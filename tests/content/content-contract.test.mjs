@@ -178,11 +178,11 @@ test("demo publishes the two approved founder names without inventing profiles",
 
 test("GitHub Pages publishes the static preview artifact", async () => {
   const workflow = await readFile(
-    new URL("../../../.github/workflows/pages.yml", import.meta.url),
+    new URL("../../.github/workflows/pages.yml", import.meta.url),
     "utf8",
   );
   assert.match(workflow, /POVKH_SITE_MODE:\s*preview/);
-  assert.match(workflow, /path:\s*site\/dist\/client/);
+  assert.match(workflow, /path:\s*dist\/client/);
   assert.doesNotMatch(workflow, /POVKH_SITE_MODE:\s*production/);
   assert.doesNotMatch(workflow, /POVKH_SITE_ORIGIN/);
 });
