@@ -42,12 +42,12 @@
 
 ## 3. Текущий scope и ограничения
 
-- Задача пользователя: Связать существующий репозиторий AlessandroPovkh/povkh-dev-site со Studio Harness как независимый проект, не меняя сайт и release-состояние
+- Задача пользователя: Связать существующий репозиторий AlessandroPovkh/povkh-dev-site со Studio Harness как независимый проект и сделать его quality tooling запускаемым на Windows, не меняя сайт и release-состояние
 
 ### Границы текущей задачи
 
-- Делаем: добавляем минимальный Studio-слой в проектный репозиторий, регистрируем независимый checkout в Harness и доказываем read-only активацию.
-- Не делаем: не меняем сайт, контент, маршруты, дизайн, формы, аналитику, deployment или release-состояние.
+- Делаем: добавляем минимальный Studio-слой, регистрируем независимый checkout, заменяем POSIX-only test commands и доказываем read-only активацию. Windows tooling blocker H-001 закрыт; отдельный H-002 хранит выявленные продуктовые cross-browser failures.
+- Не делаем: не меняем `src/`, `public/`, контент, маршруты, дизайн, формы, аналитику, deployment или release-состояние; H-002 исправляется отдельным QA-пакетом.
 
 ### Ограничения
 
@@ -59,7 +59,7 @@
 - ID: `P-001-scope`
 - Статус: `blocked` <!-- not-started | in_progress | ready_for_review | approved | rework | blocked -->
 - Карточка: `.studio/packets/P-001-scope/PACKET.md`
-- Следующий hook: `H-001`
+- Следующий hook: `H-002`
 
 ## 5. Решения и approvals
 

@@ -2,12 +2,12 @@
 
 ## 1. Цель
 
-Связать существующий проектный репозиторий с Studio Harness как независимый checkout без изменения продуктового сайта.
+Связать существующий проектный репозиторий с Studio Harness как независимый checkout и устранить найденный при обязательной проверке Windows-only blocker в test tooling без изменения продуктового сайта.
 
 ## 2. Scope: делаем / не делаем
 
-- Делаем: добавляем `PROJECT.md` и минимальную `.studio/`; открываем contribution PR в `AlessandroPovkh/povkh-dev-site`; регистрируем `projects/povkh-dev` как `independent` в Harness PR #4; доказываем чистую активацию.
-- Не делаем: не меняем `src/`, `public/`, `tests/`, зависимости, workflow, публичный preview, формы, аналитику, дизайн или release-состояние; не используем submodule.
+- Делаем: добавляем `PROJECT.md` и минимальную `.studio/`; открываем contribution PR в `AlessandroPovkh/povkh-dev-site`; регистрируем `projects/povkh-dev` как `independent` в Harness PR #4; заменяем POSIX-only inline env syntax в Playwright/Lighthouse tooling на кроссплатформенные механизмы Node и Playwright; обходим подтверждённый Windows EPERM в upstream `chrome-launcher` через штатный LHCI Puppeteer-runner; доказываем чистую активацию и полный Windows test run.
+- Не делаем: не меняем `src/`, `public/`, продуктовые тесты, workflow, публичный preview, формы, аналитику, дизайн или release-состояние; не используем submodule. Единственное dependency-изменение — pinned `puppeteer-core` без загрузки браузера для штатного LHCI runner.
 
 ## 3. Входы и готовность
 
@@ -45,7 +45,7 @@
 ## 9. Done check и evidence
 
 - `validate-project.mjs` и `npm run test:all` проходят.
-- Diff внешнего PR ограничен `PROJECT.md` и `.studio/**`.
+- Продуктовая поверхность (`src/`, `public/`) не меняется; tooling diff ограничен настройкой окружения Playwright/Lighthouse.
 - Harness не отслеживает `projects/povkh-dev/**`, registry валиден, activation возвращает точный independent root.
 
 ## 10. Prototype exceptions
@@ -55,3 +55,9 @@
 ## 11. Stop conditions
 
 - Upstream HEAD изменился, появился конкурирующий Studio-слой, fork PR нельзя создать, project tests падают, activation видит неверный Git root или Harness начинает отслеживать project bytes.
+
+## 12. Verification evidence
+
+- RED: Windows rejected `ASTRO_DEV_BACKGROUND=0 ...` and `POVKH_SITE_ORIGIN=...` before either command could start.
+- GREEN: tooling regression proves inherited `HOST`, `PORT` and `POVKH_SITE_ORIGIN` are overridden; focused Chromium E2E passed 7/7; Windows LHCI collected and asserted four URLs successfully.
+- Full suite: content 13/13, server 11/11, Astro check/build/verify passed; E2E executed all declared browser profiles with 354 passed, 35 skipped and 21 product failures. H-001 is resolved; H-002 stops product CSS/snapshot work from entering this attachment rework.
