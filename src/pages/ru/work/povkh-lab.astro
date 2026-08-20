@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import CaseChapter from "../../../components/work/CaseChapter.astro";
+import CaseEvidence from "../../../components/work/CaseEvidence.astro";
+import CaseXray from "../../../components/work/CaseXray.astro";
+import { getWorkCase } from "../../../lib/content";
+import { render } from "astro:content";
+
+const caseStudy = await getWorkCase("ru", "povkh-lab");
+const { Content } = await render(caseStudy);
+const evidenceDate = new Intl.DateTimeFormat("ru-RU", { dateStyle: "medium", timeZone: "UTC" }).format(caseStudy.data.evidenceDate);
+---
+
+<BaseLayout locale="ru" currentPath="/ru/work/povkh-lab/" title="POVKH LAB — Povkh.Dev" description={caseStudy.data.summary}>
+  <div class="case-page container">
+    <header class="case-hero">
+      <div>
+        <p class="eyebrow">Кейс проекта основателей / проверенные материалы</p>
+        <h1>{caseStudy.data.title}</h1>
+      </div>
+      <div class="case-hero-note">
+        <p>{caseStudy.data.disclosure}</p>
+        <p class="metadata">Граница результата: без неподтверждённых клиентских или коммерческих заявлений.</p>
+        <a class="button button-secondary" href={caseStudy.data.liveSite} rel="external">Открыть сайт POVKH LAB ↗</a>
+      </div>
+    </header>
+
+    <CaseEvidence
+      label="Реестр доказательств"
+      source={caseStudy.data.publicSource}
+      date={evidenceDate}
+      text="Текст и визуальные материалы ниже собраны из текущей ветки исходного проекта и датированной документации о проверке качества. Права на публикацию подтверждены владельцем."
+      sourceLabel="Источник"
+      dateLabel="Проверено"
+    />
+
+    <CaseChapter id="narrative" kicker="Контекст / роль / метод" title="Как устроена система лейбла.">
+      <Content />
+    </CaseChapter>
+
+    <CaseXray
+      kicker="Устройство интерфейса"
+      title="Один экран — два способа его увидеть."
+      controlsLabel="Выбрать режим просмотра"
+      audienceLabel="Для посетителя"
+      systemLabel="Системное представление"
+      audienceImage="/assets/work/povkh-lab/home-en-desktop.webp"
+      audienceAlt="Проверенный снимок домашней страницы POVKH LAB до запуска; не концепт-арт."
+      audienceCaption="Вид для аудитории — проверенный снимок сайта до запуска."
+      systemImage="/assets/work/povkh-lab/audio-player-desktop.webp"
+      systemAlt="Проверенный снимок аудиоплеера POVKH LAB с системой воспроизведения каталога; не концепт-арт."
+      systemCaption="Системный вид — проверенный снимок аудиоплеера."
+      audienceText="каталог и язык лейбла считываются как сфокусированный публичный опыт."
+      systemText="тот же экран раскрывается как маршруты, состояние плеера, данные аудиоволны и явные условия запуска."
+    />
+
+    <CaseChapter id="artifacts" kicker="Доказательства / визуальная последовательность" title="Материалы с указанным источником.">
+      <p>Эти снимки взяты из текущего исходного проекта POVKH LAB. Они показывают состояние сайта до запуска и результаты проверки качества, а не рекламные концепции или доказательство внешнего результата.</p>
+      <div class="artifact-grid">
+        <figure>
+          <img data-case-asset src="/assets/work/povkh-lab/catalog-en-mobile.webp" alt="Проверенный снимок каталога POVKH LAB на узком экране до запуска; не концепт-арт." width="375" height="7670" loading="lazy" decoding="async" />
+          <figcaption>Маршрут каталога / адаптивная версия</figcaption>
+        </figure>
+        <figure>
+          <img data-case-asset src="/assets/work/povkh-lab/release-en-desktop.webp" alt="Проверенный снимок страницы релиза POVKH LAB с метаданными каталога до запуска; не концепт-арт." width="960" height="2268" loading="lazy" decoding="async" />
+          <figcaption>Маршрут релиза / метаданные</figcaption>
+        </figure>
+        <figure>
+          <img data-case-asset src="/assets/work/povkh-lab/smartlink-en-desktop.webp" alt="Проверенный снимок выбора платформы POVKH LAB со ссылками для прослушивания до запуска; не концепт-арт." width="960" height="682" loading="lazy" decoding="async" />
+          <figcaption>Выбор платформы / снимок сценария</figcaption>
+        </figure>
+      </div>
+    </CaseChapter>
+
+    <nav class="case-next" aria-label="Навигация кейса">
+      <a href="/ru/work/">← Все работы</a>
+      <a href="/work/povkh-lab/">English version →</a>
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .case-page { padding-block: var(--space-8) var(--space-9); }
+  .case-hero { display: grid; min-height: 31rem; padding-block: var(--space-6); grid-template-columns: minmax(0, 7fr) minmax(16rem, 5fr); gap: var(--space-7); align-items: end; border-bottom: 1px solid var(--ink); }
+  .case-hero h1 { margin: var(--space-5) 0 0; font-family: var(--font-display); font-size: clamp(3.2rem, 9vw, 9rem); letter-spacing: -0.08em; line-height: 0.86; }
+  .case-hero-note { padding: var(--space-5); border: 1px solid var(--ink); background: var(--warm-coral); box-shadow: var(--shadow-offset); }
+  .case-hero-note p:last-child { margin: 0; }
+  .case-page :global(.case-evidence) { max-width: 56rem; margin-block: var(--space-7); }
+  .artifact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+  .artifact-grid figure { margin: 0; }
+  .artifact-grid img { width: 100%; height: 21rem; object-fit: cover; object-position: top; border: 1px solid var(--ink); background: var(--paper-deep); }
+  figcaption { margin-top: var(--space-2); color: var(--muted); font-family: var(--font-mono); font-size: 0.72rem; }
+  .case-next { display: flex; justify-content: space-between; gap: var(--space-4); padding-top: var(--space-6); border-top: 1px solid var(--ink); }
+  .case-next a { font-weight: 700; }
+  @media (max-width: 56rem) {
+    .case-hero { grid-template-columns: 1fr; gap: var(--space-5); }
+    .artifact-grid { grid-template-columns: 1fr; }
+    .artifact-grid img { height: 20rem; }
+  }
+  @media (max-width: 36rem) {
+    .case-next { align-items: start; flex-direction: column; }
+  }
+</style>

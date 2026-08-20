@@ -1,0 +1,96 @@
+---
+interface Props {
+  audienceImage: string;
+  audienceAlt: string;
+  audienceCaption: string;
+  systemImage: string;
+  systemAlt: string;
+  systemCaption: string;
+  audienceText: string;
+  systemText: string;
+  kicker?: string;
+  title?: string;
+  controlsLabel?: string;
+  audienceLabel?: string;
+  systemLabel?: string;
+}
+
+const {
+  audienceImage,
+  audienceAlt,
+  audienceCaption,
+  systemImage,
+  systemAlt,
+  systemCaption,
+  audienceText,
+  systemText,
+  kicker = "Interface view",
+  title = "One interface, two ways to read it.",
+  controlsLabel = "Choose a view",
+  audienceLabel = "Audience view",
+  systemLabel = "System view",
+} = Astro.props;
+---
+
+<section class="case-xray" data-xray aria-labelledby="xray-title">
+  <div class="case-xray-header">
+    <div>
+      <p class="case-kicker">{kicker}</p>
+      <h2 id="xray-title">{title}</h2>
+    </div>
+    <div class="case-xray-controls" role="group" aria-label={controlsLabel}>
+      <button type="button" data-xray-button="audience" aria-pressed="true" aria-controls="xray-audience-panel">{audienceLabel}</button>
+      <button type="button" data-xray-button="system" aria-pressed="false" aria-controls="xray-system-panel">{systemLabel}</button>
+    </div>
+  </div>
+
+  <p class="case-xray-static" data-xray-static>
+    {audienceLabel}: {audienceText} {systemLabel}: {systemText}
+  </p>
+
+  <div class="case-xray-panels">
+    <figure id="xray-audience-panel" data-xray-panel="audience">
+      <img data-case-asset src={audienceImage} alt={audienceAlt} width="960" height="2390" loading="lazy" decoding="async" />
+      <figcaption>{audienceCaption}</figcaption>
+    </figure>
+    <figure id="xray-system-panel" data-xray-panel="system" hidden>
+      <img data-case-asset src={systemImage} alt={systemAlt} width="960" height="666" loading="lazy" decoding="async" />
+      <figcaption>{systemCaption}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>("[data-xray]")) {
+    const buttons = root.querySelectorAll<HTMLButtonElement>("[data-xray-button]");
+    const panels = root.querySelectorAll<HTMLElement>("[data-xray-panel]");
+    for (const button of buttons) {
+      button.addEventListener("click", () => {
+        const state = button.dataset.xrayButton;
+        for (const candidate of buttons) candidate.setAttribute("aria-pressed", String(candidate === button));
+        for (const panel of panels) panel.hidden = panel.dataset.xrayPanel !== state;
+      });
+    }
+  }
+</script>
+
+<style>
+  .case-xray { margin-block: var(--space-8); padding: var(--space-6); border: 1px solid var(--ink); background: var(--electric-cobalt); color: var(--paper); }
+  .case-xray-header { display: flex; align-items: end; justify-content: space-between; gap: var(--space-5); }
+  .case-xray h2 { margin: var(--space-3) 0 0; font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 4rem); letter-spacing: -0.065em; line-height: 0.95; }
+  .case-kicker { margin: 0; color: var(--signal-lime); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .case-xray-controls { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .case-xray-controls button { min-height: 2.75rem; padding: 0.6rem 0.85rem; border: 1px solid var(--paper); color: var(--paper); background: transparent; cursor: pointer; font-weight: 700; }
+  .case-xray-controls button[aria-pressed="true"] { color: var(--ink); background: var(--signal-lime); }
+  .case-xray-controls button[aria-pressed="false"]:hover { background: rgb(244 241 232 / 0.14); }
+  .case-xray-static { max-width: 52rem; margin-block: var(--space-5); color: var(--paper); }
+  .case-xray-panels figure { margin: 0; }
+  .case-xray-panels img { width: 100%; max-height: 34rem; object-fit: cover; object-position: top; border: 1px solid var(--paper); background: var(--ink); }
+  .case-xray-panels figcaption { margin-top: var(--space-3); color: var(--paper); font-family: var(--font-mono); font-size: 0.72rem; }
+  @media (max-width: 42rem) {
+    .case-xray { padding: var(--space-4); }
+    .case-xray-header { align-items: start; flex-direction: column; }
+    .case-xray-controls { width: 100%; }
+    .case-xray-controls button { flex: 1; }
+  }
+</style>

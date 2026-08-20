@@ -1,0 +1,105 @@
+---
+import type { Locale } from "../../lib/i18n";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const isRu = locale === "ru";
+const prefix = isRu ? "/ru" : "";
+const options = isRu ? [
+  { id: "launch", label: "Запустить", result: "От идеи — к узнаваемому бренду и сайту, который ведёт к действию.", cta: "Обсудить запуск", steps: ["Позиционирование", "Айдентика", "Сайт", "Целевое действие"] },
+  { id: "reframe", label: "Обновить", result: "Пересоберём существующий образ и выпустим согласованную систему страниц.", cta: "Обсудить обновление", steps: ["Аудит", "Новое направление", "Система страниц", "Проверка и запуск"] },
+  { id: "connect", label: "Соединить", result: "Свяжем сайт с обработкой заявок и понятной аналитикой.", cta: "Обсудить интеграцию", steps: ["Сайт", "Форма заявки", "CRM и ответ", "Аналитика"] },
+] : [
+  { id: "launch", label: "Launch", result: "Move from an idea to a recognisable brand and a website built for action.", cta: "Discuss a launch", steps: ["Positioning", "Identity", "Website", "Target action"] },
+  { id: "reframe", label: "Reframe", result: "Rebuild the existing direction and release a consistent page system.", cta: "Discuss a reframe", steps: ["Audit", "New direction", "Page system", "QA and launch"] },
+  { id: "connect", label: "Connect", result: "Connect the website to lead handling and useful analytics.", cta: "Discuss integrations", steps: ["Website", "Lead form", "CRM and reply", "Analytics"] },
+];
+const initial = options[0];
+---
+
+<section class="signature" data-section="signature" data-testid="signature" data-signature aria-labelledby="signature-title">
+  <div class="signature-inner container">
+    <header>
+      <p class="eyebrow">03 / {isRu ? "Соберите результат" : "Build the outcome"}</p>
+      <h2 id="signature-title">{isRu ? "С чего должна начаться ваша система?" : "Where should your system begin?"}</h2>
+    </header>
+    <div class="signature-controls" role="group" aria-label={isRu ? "Выберите цель проекта" : "Choose a project goal"}>
+      {options.map((option, index) => (
+        <button
+          type="button"
+          aria-pressed={index === 0 ? "true" : "false"}
+          data-signature-option
+          data-id={option.id}
+          data-result={option.result}
+          data-cta={option.cta}
+          data-href={`${prefix}/contact/?goal=${option.id}`}
+          data-steps={JSON.stringify(option.steps)}
+        >
+          <span>0{index + 1}</span>{option.label}
+        </button>
+      ))}
+    </div>
+    <div class="signature-path" aria-live="polite">
+      <p class="metadata">{isRu ? "Ваш маршрут" : "Your project path"}</p>
+      <ol class="signature-flow" data-testid="signature-flow">
+        {initial.steps.map((step, index) => (
+          <li>
+            <span class="metadata">0{index + 1}</span>
+            <b data-signature-step>{step}</b>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div class="signature-output">
+      <p class="metadata" data-testid="signature-active" data-signature-active>{initial.label} {isRu ? "выбрано" : "selected"}</p>
+      <p class="signature-result" data-testid="signature-result" data-signature-result>{initial.result}</p>
+      <a class="button" data-testid="signature-cta" data-signature-cta href={`${prefix}/contact/?goal=${initial.id}`}>{initial.cta}</a>
+    </div>
+    <noscript>
+      <ul>{options.map((option) => <li><b>{option.label}:</b> {option.result}</li>)}</ul>
+    </noscript>
+  </div>
+</section>
+
+<script>
+  import "../../scripts/signature";
+</script>
+
+<style>
+  .signature { overflow: hidden; border-bottom: 1px solid var(--ink); color: var(--paper); background: var(--ink); }
+  .signature-inner { padding-block: var(--space-9); }
+  header { display: grid; grid-template-columns: 3fr 9fr; gap: var(--space-5); }
+  h2 { max-width: 12ch; margin: 0; font-family: var(--font-display); font-size: clamp(2.2rem, 5.3vw, 5.2rem); letter-spacing: -0.06em; line-height: 0.98; }
+  .signature-controls { display: grid; margin-block: var(--space-7); grid-template-columns: repeat(3, 1fr); }
+  .signature-controls button { min-height: 6rem; padding: var(--space-4); border: 1px solid var(--paper); color: inherit; background: transparent; font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.7rem); cursor: pointer; }
+  .signature-controls button + button { border-left: 0; }
+  .signature-controls button span { display: block; margin-bottom: var(--space-2); color: var(--signal-lime); font-family: var(--font-mono); font-size: 0.72rem; }
+  .signature-controls button[aria-pressed="true"] { color: var(--ink); background: var(--signal-lime); }
+  .signature-controls button[aria-pressed="true"] span { color: var(--ink); }
+  .signature-controls button[aria-pressed="false"]:hover { background: color-mix(in srgb, var(--paper) 12%, transparent); }
+  .signature-path { padding: var(--space-4); border: 1px solid color-mix(in srgb, var(--paper) 54%, transparent); background: color-mix(in srgb, var(--paper) 5%, transparent); }
+  .signature-path > .metadata { margin-bottom: var(--space-3); color: var(--signal-lime); }
+  .signature-flow { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); list-style: none; }
+  .signature-flow li { position: relative; min-width: 0; min-height: 8.5rem; padding: var(--space-4); border: 1px solid var(--paper); }
+  .signature-flow li + li { border-left: 0; }
+  .signature-flow li:not(:last-child)::after { position: absolute; z-index: 1; top: 50%; right: -0.65rem; width: 1.2rem; height: 1.2rem; border-top: 2px solid var(--ink); border-right: 2px solid var(--ink); background: var(--signal-lime); content: ""; transform: translateY(-50%) rotate(45deg); }
+  .signature-flow .metadata { display: block; margin-bottom: var(--space-4); color: var(--signal-lime); }
+  .signature-flow b { display: block; max-width: 15ch; overflow-wrap: break-word; font-family: var(--font-display); font-size: clamp(1rem, 1.65vw, 1.45rem); line-height: 1.08; }
+  .signature-output { display: grid; margin-top: var(--space-7); grid-template-columns: 2fr 7fr 3fr; gap: var(--space-5); align-items: center; }
+  .signature-output .button { color: var(--ink); }
+  .signature-result { margin: 0; font-size: clamp(1.35rem, 2.7vw, 2.6rem); line-height: 1.2; }
+  @media (max-width: 48rem) {
+    header, .signature-output { grid-template-columns: 1fr; }
+    .signature-controls { grid-template-columns: 1fr; }
+    .signature-controls button + button { border-top: 0; border-left: 1px solid var(--paper); }
+    .signature-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .signature-flow li + li { border-left: 1px solid var(--paper); }
+    .signature-flow li:nth-child(even) { border-left: 0; }
+    .signature-flow li:nth-child(n + 3) { border-top: 0; }
+    .signature-flow li::after { display: none; }
+  }
+  @media (max-width: 30rem) {
+    .signature-flow { grid-template-columns: minmax(0, 1fr); }
+    .signature-flow li + li,
+    .signature-flow li:nth-child(even) { border-top: 0; border-left: 1px solid var(--paper); }
+  }
+</style>

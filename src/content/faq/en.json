@@ -1,0 +1,9 @@
+{
+  "locale": "en",
+  "items": [
+    { "id": "fit", "title": "What kind of project is a good fit?", "answer": "A focused brand system, landing or company website, or a website connected to an agreed business workflow. Larger applications and commerce systems need separate evaluation." },
+    { "id": "languages", "title": "Can you work in Russian and English?", "answer": "Yes. We can design one system for both languages. Translation into additional languages is scoped separately with an approved specialist when needed." },
+    { "id": "integrations", "title": "Which integrations can you connect?", "answer": "Forms, CRM adapters, email, calendars, analytics and limited automations can be considered after we check API access, regional availability, permissions and data requirements." },
+    { "id": "handover", "title": "What happens after launch?", "answer": "The agreed handover includes sources, access mapping, QA evidence and operating notes. A bounded evolution package can be scoped separately." }
+  ]
+}

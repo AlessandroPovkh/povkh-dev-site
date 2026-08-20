@@ -1,0 +1,99 @@
+---
+import type { Locale } from "../lib/i18n";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const isRu = locale === "ru";
+const prefix = isRu ? "/ru" : "";
+const notes = isRu ? [
+  {
+    number: "01",
+    title: "Что делает сайт рабочей системой",
+    lead: "Красивого интерфейса недостаточно: посетителю нужен понятный путь, а команде — надёжная передача данных.",
+    body: "Начинаем с цели, затем проектируем страницы, формы, интеграции и проверку результата как одну последовательность. Так решения в дизайне связаны с реальной работой бизнеса.",
+    tag: "Сайты и интеграции",
+  },
+  {
+    number: "02",
+    title: "Когда бренду нужен не логотип, а система",
+    lead: "Айдентика становится полезной, когда ею можно последовательно пользоваться на сайте, в презентации и в материалах для запуска.",
+    body: "Поэтому мы определяем не только знак и цвета, но и типографику, композиционные правила, тон коммуникации и набор практических макетов.",
+    tag: "Бренд и дизайн",
+  },
+  {
+    number: "03",
+    title: "Как подготовить проект к первому разговору",
+    lead: "Не нужен готовый технический документ. Достаточно описать задачу, аудиторию, ограничения и желаемое изменение.",
+    body: "На старте важнее понять контекст и приоритеты. Список страниц, технологий и этапов мы поможем определить после знакомства с задачей.",
+    tag: "Процесс",
+  },
+] : [
+  {
+    number: "01",
+    title: "What makes a website a working system",
+    lead: "A polished interface is not enough: visitors need a clear path, while the team needs a reliable way to pass data to the right tools.",
+    body: "We start with the goal, then design pages, forms, integrations and verification as one sequence. That keeps design decisions connected to the way the business actually works.",
+    tag: "Websites and integrations",
+  },
+  {
+    number: "02",
+    title: "When a brand needs more than a logo",
+    lead: "An identity becomes useful when it can be applied consistently across a website, a presentation and launch materials.",
+    body: "That is why we define more than a mark and colours: typography, layout rules, communication principles and a practical set of templates all belong to the system.",
+    tag: "Brand and design",
+  },
+  {
+    number: "03",
+    title: "How to prepare for a first project conversation",
+    lead: "You do not need a finished technical specification. A clear task, audience, constraints and desired change are enough.",
+    body: "At the start, context and priorities matter most. We can define the pages, technology and delivery stages after we understand the problem.",
+    tag: "Process",
+  },
+];
+---
+
+<section class="blog-hero container" aria-labelledby="blog-title">
+  <p class="eyebrow">{isRu ? "Блог Povkh.Dev" : "Povkh.Dev blog"}</p>
+  <h1 id="blog-title">{isRu ? "Заметки о брендах, сайтах и связанных системах" : "Notes on brands, websites and connected systems"}</h1>
+  <p>{isRu ? "Коротко разбираем решения, из которых складывается цельный цифровой продукт." : "Short explanations of the decisions behind a coherent digital product."}</p>
+</section>
+
+<section class="blog-notes container" aria-label={isRu ? "Заметки" : "Notes"}>
+  {notes.map((note) => (
+    <article class="blog-note" data-blog-note>
+      <header>
+        <span class="metadata">{note.number} / {note.tag}</span>
+        <h2>{note.title}</h2>
+      </header>
+      <div>
+        <p class="note-lead">{note.lead}</p>
+        <p>{note.body}</p>
+      </div>
+    </article>
+  ))}
+</section>
+
+<section class="blog-cta container">
+  <p>{isRu ? "Есть задача, которую стоит разобрать вместе?" : "Have a project worth unpacking together?"}</p>
+  <a class="button" href={`${prefix}/contact/`}>{isRu ? "Обсудить проект" : "Discuss a project"}</a>
+</section>
+
+<style>
+  .blog-hero { display: grid; min-height: 35rem; padding-block: var(--space-8); border-bottom: 1px solid var(--ink); grid-template-columns: 3fr 9fr; gap: var(--space-5); align-content: end; }
+  .blog-hero h1 { max-width: 15ch; margin: 0; font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 6.3rem); letter-spacing: -0.065em; line-height: 0.98; }
+  .blog-hero > p:last-child { max-width: 38rem; margin: var(--space-5) 0 0; grid-column: 2; font-size: 1.2rem; }
+  .blog-notes { padding-block: var(--space-8); }
+  .blog-note { display: grid; padding-block: var(--space-7); border-top: 1px solid var(--ink); grid-template-columns: 5fr 7fr; gap: var(--space-7); }
+  .blog-note:last-child { border-bottom: 1px solid var(--ink); }
+  .blog-note h2 { max-width: 18ch; margin: var(--space-4) 0 0; font-family: var(--font-display); font-size: clamp(1.8rem, 3.8vw, 3.8rem); letter-spacing: -0.05em; line-height: 1.05; }
+  .blog-note p { max-width: 42rem; }
+  .note-lead { font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 600; }
+  .blog-cta { display: flex; padding-block: var(--space-8); align-items: center; justify-content: space-between; gap: var(--space-5); }
+  .blog-cta p { max-width: 34rem; margin: 0; font-family: var(--font-display); font-size: clamp(1.6rem, 3.5vw, 3rem); font-weight: 650; letter-spacing: -0.04em; line-height: 1.1; }
+  @media (max-width: 52rem) {
+    .blog-hero, .blog-note { grid-template-columns: minmax(0, 1fr); }
+    .blog-hero { min-height: auto; }
+    .blog-hero > p:last-child { grid-column: 1; }
+    .blog-cta { align-items: flex-start; flex-direction: column; }
+  }
+</style>

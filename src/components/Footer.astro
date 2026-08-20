@@ -1,0 +1,19 @@
+---
+import type { Locale } from "../lib/i18n";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const prefix = locale === "ru" ? "/ru" : "";
+---
+
+<footer class="site-footer">
+  <div class="footer-inner container">
+    <p class="footer-mark">POVKH.DEV</p>
+    <ul class="footer-links">
+      <li><a href={`${prefix}/privacy/`}>{locale === "ru" ? "Конфиденциальность" : "Privacy"}</a></li>
+      <li><a href={`${prefix}/cookies/`}>{locale === "ru" ? "Файлы cookie" : "Cookies"}</a></li>
+    </ul>
+    <p class="metadata">{locale === "ru" ? "Бренд × Сайт × Интеграции" : "Brand × Web × Connect"}</p>
+    <p class="metadata">© {new Date().getFullYear()} Povkh.Dev</p>
+  </div>
+</footer>

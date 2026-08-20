@@ -1,0 +1,40 @@
+---
+import type { Locale } from "../lib/i18n";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const isRu = locale === "ru";
+---
+
+<aside class="consent" data-consent-controls data-testid="consent-controls" aria-label={isRu ? "Настройки аналитики" : "Analytics settings"}>
+  <div class="consent-prompt" data-consent-prompt>
+    <p>{isRu ? "Разрешить анонимную аналитику? До согласия ничего не отправляется." : "Allow anonymous analytics? Nothing is sent before consent."}</p>
+    <div class="consent-actions">
+      <button class="button" type="button" data-consent="granted">{isRu ? "Разрешить аналитику" : "Accept analytics"}</button>
+      <button class="button button-secondary" type="button" data-consent="denied">{isRu ? "Отказаться" : "Decline"}</button>
+    </div>
+  </div>
+  <button class="consent-withdraw" type="button" data-consent-withdraw hidden>
+    {isRu ? "Отозвать согласие на аналитику" : "Withdraw analytics consent"}
+  </button>
+</aside>
+
+<noscript><style>[data-consent-controls] { display: none !important; }</style></noscript>
+
+<style>
+  .consent {
+    width: 100%;
+    padding: var(--space-4) var(--gutter);
+    border-top: 1px solid var(--ink);
+    background: var(--paper);
+  }
+  .consent-prompt { display: grid; width: min(100%, var(--container)); margin-inline: auto; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-5); }
+  .consent-prompt p { max-width: 42rem; margin: 0; }
+  .consent-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .consent-withdraw { padding: 0.5rem 0.75rem; border: 1px solid var(--paper); color: var(--paper); background: var(--ink); text-decoration: underline; cursor: pointer; }
+  .consent[data-state="denied"] { display: none; }
+  @media (max-width: 40rem) {
+    .consent-prompt { grid-template-columns: minmax(0, 1fr); }
+    .consent-actions > * { width: 100%; }
+  }
+</style>

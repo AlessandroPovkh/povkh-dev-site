@@ -1,0 +1,48 @@
+---
+import type { Locale } from "../lib/i18n";
+import { equivalentRoute } from "../lib/i18n";
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+  title: string;
+  description: string;
+  robots: string;
+}
+
+const { locale, currentPath, title, description, robots } = Astro.props;
+const alternatePath = equivalentRoute(currentPath);
+const canonical = Astro.site ? new URL(currentPath, Astro.site).href : currentPath;
+const alternate = Astro.site ? new URL(alternatePath, Astro.site).href : alternatePath;
+const ogImage = Astro.site ? new URL("/og/povkh-dev-og.png", Astro.site).href : "/og/povkh-dev-og.png";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Povkh.Dev",
+  inLanguage: locale,
+  ...(Astro.site ? { url: canonical } : {}),
+};
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<meta name="theme-color" content="#F4F1E8" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+{__POVKH_ANALYTICS_ENDPOINT__ && <meta name="povkh-analytics-endpoint" content={__POVKH_ANALYTICS_ENDPOINT__} />}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Povkh.Dev" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:locale" content={locale === "ru" ? "ru_RU" : "en_GB"} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<title>{title}</title>
+<link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang={locale} href={canonical} />
+<link rel="alternate" hreflang={locale === "en" ? "ru" : "en"} href={alternate} />
+<link rel="alternate" hreflang="x-default" href={locale === "en" ? canonical : alternate} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />

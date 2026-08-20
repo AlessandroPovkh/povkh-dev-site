@@ -1,0 +1,148 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { Locale } from "../../lib/i18n";
+
+interface Props {
+  locale: Locale;
+  site: CollectionEntry<"site">["data"];
+  work: CollectionEntry<"work">[];
+}
+
+const { locale, site, work } = Astro.props;
+const isRu = locale === "ru";
+const prefix = isRu ? "/ru" : "";
+const relationshipLabel = (relationship: CollectionEntry<"work">["data"]["relationship"]) => {
+  if (relationship === "client") return isRu ? "Клиентский проект" : "Client work";
+  return isRu ? "Проект основателей" : "Founder-led";
+};
+---
+
+<section class="dual-hero" aria-labelledby="hero-title">
+  <div class="dual-hero-copy">
+    <p class="eyebrow">{site.hero.eyebrow}</p>
+    <h1 id="hero-title">{site.hero.title}</h1>
+    <div class="hero-footer">
+      <a class="button" href={`${prefix}/contact/`}>{site.hero.primaryCta}</a>
+      <p class="hero-fact">{site.hero.metaFact}</p>
+    </div>
+  </div>
+
+  <aside class="hero-work" data-testid="hero-selected-work" aria-label={site.hero.workLabel}>
+    <p class="hero-work-label">{site.hero.workLabel}</p>
+    <div class="hero-work-list">
+      {work.map((caseStudy) => (
+        <a class="hero-work-record" href={`${prefix}/work/${caseStudy.data.caseSlug}/`}>
+          <span class="work-meta">{relationshipLabel(caseStudy.data.relationship)} · {caseStudy.data.context}</span>
+          <span class="work-title">{caseStudy.data.title}<span aria-hidden="true">↗</span></span>
+          <span class="work-scope">{caseStudy.data.featuredScope}</span>
+        </a>
+      ))}
+    </div>
+  </aside>
+</section>
+
+<style>
+  .dual-hero {
+    display: grid;
+    min-height: min(50rem, calc(100svh - 7rem));
+    border-bottom: 1px solid var(--ink);
+    grid-template-columns: minmax(0, 7fr) minmax(21rem, 5fr);
+  }
+  .dual-hero-copy {
+    display: grid;
+    min-width: 0;
+    padding: clamp(3rem, 6vw, 6.5rem) var(--gutter);
+    grid-template-rows: auto 1fr auto;
+  }
+  h1 {
+    max-width: 16ch;
+    margin: clamp(3rem, 8vh, 6.5rem) 0 var(--space-7);
+    align-self: center;
+    font-family: var(--font-display);
+    font-size: clamp(2.7rem, 4.65vw, 5rem);
+    font-weight: 650;
+    letter-spacing: -0.065em;
+    line-height: 0.96;
+  }
+  .hero-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+  .hero-fact {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .hero-work {
+    display: grid;
+    min-width: 0;
+    padding: clamp(2rem, 4vw, 4rem) var(--gutter);
+    color: var(--paper);
+    background: var(--ink);
+    grid-template-rows: auto 1fr;
+  }
+  .hero-work-label {
+    margin: 0;
+    color: var(--signal-lime);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero-work-list {
+    display: grid;
+    align-self: end;
+  }
+  .hero-work-record {
+    display: grid;
+    min-width: 0;
+    padding-block: clamp(1.5rem, 3vw, 2.5rem);
+    border-top: 1px solid color-mix(in srgb, var(--paper) 58%, transparent);
+    color: inherit;
+    gap: var(--space-3);
+    text-decoration: none;
+    transition: color var(--transition-fast), padding-inline var(--transition-fast);
+  }
+  .hero-work-record:last-child { border-bottom: 1px solid color-mix(in srgb, var(--paper) 58%, transparent); }
+  .hero-work-record:hover { padding-inline: var(--space-3); color: var(--signal-lime); }
+  .work-meta,
+  .work-scope {
+    overflow-wrap: anywhere;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .work-meta { color: var(--signal-lime); }
+  .work-scope { color: color-mix(in srgb, var(--paper) 78%, transparent); }
+  .hero-work-record:hover .work-scope { color: currentColor; }
+  .work-title {
+    display: flex;
+    min-width: 0;
+    justify-content: space-between;
+    gap: var(--space-4);
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 3vw, 2.7rem);
+    font-weight: 650;
+    letter-spacing: -0.055em;
+    line-height: 1;
+  }
+  @media (max-width: 64rem) {
+    .dual-hero { min-height: auto; grid-template-columns: minmax(0, 1fr); }
+    .dual-hero-copy { min-height: min(42rem, calc(100svh - 7rem)); padding-block: var(--space-7); }
+    h1 { max-width: 15ch; margin-block: var(--space-7); font-size: clamp(2.55rem, 8.6vw, 4.7rem); }
+    .hero-work { min-height: 25rem; padding-block: var(--space-7); }
+  }
+  @media (max-width: 36rem) {
+    .dual-hero-copy { min-height: 35rem; }
+    h1 { font-size: clamp(2.2rem, 10.8vw, 3.5rem); line-height: 0.98; }
+    .hero-footer { align-items: flex-start; flex-direction: column; }
+    .hero-work { min-height: 27rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-work-record { transition: none; }
+  }
+</style>

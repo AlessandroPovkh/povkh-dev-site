@@ -1,0 +1,30 @@
+{
+  "locale": "ru",
+  "languageName": "Русский",
+  "routes": ["/ru/", "/ru/work/", "/ru/work/endokey/", "/ru/work/povkh-lab/", "/ru/services/", "/ru/process/", "/ru/studio/", "/ru/blog/", "/ru/contact/", "/ru/privacy/", "/ru/cookies/"],
+  "meta": {
+    "title": "Povkh.Dev — брендинг и сайты с ясным путём к заявке",
+    "description": "Позиционирование, айдентика, тексты и сайты для бизнеса, где важен понятный путь от первого впечатления к обращению."
+  },
+  "nav": [
+    { "id": "work", "label": "Работы", "href": "/ru/work/" },
+    { "id": "services", "label": "Услуги", "href": "/ru/services/" },
+    { "id": "process", "label": "Процесс", "href": "/ru/process/" },
+    { "id": "studio", "label": "Студия", "href": "/ru/studio/" },
+    { "id": "blog", "label": "Блог", "href": "/ru/blog/" },
+    { "id": "contact", "label": "Контакт", "href": "/ru/contact/" }
+  ],
+  "hero": {
+    "eyebrow": "Брендинг + сайты",
+    "title": "Сайт должен вести к заявке. Бренд — помогать выбрать вас.",
+    "primaryCta": "Обсудить задачу",
+    "metaFact": "Россия / Европа · RU / EN",
+    "workLabel": "Избранные работы / 02"
+  },
+  "finalCta": {
+    "title": "Расскажите, что нужно создать или соединить.",
+    "body": "Мы изучим контекст и предложим понятный следующий шаг.",
+    "action": "Начать разговор"
+  },
+  "previewNotice": "Предварительная версия. Публичные данные, контакты и юридические тексты ждут подтверждения владельца."
+}

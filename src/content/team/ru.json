@@ -1,0 +1,10 @@
+{
+  "locale": "ru",
+  "intro": "Povkh.Dev — независимая студия из двух человек. Стратегия, дизайн и разработка остаются рядом с теми, кто выполняет работу.",
+  "productionReady": false,
+  "gateNotice": "Имена подтверждены для демоверсии. Для публичных профилей перед запуском ещё нужны утверждённые роли, биографии, портреты и ссылки.",
+  "items": [
+    { "id": "founder-one", "publicName": "Alessandro Povkh", "role": null, "biography": null, "portrait": null, "links": [] },
+    { "id": "founder-two", "publicName": "Egor Vereshagin", "role": null, "biography": null, "portrait": null, "links": [] }
+  ]
+}

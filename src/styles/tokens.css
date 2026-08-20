@@ -1,0 +1,30 @@
+:root {
+  --paper: #f4f1e8;
+  --paper-deep: #e7e1d3;
+  --ink: #11110f;
+  --muted: #706e67;
+  --signal-lime: #d6ff45;
+  --electric-cobalt: #514cff;
+  --warm-coral: #ff654d;
+  --line: color-mix(in srgb, var(--ink) 28%, transparent);
+  --font-display: "Unbounded Variable", "Arial Black", sans-serif;
+  --font-body: "IBM Plex Sans Variable", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+  --container: 80rem;
+  --gutter: clamp(1rem, 4vw, 4rem);
+  --radius-small: 0.35rem;
+  --radius-pill: 100vw;
+  --shadow-offset: 0.35rem 0.35rem 0 var(--ink);
+  --transition-fast: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --z-header: 20;
+  --z-skip: 100;
+}

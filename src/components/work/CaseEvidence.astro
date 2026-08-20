@@ -1,0 +1,40 @@
+---
+interface Props {
+  label: string;
+  source: string;
+  date: string;
+  text: string;
+  sourceLabel?: string;
+  dateLabel?: string;
+}
+
+const { label, source, date, text, sourceLabel = "Source", dateLabel = "Checked" } = Astro.props;
+---
+
+<aside class="case-evidence" data-case-evidence aria-label={label}>
+  <p class="case-kicker">{label}</p>
+  <p>{text}</p>
+  <dl>
+    <div><dt>{sourceLabel}</dt><dd>{source}</dd></div>
+    <div><dt>{dateLabel}</dt><dd>{date}</dd></div>
+  </dl>
+</aside>
+
+<style>
+  .case-evidence {
+    margin-block: var(--space-6);
+    padding: var(--space-5);
+    border: 1px solid var(--ink);
+    background: var(--signal-lime);
+    box-shadow: var(--shadow-offset);
+  }
+
+  .case-evidence p { max-width: 48rem; }
+  .case-evidence p:nth-child(2) { margin-block: var(--space-3) var(--space-5); font-weight: 600; }
+  .case-kicker { margin: 0; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  dl { display: grid; margin: 0; gap: var(--space-2); }
+  dl > div { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: var(--space-3); }
+  dt, dd { margin: 0; }
+  dt { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; }
+  dd { overflow-wrap: anywhere; font-family: var(--font-mono); font-size: 0.75rem; }
+</style>

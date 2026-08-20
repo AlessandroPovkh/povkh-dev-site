@@ -1,0 +1,43 @@
+{
+  "name": "povkh-dev-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test:content": "node --test tests/content/content-contract.test.mjs",
+    "test:server": "node --test tests/server/*.test.mjs",
+    "test:e2e": "playwright test",
+    "test:a11y": "playwright test tests/e2e/accessibility.spec.ts",
+    "test:visual": "playwright test tests/e2e/visual.spec.ts",
+    "test:performance": "POVKH_SITE_ORIGIN=http://127.0.0.1:4322 npm run build && lhci autorun",
+    "verify:build": "node scripts/verify-build.mjs",
+    "test:all": "npm run test:content && npm run test:server && npm run check && npm run build && npm run verify:build && npm run test:e2e && npm run test:performance",
+    "qa": "npm run test:all"
+  },
+  "dependencies": {
+    "@astrojs/node": "11.1.2",
+    "@astrojs/sitemap": "3.7.3",
+    "@fontsource-variable/ibm-plex-sans": "5.3.0",
+    "@fontsource-variable/unbounded": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.2.7",
+    "astro": "7.2.2",
+    "nodemailer": "9.0.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@axe-core/playwright": "4.13.0",
+    "@emnapi/core": "1.11.3",
+    "@emnapi/runtime": "1.11.3",
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.62.1",
+    "@types/nodemailer": "7.0.11",
+    "typescript": "6.0.3"
+  }
+}

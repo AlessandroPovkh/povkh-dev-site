@@ -1,0 +1,243 @@
+import assert from "node:assert/strict";
+import { readFile, readdir } from "node:fs/promises";
+import test from "node:test";
+import { join } from "node:path";
+import { founderAuthorityApproved, workRightsApproved } from "../../src/lib/release-gates.mjs";
+
+const contentRoot = new URL("../../src/content/", import.meta.url);
+const expectedRoutes = [
+  "/",
+  "/work/",
+  "/work/endokey/",
+  "/work/povkh-lab/",
+  "/services/",
+  "/process/",
+  "/studio/",
+  "/blog/",
+  "/contact/",
+  "/privacy/",
+  "/cookies/",
+];
+
+async function json(relativePath) {
+  return JSON.parse(await readFile(new URL(relativePath, contentRoot), "utf8"));
+}
+
+async function filenames(relativeDirectory, extension) {
+  const directory = new URL(relativeDirectory, contentRoot);
+  return (await readdir(directory))
+    .filter((name) => name.endsWith(extension))
+    .sort();
+}
+
+const unsupportedOutcomePatterns = [
+  /\b(?:double[ds]?|triple[ds]?|increase[ds]?|grew|improve[ds]?|boost(?:ed|s)?|raise[ds]?)\s+(?:qualified\s+)?(?:leads?|enquiries|inquiries|sales|revenue|conversions?|conversion rate|orders?)\b/iu,
+  /\bguarantee(?:d|s)?\s+(?:more\s+)?(?:leads?|enquiries|inquiries|sales|revenue|conversions?|orders?)\b/iu,
+  /\b(?:improve[ds]?|increase[ds]?|guarantee(?:d|s)?|boost(?:ed|s)?)\s+(?:clinical\s+)?(?:disinfection|healing|medical outcomes?|survival|success rates?|treatment efficacy)\b/iu,
+  /(?:удвоил[аи]?|утроил[аи]?|увеличил[аи]?|повысил[аи]?|улучшил[аи]?|выросл[аи]?|выросли)\s+(?:число\s+)?(?:заявк(?:и|у|ам|ов)|лидов|продаж|выручк[аиуы]?|конверс(?:ии|ию)|заказов)/iu,
+  /(?<!не\s)гарантир(?:ует|уем|уют|овал[аи]?|ованный?)\s+(?:рост\s+)?(?:заявк(?:и|у|ам|ов)|лидов|продаж|выручки|конверс(?:ии|ию)|заказов)/iu,
+  /(?:улучш(?:ает|ают|ил[аи]?)|повыш(?:ает|ают|ил[аи]?)|гарантир(?:ует|уем|уют|овал[аи]?))\s+(?:клиническ(?:ий|ие)\s+)?(?:дезинфекцию|заживление|медицинские исходы|выживаемость|успех лечения|эффективность лечения)/iu,
+];
+
+function hasUnsupportedOutcomeClaim(source) {
+  return unsupportedOutcomePatterns.some((pattern) => pattern.test(source));
+}
+
+test("unsupported outcome detector rejects commercial and medical claim mutations", () => {
+  const positiveMutations = [
+    "The redesign doubled sales.",
+    "Our website guarantees conversions.",
+    "The product improves disinfection.",
+    "Редизайн удвоил продажи.",
+    "Сайт гарантирует заявки.",
+    "Продукт улучшает дезинфекцию.",
+  ];
+  const allowedBoundaries = [
+    "The case does not claim sales or medical outcomes.",
+    "Кейс не заявляет показатели продаж или медицинские результаты.",
+  ];
+  for (const mutation of positiveMutations) assert.equal(hasUnsupportedOutcomeClaim(mutation), true, mutation);
+  for (const boundary of allowedBoundaries) assert.equal(hasUnsupportedOutcomeClaim(boundary), false, boundary);
+});
+
+test("EN and RU site authorities declare exact equivalent public routes", async () => {
+  const [en, ru] = await Promise.all([json("site/en.json"), json("site/ru.json")]);
+  assert.deepEqual(en.routes, expectedRoutes);
+  assert.deepEqual(
+    ru.routes,
+    expectedRoutes.map((route) => (route === "/" ? "/ru/" : `/ru${route}`)),
+  );
+  assert.equal(en.locale, "en");
+  assert.equal(ru.locale, "ru");
+});
+
+test("Blog is a first-class navigation destination in both locales", async () => {
+  const [en, ru] = await Promise.all([json("site/en.json"), json("site/ru.json")]);
+  assert.deepEqual(en.nav.find(({ id }) => id === "blog"), {
+    id: "blog",
+    label: "Blog",
+    href: "/blog/",
+  });
+  assert.deepEqual(ru.nav.find(({ id }) => id === "blog"), {
+    id: "blog",
+    label: "Блог",
+    href: "/ru/blog/",
+  });
+});
+
+test("contact introduction follows the configured delivery mode", async () => {
+  for (const path of ["../../src/pages/contact.astro", "../../src/pages/ru/contact.astro"]) {
+    const source = await readFile(new URL(path, import.meta.url), "utf8");
+    assert.match(source, /__POVKH_SITE_MODE__/);
+    assert.match(source, /demoMode\s*\?/);
+  }
+});
+
+test("all structured collections have EN and RU parity", async () => {
+  for (const collection of ["services", "process", "team", "faq"]) {
+    const [en, ru] = await Promise.all([
+      json(`${collection}/en.json`),
+      json(`${collection}/ru.json`),
+    ]);
+    assert.deepEqual(
+      en.items.map(({ id }) => id),
+      ru.items.map(({ id }) => id),
+      `${collection} locale parity`,
+    );
+  }
+
+  assert.deepEqual(
+    await filenames("work/en/", ".md"),
+    await filenames("work/ru/", ".md"),
+    "work locale parity",
+  );
+  assert.deepEqual(
+    await filenames("legal/en/", ".md"),
+    await filenames("legal/ru/", ".md"),
+    "legal locale parity",
+  );
+});
+
+test("service authority exposes Brand, Web and Connect without silent expansion", async () => {
+  const en = await json("services/en.json");
+  assert.deepEqual(en.items.map(({ id }) => id), ["brand", "web", "connect"]);
+  for (const service of en.items) {
+    assert.ok(service.boundary.length > 20, `${service.id} needs an explicit boundary`);
+  }
+});
+
+test("POVKH LAB is disclosed as founder-led in both locales", async () => {
+  const negativeClientClaim = {
+    en: /not an external client engagement/i,
+    ru: /не внешний клиентский контракт/i,
+  };
+  for (const locale of ["en", "ru"]) {
+    const source = await readFile(
+      new URL(`work/${locale}/povkh-lab.md`, contentRoot),
+      "utf8",
+    );
+    assert.match(source, /^relationship:\s*founder-led$/m);
+    assert.match(source, /^order:\s*2$/m);
+    assert.match(source, /^featured:\s*true$/m);
+    assert.match(source, /^disclosure:\s*.+$/m);
+    assert.match(source, negativeClientClaim[locale]);
+    assert.match(source, /^rightsStatus:\s*approved$/m);
+    assert.match(source, /^liveSite:\s*https:\/\/alessandropovkh\.github\.io\/POVKH-LAB\/$/m);
+    assert.doesNotMatch(source, /\/Users\//, `${locale} public case must not expose local paths`);
+  }
+});
+
+test("work authority publishes deterministic localized client and founder-led cases", async () => {
+  for (const locale of ["en", "ru"]) {
+    assert.deepEqual(await filenames(`work/${locale}/`, ".md"), ["endokey.md", "povkh-lab.md"]);
+    const endokey = await readFile(new URL(`work/${locale}/endokey.md`, contentRoot), "utf8");
+    assert.match(endokey, /^caseSlug:\s*endokey$/m);
+    assert.match(endokey, /^relationship:\s*client$/m);
+    assert.match(endokey, /^order:\s*1$/m);
+    assert.match(endokey, /^featured:\s*true$/m);
+    assert.match(endokey, /^rightsStatus:\s*approved$/m);
+    assert.match(endokey, /^liveSite:\s*https:\/\/endokey\.ru\/$/m);
+    assert.match(endokey, /positioning|позиционирован/i);
+    assert.match(endokey, /identity|айдентик/i);
+    assert.match(endokey, /copy|текст/i);
+    assert.match(endokey, /website|сайт/i);
+    assert.equal(hasUnsupportedOutcomeClaim(endokey), false, `${locale} ENDOkey case contains a positive outcome claim`);
+  }
+});
+
+test("demo publishes the two approved founder names without inventing profiles", async () => {
+  for (const locale of ["en", "ru"]) {
+    const team = await json(`team/${locale}.json`);
+    assert.deepEqual(team.items.map(({ publicName }) => publicName), [
+      "Alessandro Povkh",
+      "Egor Vereshagin",
+    ]);
+    assert.equal(team.productionReady, false);
+  }
+});
+
+test("GitHub Pages publishes the static preview artifact", async () => {
+  const workflow = await readFile(
+    new URL("../../../.github/workflows/pages.yml", import.meta.url),
+    "utf8",
+  );
+  assert.match(workflow, /POVKH_SITE_MODE:\s*preview/);
+  assert.match(workflow, /path:\s*site\/dist\/client/);
+  assert.doesNotMatch(workflow, /POVKH_SITE_MODE:\s*production/);
+  assert.doesNotMatch(workflow, /POVKH_SITE_ORIGIN/);
+});
+
+test("content contains no marketing placeholders or invented metrics", async () => {
+  const files = [
+    "site/en.json",
+    "site/ru.json",
+    "services/en.json",
+    "services/ru.json",
+    "process/en.json",
+    "process/ru.json",
+    "team/en.json",
+    "team/ru.json",
+    "faq/en.json",
+    "faq/ru.json",
+  ];
+  const workFiles = (await Promise.all(["en", "ru"].map(async (locale) =>
+    Promise.all((await filenames(`work/${locale}/`, ".md")).map((name) =>
+      readFile(new URL(`work/${locale}/${name}`, contentRoot), "utf8"),
+    )),
+  ))).flat();
+  const source = [
+    ...(await Promise.all(files.map((file) => readFile(new URL(file, contentRoot), "utf8")))),
+    ...workFiles,
+  ].join("\n");
+  assert.doesNotMatch(source, /lorem ipsum|tbd|coming soon|\d+%|#1|award-winning/iu);
+  assert.equal(hasUnsupportedOutcomeClaim(source), false, "public content contains a positive commercial or medical outcome claim");
+});
+
+test("production accepts only approved legal entries", async () => {
+  if (process.env.POVKH_SITE_MODE !== "production") return;
+  for (const locale of ["en", "ru"]) {
+    for (const name of await filenames(`legal/${locale}/`, ".md")) {
+      const source = await readFile(
+        new URL(join("legal", locale, name), contentRoot),
+        "utf8",
+      );
+      assert.match(source, /^status:\s*approved$/m, `${locale}/${name}`);
+    }
+  }
+});
+
+test("production authority gates reject current pending records and accept complete fixtures", async () => {
+  const team = await json("team/en.json");
+  assert.equal(founderAuthorityApproved(team), false);
+  assert.equal(workRightsApproved({ rightsStatus: "owner-confirmation-required" }), false);
+
+  const completeFounder = {
+    publicName: "Approved Name",
+    role: "Approved Role",
+    biography: "Approved public biography.",
+    portrait: "/approved-portrait.webp",
+    links: ["https://povkh.dev/approved-profile"],
+  };
+  assert.equal(founderAuthorityApproved({ productionReady: true, items: [completeFounder, completeFounder] }), true);
+  assert.equal(workRightsApproved({ rightsStatus: "approved" }), true);
+});

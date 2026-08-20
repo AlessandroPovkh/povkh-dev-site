@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getFaq, getSite, getTeam } from "../lib/content";
+
+const locale = "en" as const;
+const currentPath = "/studio/";
+const site = await getSite(locale);
+const team = await getTeam(locale);
+const faq = await getFaq(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  currentPath={currentPath}
+  title={`Studio — ${site.meta.title}`}
+  description="Meet the independent two-person Povkh.Dev studio and understand how responsibility stays close to the work."
+>
+  <div class="studio-page">
+    <section class="studio-hero container" aria-labelledby="studio-title">
+      <p class="eyebrow">03 / People and responsibility</p>
+      <h1 id="studio-title">Studio</h1>
+      <p class="studio-lede">{team.intro}</p>
+    </section>
+
+    <section class="studio-gate container" aria-labelledby="people-title">
+      <header class="section-heading">
+        <p class="eyebrow">A real team, not a composite profile</p>
+        <h2 id="people-title">Two people. One accountable system.</h2>
+      </header>
+      <p class="studio-gate-copy">The permanent team consists of two real people. Full profiles will be added after roles, biographies, portraits and links are approved.</p>
+      <div class="founder-records" aria-label="Founder records">
+        {team.items.map((founder, index) => (
+          <article class="founder-record" data-testid="founder-record">
+            <p class="metadata">Founder record 0{index + 1}</p>
+            <h3>{founder.publicName}</h3>
+            <p>Founder profile details will be published after personal approval.</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="collaboration-section container" aria-labelledby="collaboration-title">
+      <h2 id="collaboration-title">Close by design.</h2>
+      <div class="collaboration-grid">
+        <p><strong>Direct work.</strong><br />Strategy, design and engineering stay close to the people doing the work, with fewer handoffs and clearer decisions.</p>
+        <p><strong>Conditional specialists.</strong><br />When a project needs a profile outside our permanent team, we connect a specialist for the agreed task while keeping one point of responsibility inside Povkh.Dev.</p>
+        <p><strong>Evidence over theatre.</strong><br />Our own website and the founder-led POVKH LAB case show the kind of systems we can explain, test and hand over.</p>
+      </div>
+    </section>
+
+    <section class="faq-section container" aria-labelledby="faq-title">
+      <header class="section-heading"><p class="eyebrow">Working questions</p><h2 id="faq-title">A few useful answers.</h2></header>
+      <div class="faq-list">
+        {faq.items.map((item) => (
+          <details><summary>{item.title}</summary><p>{item.answer}</p></details>
+        ))}
+      </div>
+    </section>
+
+    <section class="studio-cta container" aria-labelledby="studio-cta-title">
+      <h2 id="studio-cta-title">Want to see if the fit is right?</h2>
+      <p>Tell us what needs to be created, clarified or connected.</p>
+      <a class="button" href="/contact/">{site.hero.primaryCta}</a>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .studio-page { border-bottom: 1px solid var(--ink); }
+  .studio-hero { padding-block: clamp(4rem, 10vw, 9rem) var(--space-8); }
+  .studio-hero h1 { margin-block: var(--space-4) var(--space-5); font-family: var(--font-display); font-size: clamp(3rem, 9vw, 7rem); letter-spacing: -0.07em; line-height: 0.95; }
+  .studio-lede { max-width: 46rem; font-size: clamp(1.25rem, 2.3vw, 2rem); line-height: 1.25; }
+  .studio-gate, .collaboration-section, .faq-section, .studio-cta { padding-block: var(--space-8); border-top: 1px solid var(--ink); }
+  .section-heading { margin-block-end: var(--space-6); }
+  .section-heading h2 { max-width: 20ch; margin-block: var(--space-3) 0; font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3.5rem); letter-spacing: -0.06em; line-height: 1; }
+  .studio-gate-copy { max-width: 46rem; font-size: 1.2rem; }
+  .founder-records { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--ink); background: var(--ink); }
+  .founder-record { padding: var(--space-5); background: var(--paper); }
+  .founder-record h3 { margin-block: var(--space-3); font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 2rem); letter-spacing: -0.05em; line-height: 1.1; }
+  .collaboration-section h2, .faq-section h2 { margin-block: 0 var(--space-6); font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3.5rem); letter-spacing: -0.06em; line-height: 1; }
+  .collaboration-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+  .collaboration-grid p { margin: 0; padding-block-start: var(--space-4); border-top: 2px solid var(--warm-coral); }
+  .faq-list { border-top: 1px solid var(--line); }
+  .faq-list details { padding-block: var(--space-4); border-bottom: 1px solid var(--line); }
+  .faq-list summary { cursor: pointer; font-size: 1.2rem; font-weight: 700; }
+  .faq-list p { max-width: 48rem; margin: var(--space-3) 0 0; }
+  .studio-cta { display: grid; grid-template-columns: 2fr 2fr auto; align-items: end; gap: var(--space-5); }
+  .studio-cta h2 { margin: 0; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); letter-spacing: -0.05em; line-height: 1; }
+  .studio-cta p { margin: 0; }
+  @media (max-width: 56rem) { .founder-records, .collaboration-grid { grid-template-columns: 1fr; } .studio-cta { grid-template-columns: 1fr 1fr; } .studio-cta .button { grid-column: 1 / -1; justify-self: start; } }
+  @media (max-width: 36rem) { .studio-cta { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CasePreview from "../../components/CasePreview.astro";
+import CaseEvidence from "../../components/work/CaseEvidence.astro";
+import { getLocalizedWork } from "../../lib/content";
+
+const locale = "en" as const;
+const cases = await getLocalizedWork(locale);
+---
+
+<BaseLayout locale={locale} currentPath="/work/" title="Work — Povkh.Dev" description="Selected client and founder-led work by Povkh.Dev.">
+  <div class="work-index container">
+    <header class="work-index-hero">
+      <p class="eyebrow">Selected work / 02</p>
+      <h1>Built to make the next step clear.</h1>
+      <p class="lede">Brand and website work for products and independent ventures.</p>
+    </header>
+
+    <section aria-labelledby="case-list-title">
+      <div class="section-heading">
+        <p class="eyebrow">Case archive</p>
+        <h2 id="case-list-title">From positioning to a working website.</h2>
+      </div>
+      <div class="case-list">
+        {cases.map((caseStudy) => (
+          <div class="case-list-item">
+            <CasePreview
+              title={caseStudy.data.title}
+              context={caseStudy.data.context}
+              summary={caseStudy.data.summary}
+              href={`/work/${caseStudy.data.caseSlug}/`}
+              action="Read the case"
+              accessibleAction={`Read the ${caseStudy.data.title} case`}
+            />
+            <CaseEvidence
+              label={caseStudy.data.relationship === "client" ? "Client work" : "Founder-led project"}
+              source={caseStudy.data.publicSource}
+              date={new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeZone: "UTC" }).format(caseStudy.data.evidenceDate)}
+              text={caseStudy.data.disclosure}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .work-index { padding-block: var(--space-8) var(--space-9); }
+  .work-index-hero { display: grid; min-height: 31rem; padding-block: var(--space-6); align-content: space-between; border-bottom: 1px solid var(--ink); }
+  .work-index h1 { max-width: 11ch; margin: var(--space-5) 0; font-family: var(--font-display); font-size: clamp(3rem, 8vw, 8rem); letter-spacing: -0.075em; line-height: 0.9; }
+  .lede { max-width: 42rem; margin: 0; font-size: clamp(1.1rem, 1.8vw, 1.45rem); }
+  .work-index section { padding-block: var(--space-8); }
+  .section-heading { display: grid; grid-template-columns: minmax(8rem, 2fr) minmax(0, 7fr); gap: var(--space-7); margin-bottom: var(--space-6); }
+  .section-heading h2 { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 4rem); letter-spacing: -0.065em; line-height: 0.96; }
+  .case-list { display: grid; gap: var(--space-8); }
+  .case-list-item { display: grid; grid-template-columns: minmax(0, 7fr) minmax(15rem, 5fr); gap: var(--space-6); align-items: stretch; }
+  .case-list-item :global(.case-preview) { display: flex; min-height: 28rem; padding: var(--space-6); border: 1px solid var(--ink); flex-direction: column; justify-content: flex-end; background: var(--warm-coral); box-shadow: var(--shadow-offset); }
+  .case-list-item :global(.case-preview h2) { margin-block: var(--space-4); font-family: var(--font-display); font-size: clamp(2.4rem, 6vw, 6rem); letter-spacing: -0.07em; line-height: 0.9; }
+  .case-list-item :global(.case-preview p:not(.metadata)) { max-width: 34rem; }
+  .case-list-item :global(.case-preview .button) { align-self: flex-start; margin-top: var(--space-4); }
+  @media (max-width: 56rem) {
+    .case-list-item, .section-heading { grid-template-columns: 1fr; gap: var(--space-5); }
+    .section-heading > * { min-width: 0; }
+    .section-heading h2 { overflow-wrap: anywhere; font-size: clamp(1.8rem, 8vw, 3rem); hyphens: auto; }
+  }
+</style>

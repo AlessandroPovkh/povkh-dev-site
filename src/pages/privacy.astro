@@ -1,0 +1,14 @@
+---
+import { getEntry, render } from "astro:content";
+import ContentLayout from "../layouts/ContentLayout.astro";
+
+const entry = await getEntry("legal", "en/privacy");
+if (!entry) throw new Error("Missing EN privacy content");
+const { Content } = await render(entry);
+---
+<ContentLayout locale="en" currentPath="/privacy/" title={`${entry.data.title} — Povkh.Dev`} description="How Povkh.Dev handles project enquiries and website data.">
+  <p class="eyebrow">Legal / {entry.data.status}</p>
+  <h1>{entry.data.title}</h1>
+  <p class="evidence-note" role="status">{entry.data.reviewNotice}</p>
+  <Content />
+</ContentLayout>

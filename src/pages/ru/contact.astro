@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectBrief from "../../components/contact/ProjectBrief.astro";
+const publicEmail = process.env.POVKH_PUBLIC_CONTACT_EMAIL;
+const demoMode = __POVKH_SITE_MODE__ !== "production";
+---
+
+<BaseLayout
+  locale="ru"
+  currentPath="/ru/contact/"
+  title="Обсудить проект — Povkh.Dev"
+  description="Расскажите Povkh.Dev, что нужно создать, обновить или соединить."
+>
+  <section class="contact-page container">
+    <header>
+      <p class="eyebrow">Бренд × Сайт × Интеграции</p>
+      <h1>Расскажите о проекте.</h1>
+      <p>{demoMode
+        ? "Три коротких шага: задача, рамки проекта и ваши контакты. В демоверсии данные никуда не отправляются."
+        : "Три коротких шага: задача, рамки проекта и ваши контакты. Мы используем эти данные только для ответа на ваш запрос."}</p>
+    </header>
+    <ProjectBrief locale="ru" {publicEmail} />
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-page { display: grid; padding-block: var(--space-8) var(--space-9); grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-7); }
+  header { position: sticky; top: var(--space-5); align-self: start; }
+  h1 { max-width: 11ch; margin-block: var(--space-4) var(--space-5); font-family: var(--font-body); font-size: clamp(2.7rem, 5vw, 5rem); font-weight: 700; letter-spacing: -0.055em; line-height: 0.98; }
+  header > p:last-child { max-width: 32rem; }
+  @media (max-width: 64rem) { .contact-page { grid-template-columns: minmax(0, 1fr); } header { position: static; min-width: 0; } }
+</style>

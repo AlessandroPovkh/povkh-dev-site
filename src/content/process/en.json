@@ -1,0 +1,11 @@
+{
+  "locale": "en",
+  "intro": "Five visible stages, each ending with a concrete decision or deliverable.",
+  "items": [
+    { "id": "understand", "title": "Understand", "summary": "We establish the goal, facts, constraints and project boundary.", "output": "A shared brief, source inventory and risk list." },
+    { "id": "frame", "title": "Frame", "summary": "We define positioning, structure and success criteria.", "output": "An approved direction, sitemap and acceptance criteria." },
+    { "id": "design", "title": "Design", "summary": "We shape identity, UX/UI and meaningful states.", "output": "A visual and interaction system ready for review." },
+    { "id": "build-connect", "title": "Build & Connect", "summary": "We implement the site and agreed integrations.", "output": "A working test release with documented connections." },
+    { "id": "verify-handover", "title": "Verify & Handover", "summary": "We test, launch and hand over the knowledge needed to run the system.", "output": "Quality-check results, source files, access map and operating notes." }
+  ]
+}

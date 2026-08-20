@@ -1,0 +1,22 @@
+---
+import type { Locale } from "../lib/i18n";
+import { equivalentRoute } from "../lib/i18n";
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const targetLocale = locale === "en" ? "ru" : "en";
+const label = locale === "en" ? "Русская версия" : "English version";
+---
+
+<a
+  class="language-switch"
+  data-testid="language-switch"
+  href={equivalentRoute(currentPath)}
+  hreflang={targetLocale}
+  lang={targetLocale}
+  aria-label={label}
+>{targetLocale.toUpperCase()}</a>

@@ -1,0 +1,185 @@
+---
+import type { Locale } from "../../lib/i18n";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CaseEvidence from "./CaseEvidence.astro";
+import { getWorkCase } from "../../lib/content";
+import { render } from "astro:content";
+
+interface Props { locale: Locale; }
+
+const { locale } = Astro.props;
+const isRu = locale === "ru";
+const prefix = isRu ? "/ru" : "";
+const caseStudy = await getWorkCase(locale, "endokey");
+const { Content } = await render(caseStudy);
+const evidenceDate = new Intl.DateTimeFormat(isRu ? "ru-RU" : "en-GB", {
+  dateStyle: "medium",
+  timeZone: "UTC",
+}).format(caseStudy.data.evidenceDate);
+const labels = isRu ? {
+  eyebrow: "Клиентский проект / медицинский продукт",
+  role: "Наша работа",
+  visit: "Открыть ENDOkey ↗",
+  evidence: "Источник кейса",
+  evidenceText: "Кейс основан на опубликованном сайте и подтверждённом владельцем перечне выполненных работ. Коммерческие показатели и медицинские результаты не раскрываются.",
+  source: "Источник",
+  checked: "Проверено",
+  map: "Путь на сайте",
+  steps: ["Понять", "Доверять", "Выбрать", "Действовать"],
+  story: "Что мы собрали",
+  back: "← Все работы",
+  alternate: "English version →",
+} : {
+  eyebrow: "Client work / medical product",
+  role: "Our work",
+  visit: "Visit ENDOkey ↗",
+  evidence: "Case source",
+  evidenceText: "This case is based on the published website and the delivered work confirmed by the project owner. Commercial figures and medical outcomes are not disclosed.",
+  source: "Source",
+  checked: "Checked",
+  map: "Website journey",
+  steps: ["Understand", "Trust", "Choose", "Act"],
+  story: "What we built",
+  back: "← All work",
+  alternate: "Русская версия →",
+};
+---
+
+<BaseLayout
+  {locale}
+  currentPath={`${prefix}/work/endokey/`}
+  title={`ENDOkey — Povkh.Dev`}
+  description={caseStudy.data.summary}
+>
+  <div class="endokey-case">
+    <header class="endokey-hero container">
+      <div class="endokey-intro">
+        <p class="eyebrow">{labels.eyebrow}</p>
+        <h1>{caseStudy.data.title}</h1>
+        <p class="case-summary">{caseStudy.data.summary}</p>
+        <a class="button" href={caseStudy.data.liveSite} rel="external">{labels.visit}</a>
+      </div>
+
+      <div class="endokey-system" aria-label={labels.map}>
+        <div class="system-mark" aria-hidden="true"><i></i><i></i><i></i></div>
+        <p class="system-label">{labels.map}</p>
+        <ol>
+          {labels.steps.map((step, index) => (
+            <li><span>0{index + 1}</span><strong>{step}</strong></li>
+          ))}
+        </ol>
+      </div>
+    </header>
+
+    <section class="case-scope container" aria-labelledby="endokey-scope-title">
+      <p class="eyebrow" id="endokey-scope-title">{labels.role}</p>
+      <ul>{caseStudy.data.scope.map((item) => <li>{item}</li>)}</ul>
+    </section>
+
+    <div class="container">
+      <CaseEvidence
+        label={labels.evidence}
+        source={caseStudy.data.publicSource}
+        date={evidenceDate}
+        text={labels.evidenceText}
+        sourceLabel={labels.source}
+        dateLabel={labels.checked}
+      />
+    </div>
+
+    <article class="case-story container" aria-labelledby="endokey-story-title">
+      <header>
+        <p class="eyebrow">ENDOkey / Brand × Web</p>
+        <h2 id="endokey-story-title">{labels.story}</h2>
+      </header>
+      <div class="story-body"><Content /></div>
+    </article>
+
+    <nav class="case-next container" aria-label={isRu ? "Навигация по кейсам" : "Case navigation"}>
+      <a href={`${prefix}/work/`}>{labels.back}</a>
+      <a href={isRu ? "/work/endokey/" : "/ru/work/endokey/"}>{labels.alternate}</a>
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .endokey-case { border-bottom: 1px solid var(--ink); }
+  .endokey-hero {
+    display: grid;
+    min-height: min(46rem, calc(100svh - 7rem));
+    padding-block: var(--space-8);
+    grid-template-columns: minmax(0, 7fr) minmax(19rem, 5fr);
+    gap: var(--space-7);
+    align-items: stretch;
+  }
+  .endokey-intro { display: flex; min-width: 0; align-items: flex-start; flex-direction: column; justify-content: flex-end; }
+  .endokey-intro h1 {
+    margin: var(--space-5) 0;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 9vw, 8.5rem);
+    letter-spacing: -0.08em;
+    line-height: 0.86;
+  }
+  .case-summary { max-width: 36rem; font-size: clamp(1.1rem, 1.8vw, 1.4rem); }
+  .endokey-intro .button { margin-top: var(--space-4); }
+  .endokey-system {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    overflow: hidden;
+    padding: var(--space-6);
+    color: white;
+    background: #143d6b;
+    grid-template-rows: auto 1fr;
+  }
+  .endokey-system::after {
+    position: absolute;
+    right: -14%;
+    bottom: -18%;
+    width: 62%;
+    aspect-ratio: 1;
+    border: clamp(1.4rem, 3vw, 2.6rem) solid #24a45d;
+    content: "";
+    transform: rotate(45deg);
+  }
+  .system-mark { position: absolute; top: 12%; right: 10%; display: flex; gap: 0.35rem; transform: rotate(45deg); }
+  .system-mark i { display: block; width: 2.4rem; height: 0.55rem; background: #24a45d; }
+  .system-mark i:nth-child(2) { background: #f4f1e8; }
+  .system-mark i:nth-child(3) { background: #2374d1; }
+  .system-label { margin: 0; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .endokey-system ol { z-index: 1; align-self: end; margin: 0; padding: 0; border-top: 1px solid white; list-style: none; }
+  .endokey-system li { display: grid; padding-block: var(--space-4); border-bottom: 1px solid white; grid-template-columns: 3rem 1fr; align-items: baseline; gap: var(--space-3); }
+  .endokey-system li span { color: #9bd9ff; font-family: var(--font-mono); font-size: 0.7rem; }
+  .endokey-system li strong { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.5rem); }
+  .case-scope { padding-block: var(--space-7); border-block: 1px solid var(--ink); }
+  .case-scope ul { display: grid; margin: var(--space-5) 0 0; padding: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); list-style: none; }
+  .case-scope li { padding: var(--space-4); border: 1px solid var(--ink); border-right: 0; font-family: var(--font-display); font-size: clamp(0.9rem, 1.5vw, 1.2rem); line-height: 1.2; }
+  .case-scope li:last-child { border-right: 1px solid var(--ink); }
+  .case-story { display: grid; padding-block: var(--space-9); grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-7); }
+  .case-story h2 { max-width: 9ch; margin: var(--space-4) 0 0; font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 5rem); letter-spacing: -0.065em; line-height: 0.96; }
+  .story-body { min-width: 0; }
+  .story-body :global(h2) { margin: var(--space-7) 0 var(--space-3); font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 2.1rem); letter-spacing: -0.045em; line-height: 1.05; }
+  .story-body :global(h2:first-child) { margin-top: 0; }
+  .story-body :global(p) { max-width: 48rem; }
+  .case-next { display: flex; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-6) var(--space-9); border-top: 1px solid var(--ink); }
+  .case-next a { font-weight: 700; }
+  @media (max-width: 64rem) {
+    .endokey-hero { min-height: auto; grid-template-columns: 1fr; }
+    .endokey-intro { min-height: 28rem; }
+    .endokey-system { min-height: 28rem; }
+    .case-story { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 48rem) {
+    .case-scope ul { grid-template-columns: 1fr 1fr; }
+    .case-scope li:nth-child(2) { border-right: 1px solid var(--ink); }
+    .case-scope li:nth-child(n + 3) { border-top: 0; }
+  }
+  @media (max-width: 36rem) {
+    .endokey-intro h1 { font-size: clamp(3.2rem, 17vw, 5rem); }
+    .endokey-system { min-height: 24rem; padding: var(--space-5); }
+    .case-scope ul { grid-template-columns: 1fr; }
+    .case-scope li { border-right: 1px solid var(--ink); border-top: 0; }
+    .case-scope li:first-child { border-top: 1px solid var(--ink); }
+    .case-next { align-items: flex-start; flex-direction: column; }
+  }
+</style>

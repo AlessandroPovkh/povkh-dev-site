@@ -1,0 +1,100 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { Locale } from "../../lib/i18n";
+
+interface Props {
+  locale: Locale;
+  services: CollectionEntry<"services">["data"];
+}
+const { locale, services } = Astro.props;
+const isRu = locale === "ru";
+---
+
+<section class="service-systems" data-section="services" aria-labelledby="services-title">
+  <header class="service-intro container">
+    <p class="eyebrow">02 / {isRu ? "Три системы" : "Three systems"}</p>
+    <h2 id="services-title">{isRu ? "Не список технологий. Связанный результат." : "Not a list of technologies. A connected outcome."}</h2>
+    <p>{services.intro}</p>
+  </header>
+  <div class="service-list">
+    {services.items.map((service, index) => (
+      <article class={`service-row service-${service.id}`}>
+        <div class="service-index metadata">0{index + 1} / 03</div>
+        <div class="service-main">
+          <h3>{service.title}</h3>
+          <p class="service-situation">{service.situation}</p>
+        </div>
+        <div class="service-detail">
+          <p class="service-outcome">{service.outcome}</p>
+          <ul>{service.includes.slice(0, 5).map((item) => <li>{item}</li>)}</ul>
+          <p class="service-boundary"><b>{isRu ? "Граница:" : "Boundary:"}</b> {service.boundary}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .service-systems { border-bottom: 1px solid var(--ink); }
+  .service-intro {
+    display: grid;
+    padding-block: var(--space-8);
+    grid-template-columns: 3fr 6fr 3fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+  .service-intro h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.3vw, 4.3rem);
+    letter-spacing: -0.055em;
+    line-height: 1;
+  }
+  .service-intro > p:last-child { max-width: 30rem; margin: 0; }
+  .service-row {
+    display: grid;
+    min-height: 31rem;
+    padding: var(--space-7) var(--gutter);
+    border-top: 1px solid var(--ink);
+    grid-template-columns: minmax(3rem, 1fr) minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-5);
+  }
+  .service-main,
+  .service-detail { min-width: 0; }
+  .service-main { grid-column: 2; }
+  .service-main h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4vw, 6rem);
+    letter-spacing: -0.07em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+  .service-situation { max-width: 29rem; margin-top: var(--space-6); font-size: 1.2rem; }
+  .service-detail { grid-column: 3; align-self: end; }
+  .service-outcome { max-width: 44rem; font-size: clamp(1.35rem, 2.2vw, 2.2rem); line-height: 1.25; }
+  .service-detail ul {
+    display: flex;
+    margin: var(--space-6) 0;
+    padding: 0;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+  }
+  .service-detail li { padding: 0.35rem 0.65rem; border: 1px solid currentColor; border-radius: var(--radius-pill); font-size: 0.82rem; }
+  .service-boundary { max-width: 45rem; margin: 0; font-size: 0.88rem; }
+  .service-brand { background: var(--warm-coral); }
+  .service-web { color: var(--paper); background: var(--electric-cobalt); }
+  .service-connect { background: var(--signal-lime); }
+  @media (max-width: 56rem) {
+    .service-intro,
+    .service-row { grid-template-columns: 1fr; }
+    .service-intro > *, .service-main, .service-detail { grid-column: 1; }
+    .service-row { min-height: auto; padding-block: var(--space-7); }
+    .service-main h3 { font-size: clamp(3rem, 9vw, 5.5rem); }
+    .service-detail { margin-top: var(--space-6); }
+  }
+  @media (max-width: 36rem) {
+    .service-main h3 { font-size: clamp(1.9rem, 10vw, 3.6rem); overflow-wrap: anywhere; }
+  }
+</style>

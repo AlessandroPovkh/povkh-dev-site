@@ -1,0 +1,46 @@
+---
+import type { Locale } from "../lib/i18n";
+import type { CollectionEntry } from "astro:content";
+import LanguageSwitch from "./LanguageSwitch.astro";
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+  site: CollectionEntry<"site">["data"];
+}
+
+const { locale, currentPath, site } = Astro.props;
+const isRu = locale === "ru";
+const contactHref = site.nav.find(({ id }) => id === "contact")?.href ?? "/contact/";
+---
+
+<header class="site-header" data-site-header>
+  <div class="header-inner container">
+    <a class="wordmark" href={locale === "ru" ? "/ru/" : "/"} aria-label={isRu ? "Главная Povkh.Dev" : "Povkh.Dev home"}>
+      POVKH<span class="wordmark-dot">.</span>DEV
+    </a>
+    <nav class="primary-nav" aria-label={isRu ? "Основная навигация" : "Primary navigation"}>
+      <ul class="primary-links" data-testid="primary-links" data-primary-links>
+        {site.nav.filter(({ id }) => id !== "contact").map((item) => (
+          <li>
+            <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <LanguageSwitch locale={locale} currentPath={currentPath} />
+      <a class="button header-cta" href={contactHref}>{site.hero.primaryCta}</a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-links"
+        aria-label={isRu ? "Открыть меню" : "Open menu"}
+        data-menu-toggle
+      >
+        <span class="menu-toggle-lines" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>

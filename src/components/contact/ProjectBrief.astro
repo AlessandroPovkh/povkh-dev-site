@@ -1,0 +1,214 @@
+---
+import type { Locale } from "../../lib/i18n";
+
+interface Props {
+  locale: Locale;
+  publicEmail?: string;
+}
+
+const { locale, publicEmail } = Astro.props;
+const isRu = locale === "ru";
+const demoMode = __POVKH_SITE_MODE__ !== "production";
+const copy = isRu ? {
+  progress: "Шаг брифа",
+  stepOne: "Что создаём?",
+  stepTwo: "Границы проекта",
+  stepThree: "Как с вами связаться?",
+  context: "Контекст проекта",
+  contextHint: "Опишите задачу, аудиторию и что должно измениться.",
+  siteUrl: "Текущий сайт, если есть",
+  delivery: "Срок запуска",
+  budget: "Диапазон бюджета",
+  name: "Ваше имя",
+  company: "Компания или проект, если есть",
+  channel: "Предпочтительный способ связи",
+  consent: demoMode ? "Я понимаю, что это демоверсия и данные не отправляются." : "Я соглашаюсь на использование данных из этого брифа для ответа на мой запрос.",
+  next: "Продолжить",
+  back: "Назад",
+  submit: demoMode ? "Завершить демо" : "Отправить бриф",
+  successTitle: demoMode ? "Демоверсия завершена." : "Бриф отправлен.",
+  successBody: demoMode ? "Данные никуда не отправлялись. Рабочую отправку подключим перед запуском." : "Мы изучим контекст и ответим с понятным следующим шагом.",
+  error: "Не удалось отправить бриф. Данные сохранены — попробуйте ещё раз.",
+  rate: "Слишком много попыток. Подождите и повторите отправку.",
+  invalid: "Проверьте заполненные поля и повторите отправку.",
+  retry: "Повторить",
+  emailPending: "Публичный email ещё не утверждён; публикация формы в рабочей версии заблокирована.",
+} : {
+  progress: "Brief step",
+  stepOne: "What are we creating?",
+  stepTwo: "Project boundaries",
+  stepThree: "How should we contact you?",
+  context: "Project context",
+  contextHint: "Describe the task, audience and what needs to change.",
+  siteUrl: "Current website, if any",
+  delivery: "Delivery window",
+  budget: "Budget range",
+  name: "Your name",
+  company: "Company or project, if any",
+  channel: "Preferred contact method",
+  consent: demoMode ? "I understand this is a demo and no data is sent." : "I agree that Povkh.Dev may use the information in this brief to respond to my enquiry.",
+  next: "Continue",
+  back: "Back",
+  submit: demoMode ? "Complete demo" : "Send project brief",
+  successTitle: demoMode ? "Demo complete." : "Your brief has been sent.",
+  successBody: demoMode ? "No data was sent. Live delivery will be enabled before launch." : "We’ll review the context and reply with a clear next step.",
+  error: "We couldn’t send the brief. Your entries are saved — please try again.",
+  rate: "Too many attempts. Wait before trying again.",
+  invalid: "Check the highlighted fields and try again.",
+  retry: "Retry",
+  emailPending: "The public email is not approved yet; production publishing remains blocked.",
+};
+---
+
+<div class="brief-shell" data-project-brief data-locale={locale} data-delivery-mode={demoMode ? "demo" : "live"}>
+  <div
+    class="brief-progress metadata"
+    data-testid="brief-progress"
+    data-brief-progress
+    role="progressbar"
+    aria-label={copy.progress}
+    aria-valuemin="1"
+    aria-valuemax="3"
+    aria-valuenow="1"
+  >1 / 3</div>
+
+  <div class="brief-error" data-testid="brief-error" data-brief-error tabindex="-1" hidden></div>
+  <div class="brief-success" data-testid="brief-success" data-brief-success tabindex="-1" hidden>
+    <p class="eyebrow">{demoMode ? (isRu ? "Локальное демо" : "Local demo") : "202 / Accepted"}</p>
+    <h2>{copy.successTitle}</h2>
+    <p>{copy.successBody}</p>
+  </div>
+
+  <form data-brief-form novalidate>
+    <input type="hidden" name="locale" value={locale} />
+    <input type="hidden" name="startedAt" value="" data-started-at />
+    <input type="hidden" name="idempotencyKey" value="" data-idempotency-key />
+
+    <fieldset data-brief-step>
+      <legend><span class="metadata">01 / 03</span>{copy.stepOne}</legend>
+      <div class="choice-grid">
+        <label><input type="radio" name="category" value="brand" required /> <span>{isRu ? "Бренд-система" : "Brand & identity"}</span></label>
+        <label><input type="radio" name="category" value="website" /> <span>{isRu ? "Сайт" : "Website"}</span></label>
+        <label><input type="radio" name="category" value="connected" /> <span>{isRu ? "Сайт с интеграциями" : "Connected website"}</span></label>
+        <label><input type="radio" name="category" value="other" /> <span>{isRu ? "Другое" : "Other"}</span></label>
+      </div>
+      <label class="field">
+        <span>{copy.context}</span>
+        <small>{copy.contextHint}</small>
+        <textarea name="context" rows="7" minlength="20" maxlength="2000" required></textarea>
+      </label>
+      <label class="field">
+        <span>{copy.siteUrl}</span>
+        <input type="url" name="siteUrl" maxlength="500" inputmode="url" placeholder="https://" />
+      </label>
+      <div class="step-actions"><button class="button" type="button" data-next>{copy.next}</button></div>
+    </fieldset>
+
+    <fieldset data-brief-step>
+      <legend><span class="metadata">02 / 03</span>{copy.stepTwo}</legend>
+      <label class="field">
+        <span>{copy.delivery}</span>
+        <select name="deliveryWindow" required>
+          <option value="">—</option>
+          <option value="soon">{isRu ? "Как можно скорее" : "As soon as practical"}</option>
+          <option value="flexible">{isRu ? "Гибко" : "Flexible"}</option>
+          <option value="date">{isRu ? "Есть конкретная дата" : "There is a fixed date"}</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>{copy.budget}</span>
+        <select name="budget" required>
+          <option value="">—</option>
+          <option value="discovery">{isRu ? "Только исследование" : "Discovery only"}</option>
+          <option value="small">{isRu ? "Небольшой сфокусированный проект" : "Small focused project"}</option>
+          <option value="medium">{isRu ? "Полная бренд-система или сайт" : "Full brand or web system"}</option>
+          <option value="custom">{isRu ? "Индивидуальная оценка" : "Custom evaluation"}</option>
+          <option value="undecided">{isRu ? "Нужно определить вместе" : "To be defined together"}</option>
+        </select>
+      </label>
+      <div class="step-actions">
+        <button class="button button-secondary" type="button" data-back>{copy.back}</button>
+        <button class="button" type="button" data-next>{copy.next}</button>
+      </div>
+    </fieldset>
+
+    <fieldset data-brief-step>
+      <legend><span class="metadata">03 / 03</span>{copy.stepThree}</legend>
+      <div class="field-pair">
+        <label class="field"><span>{copy.name}</span><input name="name" maxlength="120" autocomplete="name" required /></label>
+        <label class="field"><span>{isRu ? "Электронная почта" : "Email"}</span><input type="email" name="email" maxlength="254" autocomplete="email" required /></label>
+      </div>
+      <div class="field-pair">
+        <label class="field"><span>{copy.company}</span><input name="company" maxlength="160" autocomplete="organization" /></label>
+        <label class="field">
+          <span>{copy.channel}</span>
+          <select name="channel" required>
+            <option value="email">{isRu ? "Электронная почта" : "Email"}</option>
+            <option value="video">{isRu ? "Видеозвонок" : "Video call"}</option>
+            <option value="either">{isRu ? "Любой" : "Either"}</option>
+          </select>
+        </label>
+      </div>
+      <label class="consent"><input type="checkbox" name="consent" required /> <span>{copy.consent}</span></label>
+      <div class="honeypot" aria-hidden="true">
+        <label>Website verification<input name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      <div class="step-actions">
+        <button class="button button-secondary" type="button" data-back>{copy.back}</button>
+        <button class="button" type={demoMode ? "button" : "submit"} data-submit data-submit-label={copy.submit} data-retry-label={copy.retry}>{copy.submit}</button>
+      </div>
+    </fieldset>
+  </form>
+
+  <aside class="delivery-fallback">
+    <p class="metadata">{demoMode ? (isRu ? "Демоверсия" : "Demo mode") : (isRu ? "Резервный контакт" : "Delivery fallback")}</p>
+    {demoMode && <p>{isRu ? "Можно пройти весь бриф: введённые данные останутся только в браузере." : "You can complete the full brief; entered data stays in this browser."}</p>}
+    {publicEmail
+      ? <a href={`mailto:${publicEmail}`}>{publicEmail}</a>
+      : !demoMode && <p>{copy.emailPending}</p>}
+  </aside>
+
+  <template data-error-copy data-default={copy.error} data-rate={copy.rate} data-invalid={copy.invalid}></template>
+</div>
+
+<script>
+  import "../../scripts/contact";
+</script>
+
+<style>
+  .brief-shell { display: grid; gap: var(--space-5); }
+  .brief-progress { padding: var(--space-3) var(--space-4); border: 1px solid var(--ink); justify-self: start; background: var(--signal-lime); }
+  .brief-error { padding: var(--space-4); border: 2px solid var(--ink); background: var(--warm-coral); font-weight: 700; }
+  .brief-success { padding: var(--space-7); border: 1px solid var(--ink); background: var(--signal-lime); }
+  .brief-success h2 { margin: var(--space-4) 0; font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.05em; }
+  form { border-top: 1px solid var(--ink); }
+  fieldset { display: grid; margin: 0; padding: var(--space-7) 0; border: 0; border-bottom: 1px solid var(--ink); gap: var(--space-5); }
+  html[data-enhanced] fieldset[hidden] { display: none; }
+  legend { width: 100%; padding: 0; font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3.8rem); font-weight: 650; letter-spacing: -0.055em; }
+  legend .metadata { display: block; margin-bottom: var(--space-3); color: var(--muted); }
+  .choice-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .choice-grid label { position: relative; min-width: 0; }
+  .choice-grid input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; opacity: 0; }
+  .choice-grid span { display: flex; min-height: 5rem; padding: var(--space-4); border: 1px solid var(--ink); align-items: center; font-family: var(--font-display); font-size: clamp(0.95rem, 2vw, 1.4rem); cursor: pointer; }
+  .choice-grid label:nth-child(even) span { border-left: 0; }
+  .choice-grid label:nth-child(n + 3) span { border-top: 0; }
+  .choice-grid input:checked + span { background: var(--signal-lime); box-shadow: inset 0 0 0 0.2rem var(--ink); }
+  .choice-grid input:focus-visible + span { outline: 0.2rem solid var(--electric-cobalt); outline-offset: 0.2rem; }
+  .field { display: grid; gap: var(--space-2); font-weight: 650; }
+  .field small { color: var(--muted); font-weight: 400; }
+  input, textarea, select { width: 100%; min-height: 3.25rem; padding: 0.75rem; border: 1px solid var(--ink); border-radius: 0; color: var(--ink); background: rgb(255 255 255 / 0.35); }
+  textarea { resize: vertical; }
+  .field-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+  .consent { display: grid; max-width: 46rem; grid-template-columns: 1.4rem 1fr; gap: var(--space-3); align-items: start; }
+  .consent input { width: 1.4rem; min-height: 1.4rem; margin: 0.2rem 0 0; }
+  .step-actions { display: flex; margin-top: var(--space-4); flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); }
+  .honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .delivery-fallback { padding: var(--space-5); border: 1px dashed var(--ink); }
+  .delivery-fallback p:last-child { margin-bottom: 0; }
+  @media (max-width: 40rem) {
+    .choice-grid,
+    .field-pair { grid-template-columns: 1fr; }
+    .choice-grid label:nth-child(even) span { border-left: 1px solid var(--ink); }
+    .choice-grid label:nth-child(n + 2) span { border-top: 0; }
+  }
+</style>

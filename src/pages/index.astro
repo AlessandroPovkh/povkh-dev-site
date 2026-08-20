@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DualHero from "../components/home/DualHero.astro";
+import ServiceSystems from "../components/home/ServiceSystems.astro";
+import SignatureInteraction from "../components/home/SignatureInteraction.astro";
+import { getFeaturedWork, getProcess, getServices, getSite, getTeam } from "../lib/content";
+import "../styles/home.css";
+
+const site = await getSite("en");
+const services = await getServices("en");
+const process = await getProcess("en");
+const team = await getTeam("en");
+const featuredWork = await getFeaturedWork("en");
+if (featuredWork.length !== 2) throw new Error("English homepage requires exactly two featured cases");
+---
+
+<BaseLayout
+  locale="en"
+  currentPath="/"
+  title={site.meta.title}
+  description={site.meta.description}
+>
+  <DualHero locale="en" {site} work={featuredWork} />
+
+  <ServiceSystems locale="en" {services} />
+  <SignatureInteraction locale="en" />
+
+  <section class="process-home" data-section="process" aria-labelledby="process-title">
+    <div class="container">
+      <header class="section-heading">
+        <p class="eyebrow">04 / Visible process</p>
+        <h2 id="process-title">Five stages. A concrete output at each.</h2>
+      </header>
+      <ol class="process-list" data-testid="process-list">
+        {process.items.map((stage, index) => (
+          <li>
+            <span class="metadata">0{index + 1}</span>
+            <h3>{stage.title}</h3>
+            <p>{stage.summary}</p>
+            <p class="process-output"><b>Output:</b> {stage.output}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="studio-home" data-section="studio-summary" data-testid="studio-summary" aria-labelledby="studio-title">
+    <div class="studio-home-inner container">
+      <div>
+        <p class="eyebrow">05 / Studio</p>
+        <h2 id="studio-title">Two people. One accountable system.</h2>
+      </div>
+      <div class="studio-note">
+        <p>{team.intro}</p>
+        <a class="button button-secondary" href="/studio/">How we work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-home" data-section="final-cta" aria-labelledby="final-title">
+    <div class="final-home-inner container">
+      <div>
+        <p class="eyebrow">Start with context</p>
+        <h2 id="final-title">{site.finalCta.title}</h2>
+        <p>{site.finalCta.body}</p>
+      </div>
+      <a class="button" href="/contact/">{site.hero.primaryCta}</a>
+    </div>
+  </section>
+</BaseLayout>

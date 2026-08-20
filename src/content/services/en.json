@@ -1,0 +1,33 @@
+{
+  "locale": "en",
+  "intro": "Three connected systems, scoped around the outcome your business actually needs.",
+  "items": [
+    {
+      "id": "brand",
+      "title": "Brand",
+      "situation": "Your offer works, but its meaning and visual language are fragmented or no longer fit the business.",
+      "outcome": "A recognisable identity system ready for consistent use across the website and core materials.",
+      "includes": ["research and positioning", "identity direction and logo", "brand guide", "social, advertising and presentation layouts", "mockups and application rules"],
+      "boundary": "Trademark checks, registration, paid licences and unlimited asset production are scoped separately.",
+      "cta": "Discuss a brand system"
+    },
+    {
+      "id": "web",
+      "title": "Web",
+      "situation": "Your business needs a clear, distinctive digital presence that earns trust and guides action.",
+      "outcome": "A responsive, accessible website with an agreed content system, technical foundation and documented QA results.",
+      "includes": ["discovery and roadmap", "landing or company website", "UX/UI and responsive design system", "agreed page copy", "development and CMS when needed", "technical SEO foundation", "accessibility, performance and visual QA"],
+      "boundary": "Ongoing promotion, ranking guarantees, unlimited migration and indefinite support are not included automatically.",
+      "cta": "Discuss a website"
+    },
+    {
+      "id": "connect",
+      "title": "Connect",
+      "situation": "Leads and data reach the website, then disappear into manual steps and disconnected tools.",
+      "outcome": "A documented workflow connecting the website to the agreed next business action.",
+      "includes": ["lead forms and qualification", "CRM adapters", "email and calendar flows", "analytics and event plan", "consent states", "limited automation and AI-assisted workflows with a defined purpose", "integration QA and documentation"],
+      "boundary": "Each integration depends on verified API access, regional availability, third-party costs and data-protection requirements.",
+      "cta": "Discuss an integration"
+    }
+  ]
+}

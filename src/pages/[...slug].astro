@@ -1,0 +1,34 @@
+---
+export const prerender = false;
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const isRu = Astro.url.pathname === "/ru" || Astro.url.pathname.startsWith("/ru/");
+const locale = isRu ? ("ru" as const) : ("en" as const);
+Astro.response.status = 404;
+---
+
+<BaseLayout
+  locale={locale}
+  currentPath={isRu ? "/ru/services/" : "/services/"}
+  title={isRu ? "Страница не найдена — Povkh.Dev" : "Page not found — Povkh.Dev"}
+  description={isRu ? "Запрошенная страница Povkh.Dev не найдена." : "The requested Povkh.Dev page could not be found."}
+>
+  <section class="not-found container" aria-labelledby="not-found-title">
+    <p class="eyebrow">404 / {isRu ? "Восстановление" : "Recovery"}</p>
+    <h1 id="not-found-title">{isRu ? "Страница не найдена" : "Page not found"}</h1>
+    <p>{isRu ? "Такого маршрута нет в этой версии. Следующий полезный шаг всё ещё доступен." : "That route is not part of this release. The useful next step is still available."}</p>
+    <nav aria-label={isRu ? "Навигация восстановления" : "Recovery navigation"}>
+      <a class="button" href={isRu ? "/ru/" : "/"}>{isRu ? "На главную" : "Back home"}</a>
+      <a class="button button-secondary" href={isRu ? "/ru/services/" : "/services/"}>{isRu ? "Посмотреть услуги" : "View services"}</a>
+      <a class="text-link" href={isRu ? "/ru/contact/" : "/contact/"}>{isRu ? "Обсудить проект" : "Discuss a project"} ↗</a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found { min-height: min(40rem, 70svh); padding-block: clamp(5rem, 14vw, 12rem); }
+  .not-found h1 { max-width: 12ch; margin-block: var(--space-4) var(--space-5); font-family: var(--font-display); font-size: clamp(2.8rem, 8vw, 6rem); letter-spacing: -0.07em; line-height: 0.95; }
+  .not-found > p:not(.eyebrow) { max-width: 34rem; font-size: 1.3rem; }
+  .not-found nav { display: flex; margin-block-start: var(--space-6); flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+</style>
