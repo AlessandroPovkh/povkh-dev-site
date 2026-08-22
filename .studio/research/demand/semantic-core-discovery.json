@@ -1,0 +1,45 @@
+{
+  "stage": "discovery",
+  "call_budget": 5,
+  "scope": {
+    "regions": ["225"],
+    "devices": ["DEVICE_ALL"]
+  },
+  "seeds": [
+    {
+      "query": "разработка сайтов для бизнеса",
+      "product_status": "supported",
+      "process": "создание коммерческого сайта",
+      "equipment": "сайт",
+      "industry": "B2B, B2B2C и предприниматели"
+    },
+    {
+      "query": "брендинг компании",
+      "product_status": "supported",
+      "process": "создание бренд-системы",
+      "equipment": "бренд и айдентика",
+      "industry": "B2B, B2B2C и предприниматели"
+    },
+    {
+      "query": "построение воронки продаж",
+      "product_status": "supported",
+      "process": "проектирование пути к обращению",
+      "equipment": "воронка",
+      "industry": "B2B, B2B2C и предприниматели"
+    },
+    {
+      "query": "seo продвижение сайта",
+      "product_status": "verify",
+      "process": "органическое продвижение",
+      "equipment": "сайт и контент",
+      "industry": "B2B, B2B2C и предприниматели"
+    },
+    {
+      "query": "настройка контекстной рекламы",
+      "product_status": "verify",
+      "process": "запуск платного привлечения",
+      "equipment": "рекламная кампания",
+      "industry": "B2B, B2B2C и предприниматели"
+    }
+  ]
+}

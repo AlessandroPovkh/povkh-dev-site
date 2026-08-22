@@ -21,6 +21,7 @@ const relationshipLabel = (relationship: CollectionEntry<"work">["data"]["relati
   <div class="dual-hero-copy">
     <p class="eyebrow">{site.hero.eyebrow}</p>
     <h1 id="hero-title">{site.hero.title}</h1>
+    {site.hero.lead && <p class="hero-lead">{site.hero.lead}</p>}
     <div class="hero-footer">
       <a class="button" href={`${prefix}/contact/`}>{site.hero.primaryCta}</a>
       <p class="hero-fact">{site.hero.metaFact}</p>
@@ -33,7 +34,7 @@ const relationshipLabel = (relationship: CollectionEntry<"work">["data"]["relati
       {work.map((caseStudy) => (
         <a class="hero-work-record" href={`${prefix}/work/${caseStudy.data.caseSlug}/`}>
           <span class="work-meta">{relationshipLabel(caseStudy.data.relationship)} · {caseStudy.data.context}</span>
-          <span class="work-title">{caseStudy.data.title}<span aria-hidden="true">↗</span></span>
+          <span class="work-title"><span>{caseStudy.data.title}</span><span aria-hidden="true">↗</span></span>
           <span class="work-scope">{caseStudy.data.featuredScope}</span>
         </a>
       ))}
@@ -63,6 +64,11 @@ const relationshipLabel = (relationship: CollectionEntry<"work">["data"]["relati
     font-weight: 650;
     letter-spacing: -0.065em;
     line-height: 0.96;
+  }
+  .hero-lead {
+    max-width: 42rem;
+    margin: 0 0 var(--space-6);
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
   }
   .hero-footer {
     display: flex;
@@ -130,6 +136,8 @@ const relationshipLabel = (relationship: CollectionEntry<"work">["data"]["relati
     letter-spacing: -0.055em;
     line-height: 1;
   }
+  .work-title > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+  .work-title > span:last-child { flex: 0 0 auto; }
   @media (max-width: 64rem) {
     .dual-hero { min-height: auto; grid-template-columns: minmax(0, 1fr); }
     .dual-hero-copy { min-height: min(42rem, calc(100svh - 7rem)); padding-block: var(--space-7); }

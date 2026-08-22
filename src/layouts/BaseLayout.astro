@@ -13,9 +13,10 @@ interface Props {
   currentPath: string;
   title: string;
   description: string;
+  hasAlternate?: boolean;
 }
 
-const { locale, currentPath, title, description } = Astro.props;
+const { locale, currentPath, title, description, hasAlternate = true } = Astro.props;
 const robots = __POVKH_SITE_MODE__ === "production"
   ? "index, follow, max-image-preview:large"
   : "noindex, nofollow";
@@ -26,7 +27,7 @@ const isRu = locale === "ru";
 <!doctype html>
 <html lang={locale} data-site-mode={__POVKH_SITE_MODE__}>
   <head>
-    <SeoHead {locale} {currentPath} {title} {description} {robots} />
+    <SeoHead {locale} {currentPath} {title} {description} {robots} {hasAlternate} />
     <script is:inline>
       document.documentElement.dataset.enhanced = "true";
       document.documentElement.dataset.motion = matchMedia("(prefers-reduced-motion: reduce)").matches ? "reduced" : "standard";
@@ -35,7 +36,7 @@ const isRu = locale === "ru";
   <body>
     <a class="skip-link" href="#main-content">{isRu ? "Перейти к содержанию" : "Skip to content"}</a>
     {__POVKH_SITE_MODE__ !== "production" && <div class="preview-banner" role="status">{site.previewNotice}</div>}
-    <Header {locale} {currentPath} {site} />
+    <Header {locale} {currentPath} {site} {hasAlternate} />
     <main id="main-content" tabindex="-1"><slot /></main>
     <Footer {locale} />
     <ConsentControls {locale} />

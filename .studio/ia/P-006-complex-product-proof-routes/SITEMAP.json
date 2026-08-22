@@ -1,0 +1,66 @@
+{
+  "status": "ready_for_review",
+  "scope": "ru-complex-product-proof-routes",
+  "routes": [
+    {
+      "route": "/ru/",
+      "parent": null,
+      "pageType": "homepage",
+      "pageJob": "Establish Povkh.Dev as a credible partner for complex products, prove the claim through KZMS and ENDOkey, and help the visitor choose between reviewing evidence and starting a scoped conversation.",
+      "audience": "Owner, commercial lead or marketing lead responsible for a complex B2B or specialist B2B2C product.",
+      "entryContext": "Brand/direct/referral visit or a visitor evaluating Povkh.Dev after encountering a case.",
+      "nextAction": "Open the most relevant case or initiate a bounded product/task discussion.",
+      "owner": "Povkh.Dev",
+      "sourceIds": ["D-005", "D-006", "SRC-011", "SRC-012"],
+      "status": "retained-refactor"
+    },
+    {
+      "route": "/ru/work/",
+      "parent": "/ru/",
+      "pageType": "work-index",
+      "pageJob": "Let a buyer compare Povkh.Dev evidence by problem, subject complexity, delivered surface and proof boundary.",
+      "audience": "Buyer evaluating relevance and delivery credibility.",
+      "entryContext": "Primary navigation, homepage proof section or direct visit.",
+      "nextAction": "Open a relevant case.",
+      "owner": "Povkh.Dev",
+      "sourceIds": ["D-006", "src/content/work/ru/endokey.md", "src/content/work/ru/povkh-lab.md"],
+      "status": "retained-update"
+    },
+    {
+      "route": "/ru/work/kzms/",
+      "parent": "/ru/work/",
+      "pageType": "case-study",
+      "pageJob": "Demonstrate how Povkh.Dev studied a complex industrial product and sales context, then used that understanding to redesign the catalogue around industries, production tasks and engineering selection.",
+      "audience": "Industrial B2B owner, commercial lead, marketing lead or product expert considering a catalogue/site project.",
+      "entryContext": "Homepage social proof, work index or direct shared link.",
+      "nextAction": "Open the redesigned KZMS catalogue or discuss a comparable complex-product task.",
+      "owner": "Povkh.Dev with KZMS facts subject to KZMS approval/privacy boundaries",
+      "sourceIds": ["D-004", "D-006", "SRC-011", "projects/rosset-kzms/artifacts/commercial-strategy/STRATEGY.md"],
+      "status": "new-required"
+    },
+    {
+      "route": "/ru/work/endokey/",
+      "parent": "/ru/work/",
+      "pageType": "case-study",
+      "pageJob": "Demonstrate how Povkh.Dev translated a specialised medical product into positioning, identity, explanatory content and a live route to product evaluation and action without claiming unverified medical or commercial outcomes.",
+      "audience": "Owner, product lead or marketing lead of a specialised product where professional trust and claim discipline matter.",
+      "entryContext": "Homepage social proof, work index, direct/shared link or ENDOkey reference.",
+      "nextAction": "Open the live ENDOkey site as implementation evidence or discuss a comparable complex-product task.",
+      "owner": "Povkh.Dev with product/medical claims owned by ENDOkey",
+      "sourceIds": ["D-004", "D-006", "SRC-012", "src/content/work/ru/endokey.md"],
+      "status": "retained-refactor"
+    },
+    {
+      "route": "/ru/work/povkh-lab/",
+      "parent": "/ru/work/",
+      "pageType": "case-study",
+      "pageJob": "Preserve founder-led proof of multilingual brand and digital-system implementation without treating it as an external client result.",
+      "audience": "Buyer reviewing broader implementation and brand-system capability.",
+      "entryContext": "Work index or direct/shared link.",
+      "nextAction": "Return to the work index or initiate a bounded discussion.",
+      "owner": "Povkh.Dev",
+      "sourceIds": ["src/content/work/ru/povkh-lab.md"],
+      "status": "retained-unchanged"
+    }
+  ]
+}

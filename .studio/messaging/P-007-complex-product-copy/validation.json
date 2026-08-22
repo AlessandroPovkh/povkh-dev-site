@@ -1,0 +1,14 @@
+{
+  "status": "ready_for_review",
+  "checks": {
+    "four_page_jobs_covered": true,
+    "claims_source_bound": true,
+    "kzms_described_as_catalogue_redesign": true,
+    "internal_project_language_excluded": true,
+    "private_correspondence_not_exposed": true,
+    "unsupported_performance_claims_absent": true,
+    "site_copy_humanizer_complete": true,
+    "product_surface_unchanged": true
+  },
+  "humanReviewRequired": true
+}

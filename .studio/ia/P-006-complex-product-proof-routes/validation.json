@@ -1,0 +1,26 @@
+{
+  "status": "ready_for_review",
+  "checks": {
+    "unique_routes": true,
+    "in_scope_inventory_accounted_once": true,
+    "page_jobs_complete": true,
+    "audience_entry_action_owner_complete": true,
+    "no_orphans": true,
+    "no_redirect_chains": true,
+    "kzms_catalogue_redesign_role_defined": true,
+    "endokey_live_site_distinguished": true,
+    "private_kzms_material_protected": true,
+    "product_surface_unchanged": true
+  },
+  "assumptions": [
+    "Russian routes are implemented before any English parity decision.",
+    "The existing Work navigation label and route remain suitable.",
+    "KZMS publication permission for selected screenshots will be checked during assets/build work."
+  ],
+  "unresolvedDecisions": [],
+  "humanReviewFocus": [
+    "Homepage role of the KZMS and ENDOkey proof pair.",
+    "New /ru/work/kzms/ route and its catalogue-redesign role.",
+    "Retention of POVKH LAB as secondary founder-led evidence."
+  ]
+}

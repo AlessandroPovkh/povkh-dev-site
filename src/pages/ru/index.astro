@@ -1,15 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import DualHero from "../../components/home/DualHero.astro";
-import ServiceSystems from "../../components/home/ServiceSystems.astro";
-import SignatureInteraction from "../../components/home/SignatureInteraction.astro";
-import { getFeaturedWork, getProcess, getServices, getSite, getTeam } from "../../lib/content";
+import { getFeaturedWork, getSite } from "../../lib/content";
 import "../../styles/home.css";
 
 const site = await getSite("ru");
-const services = await getServices("ru");
-const process = await getProcess("ru");
-const team = await getTeam("ru");
 const featuredWork = await getFeaturedWork("ru");
 if (featuredWork.length !== 2) throw new Error("Russian homepage requires exactly two featured cases");
 ---
@@ -22,37 +17,47 @@ if (featuredWork.length !== 2) throw new Error("Russian homepage requires exactl
 >
   <DualHero locale="ru" {site} work={featuredWork} />
 
-  <ServiceSystems locale="ru" {services} />
-  <SignatureInteraction locale="ru" />
-
-  <section class="process-home" data-section="process" aria-labelledby="process-title">
+  <section class="task-fit" data-section="task-fit" aria-labelledby="task-fit-title">
     <div class="container">
       <header class="section-heading">
-        <p class="eyebrow">04 / Прозрачный процесс</p>
-        <h2 id="process-title">Пять этапов. Конкретный результат на каждом.</h2>
+        <p class="eyebrow">01 / Ваша задача</p>
+        <h2 id="task-fit-title">С чем к нам приходят</h2>
       </header>
-      <ol class="process-list" data-testid="process-list">
-        {process.items.map((stage, index) => (
-          <li>
-            <span class="metadata">0{index + 1}</span>
-            <h3>{stage.title}</h3>
-            <p>{stage.summary}</p>
-            <p class="process-output"><b>Результат:</b> {stage.output}</p>
-          </li>
-        ))}
+      <ul class="task-fit-list">
+        <li><h3>Клиенты не понимают продукт</h3><p>На сайте много терминов и характеристик. Человеку трудно связать их со своей задачей и принять решение.</p></li>
+        <li><h3>Сайт не приводит к предметному запросу</h3><p>Посетитель читает страницы, но не видит понятного маршрута, нужных аргументов и следующего действия.</p></li>
+        <li><h3>Продвижение собрано по частям</h3><p>Бренд, сайт, поиск и реклама говорят разными словами и ведут клиента в разные стороны.</p></li>
+        <li><h3>Сложный продукт нужно вывести на рынок</h3><p>Нужно определить аудиторию, собрать оффер и подготовить первую воронку без выдуманных обещаний.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="approach-home" data-section="approach" aria-labelledby="approach-title">
+    <div class="container">
+      <header class="section-heading">
+        <p class="eyebrow">02 / Работа</p>
+        <h2 id="approach-title">Сначала находим, где теряется продажа</h2>
+      </header>
+      <ol class="approach-list">
+        <li><span class="metadata">01</span><h3>Исследуем</h3><p>Изучаем продукт, спрос, материалы компании и работу продаж. Находим вопросы, которые влияют на выбор клиента.</p></li>
+        <li><span class="metadata">02</span><h3>Выбираем фокус</h3><p>Определяем аудиторию, задачу, оффер и главное действие. Фиксируем, что человек должен понять до обращения.</p></li>
+        <li><span class="metadata">03</span><h3>Собираем путь</h3><p>Связываем сообщения, бренд, страницы, формы и материалы в последовательный маршрут.</p></li>
+        <li><span class="metadata">04</span><h3>Проверяем</h3><p>Проверяем понятность, техническое качество и путь до заявки. Затем развиваем поиск, рекламу и содержание.</p></li>
       </ol>
     </div>
   </section>
 
-  <section class="studio-home" data-section="studio-summary" data-testid="studio-summary" aria-labelledby="studio-title">
-    <div class="studio-home-inner container">
-      <div>
-        <p class="eyebrow">05 / Студия</p>
-        <h2 id="studio-title">Два человека. Одна ответственная система.</h2>
-      </div>
-      <div class="studio-note">
-        <p>{team.intro}</p>
-        <a class="button button-secondary" href="/ru/studio/">Как мы работаем</a>
+  <section class="capabilities-home" data-section="capabilities" aria-labelledby="capabilities-title">
+    <div class="container">
+      <header class="section-heading">
+        <p class="eyebrow">03 / Результат</p>
+        <h2 id="capabilities-title">Собираем путь от поиска до заявки</h2>
+      </header>
+      <div class="capability-grid">
+        <article><h3>Находят</h3><p>Семантика, поисковые страницы и рекламные материалы отвечают на реальные запросы клиентов.</p></article>
+        <article><h3>Понимают</h3><p>Оффер, структура и тексты объясняют продукт через задачи, условия выбора и применение.</p></article>
+        <article><h3>Доверяют</h3><p>Бренд, кейсы и доказательства показывают уровень работы без громких неподтверждённых обещаний.</p></article>
+        <article><h3>Обращаются</h3><p>Понятный следующий шаг, формы, аналитика и рабочие интеграции помогают довести интерес до предметного запроса.</p></article>
       </div>
     </div>
   </section>
@@ -60,11 +65,11 @@ if (featuredWork.length !== 2) throw new Error("Russian homepage requires exactl
   <section class="final-home" data-section="final-cta" aria-labelledby="final-title">
     <div class="final-home-inner container">
       <div>
-        <p class="eyebrow">Начнём с контекста</p>
+        <p class="eyebrow">04 / Следующий шаг</p>
         <h2 id="final-title">{site.finalCta.title}</h2>
         <p>{site.finalCta.body}</p>
       </div>
-      <a class="button" href="/ru/contact/">{site.hero.primaryCta}</a>
+      <a class="button" href="/ru/contact/">{site.finalCta.action}</a>
     </div>
   </section>
 </BaseLayout>

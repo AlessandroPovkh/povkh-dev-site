@@ -10,10 +10,10 @@ const locales = [
   },
   {
     path: "/ru/",
-    title: "Сайт должен вести к заявке. Бренд — помогать выбрать вас.",
-    primary: "Обсудить задачу",
+    title: "Помогаем клиентам понять сложный продукт и выбрать вас",
+    primary: "Разобрать задачу",
     contact: "/ru/contact/",
-    cases: [["ENDOkey", "/ru/work/endokey/"], ["POVKH LAB", "/ru/work/povkh-lab/"]],
+    cases: [["КЗМС", "/ru/work/kzms/"], ["ENDOkey", "/ru/work/endokey/"]],
   },
 ];
 
@@ -34,8 +34,9 @@ for (const locale of locales) {
     const order = await page.locator("[data-section]").evaluateAll((sections) =>
       sections.map((section) => section.getAttribute("data-section")),
     );
-    expect(order).not.toContain("case-proof");
-    expect(order).toEqual(expect.arrayContaining(["signature", "process", "studio-summary", "final-cta"]));
+    expect(order).toEqual(locale.path === "/ru/"
+      ? ["task-fit", "approach", "capabilities", "final-cta"]
+      : expect.arrayContaining(["signature", "process", "studio-summary", "final-cta"]));
   });
 }
 
@@ -79,7 +80,7 @@ test("homepage remains complete without JavaScript", async ({ browser }) => {
 test("mobile homepage is linear and does not overflow", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto("/ru/");
-  await expect(page.getByTestId("signature")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Сначала находим, где теряется продажа" })).toBeVisible();
   const dimensions = await page.evaluate(() => ({
     viewport: document.documentElement.clientWidth,
     content: document.documentElement.scrollWidth,
@@ -90,21 +91,27 @@ test("mobile homepage is linear and does not overflow", async ({ page }) => {
 test("hero uses one action and selected work instead of a service accordion", async ({ page }) => {
   await page.goto("/ru/");
   const hero = page.locator(".dual-hero");
-  await expect(hero.getByRole("link", { name: "Обсудить задачу" })).toHaveCount(1);
+  await expect(hero.getByRole("link", { name: "Разобрать задачу" })).toHaveCount(1);
   await expect(hero.getByRole("link")).toHaveCount(3);
   await expect(hero.locator("details, summary")).toHaveCount(0);
 });
 
-test("signature shows a concrete project path and updates it by goal", async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
+test("Russian homepage explains the approach and offer", async ({ page }) => {
   await page.goto("/ru/");
-  await expect(page.locator("html")).toHaveAttribute("data-motion", "reduced");
-  await expect(page.getByTestId("signature-result")).not.toBeEmpty();
-  const flow = page.getByTestId("signature-flow");
-  await expect(flow.locator("li")).toHaveCount(4);
-  await expect(flow).toContainText("Позиционирование");
-  await page.getByRole("button", { name: /Соединить/ }).click();
-  await expect(flow).toContainText("CRM");
-  await expect(flow).toContainText("Аналитика");
-  await expect(page.locator("[data-join-line], .signature-machine")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "С чем к нам приходят" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Сначала находим, где теряется продажа" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Собираем путь от поиска до заявки" })).toBeVisible();
+  await expect(page.locator(".task-fit-list li")).toHaveCount(4);
+  await expect(page.locator(".approach-list li")).toHaveCount(4);
+  await expect(page.locator(".capability-grid article")).toHaveCount(4);
+});
+
+test("Russian homepage repeats one low-commitment conversion action", async ({ page }) => {
+  await page.goto("/ru/");
+  await expect(page.locator("main")).not.toContainText(/\bCTA\b/);
+  const conversionLinks = page.getByRole("link", { name: "Разобрать задачу", exact: true });
+  await expect(conversionLinks).toHaveCount(3);
+  for (const link of await conversionLinks.all()) {
+    await expect(link).toHaveAttribute("href", "/ru/contact/");
+  }
 });
