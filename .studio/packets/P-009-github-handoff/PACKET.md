@@ -37,4 +37,10 @@
 
 ## 7. Evidence
 
-- Status: `active`.
+- Status: `approved`.
+- Implementation commit: `d665cec8a5531e38f4c8168c014a5f39c7ac1aee`.
+- Fork branch: `djegor315-sketch/povkh-dev-site:chore/studio-harness-attach`.
+- Pull request: `https://github.com/AlessandroPovkh/povkh-dev-site/pull/1`.
+- GitHub state at handoff: `OPEN`, `ready for review`, `MERGEABLE`, `CLEAN`; base `main`; no merge or deployment performed.
+- Verification: content 14/14; server 11/11; tooling 1/1; Astro check 0/0/0; build plus 22-route verification; proof assertions 15/15 across five browser profiles; Chromium key routes 44/44; Chromium accessibility 10/10.
+- Known baseline: H-002 continues to track existing WebKit/mobile width and mobile homepage CTA-count failures outside this handoff.

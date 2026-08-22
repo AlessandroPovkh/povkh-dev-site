@@ -12,4 +12,4 @@
 | P-006 | Complex-product proof routes | approved | D-007 approved the route handoff with a public-language correction for the KZMS result | approved page jobs and route handoff for homepage, work index and two case pages |
 | P-007 | Complex-product public copy | approved | D-008: user approved the copy and asked to build the pages | claim-safe Russian copy for homepage, work index and KZMS/ENDOkey cases |
 | P-008 | Complex-product pages | done | D-013: user approved the result and requested GitHub handoff | KZMS before/after proof and a clearer, visually stronger ENDOkey evidence page |
-| P-009 | GitHub handoff | active | D-013 authorizes committing all accumulated project changes, updating existing fork PR #1 and leaving merge/deploy untouched | committed branch, pushed fork and updated upstream pull request |
+| P-009 | GitHub handoff | done | Commit `d665cec` was pushed to the existing fork branch; upstream PR #1 is open, ready for review and mergeable; merge/deploy remain untouched | committed branch, pushed fork and updated upstream pull request |

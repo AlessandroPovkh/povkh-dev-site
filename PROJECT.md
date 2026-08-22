@@ -58,7 +58,7 @@
 ## 4. Текущий рабочий пакет
 
 - ID: `P-009-github-handoff`
-- Статус: `in_progress` <!-- not-started | in_progress | ready_for_review | approved | rework | blocked -->
+- Статус: `approved` <!-- not-started | in_progress | ready_for_review | approved | rework | blocked -->
 - Карточка: `.studio/packets/P-009-github-handoff/PACKET.md`
 - Следующий hook: нет
 
