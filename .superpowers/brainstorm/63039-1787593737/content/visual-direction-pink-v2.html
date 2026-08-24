@@ -1,0 +1,35 @@
+<style>
+  .direction-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}.direction{overflow:hidden;border:2px solid #d7d7d2;border-radius:16px;background:#fff;cursor:pointer;transition:.18s transform,.18s box-shadow,.18s border-color}.direction:hover{transform:translateY(-4px);box-shadow:0 18px 36px #0002}.direction.selected{border-color:#ff2b92;box-shadow:0 0 0 4px #ff2b9226}.preview{position:relative;overflow:hidden;min-height:360px;padding:20px;display:flex;flex-direction:column;justify-content:space-between}.preview-top{display:flex;justify-content:space-between;font:700 10px/1.2 ui-monospace;letter-spacing:.1em;text-transform:uppercase}.hero-word{position:relative;z-index:2;max-width:8ch;font-size:44px;font-weight:900;line-height:.88;letter-spacing:-.075em}.preview-copy{position:relative;z-index:2;max-width:27ch;font-size:12px;line-height:1.45}.chip-row{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:6px}.chip{padding:5px 8px;border:1px solid currentColor;border-radius:999px;font:700 9px/1 ui-monospace;text-transform:uppercase}.a{color:#181315;background:#f3eee8;background-image:linear-gradient(#18131515 1px,transparent 1px),linear-gradient(90deg,#18131515 1px,transparent 1px);background-size:24px 24px}.a:after{position:absolute;right:-45px;bottom:38px;width:190px;height:190px;border-radius:50%;background:#f275a6;content:"";mix-blend-mode:multiply}.a .hero-word{font-family:Georgia,serif;font-weight:500}.a .accent{color:#c51f66}.b{color:#fff2fb;background:#08070d;background-image:radial-gradient(circle at 76% 18%,#ff2b9270,transparent 34%),radial-gradient(circle at 28% 88%,#63eaff38,transparent 32%)}.b:after{position:absolute;inset:54px 18px 92px;border:1px solid #ff55aa88;content:"";clip-path:polygon(0 0,100% 0,100% 72%,74% 72%,74% 100%,0 100%)}.b .hero-word{font-family:ui-monospace;text-transform:uppercase;text-shadow:8px 8px 0 #ff2b9240}.b .accent{color:#ff57aa}.c{color:#170d13;background:#ffe1ee;background-image:linear-gradient(154deg,transparent 0 43%,#f22f8c 43% 59%,transparent 59%),linear-gradient(26deg,transparent 0 72%,#173acb 72% 83%,transparent 83%)}.c .preview-top{transform:rotate(-2deg)}.c .hero-word{width:7ch;padding:10px;color:#fff;background:#170d13;transform:rotate(-3deg);text-transform:uppercase}.c .preview-copy{padding:9px;background:#ffe8f1}.direction-body{padding:18px}.direction-body h3{margin:0 0 8px}.direction-body p{margin:0;color:#555;font-size:14px}.features{margin:12px 0 0;padding-left:18px;color:#333;font-size:13px}.pink-note{display:inline-block;margin-bottom:8px;padding:4px 7px;border-radius:999px;color:#831043;background:#ffd1e5;font:700 10px/1 ui-monospace;text-transform:uppercase}@media(max-width:900px){.direction-grid{grid-template-columns:1fr}.preview{min-height:300px}}
+</style>
+
+<h2>Розовый в визуальной системе</h2>
+<p class="subtitle">Обновлённое concept comparison · розовый обязателен во всех направлениях, но играет разную роль. Нажми на карточку, которая ближе.</p>
+
+<div class="direction-grid">
+  <article class="direction" data-choice="a-rose-editorial-engineering" onclick="toggleSelect(this)">
+    <div class="preview a">
+      <div class="preview-top"><span>Povkh.Dev / 01</span><span class="accent">Rose signal</span></div>
+      <div class="hero-word">Сложное становится ясным.</div>
+      <div><p class="preview-copy">Тёплая редакционная база, инженерная сетка и зрелый пыльно-розовый как интеллектуальный акцент.</p><div class="chip-row"><span class="chip">case index</span><span class="chip">live notes</span></div></div>
+    </div>
+    <div class="direction-body"><span class="pink-note">Розовый · акцент</span><h3>A · Rose Editorial Engineering</h3><p>Премиально и спокойно. Розовый маркирует важные выводы, переходы и доказательства.</p><ul class="features"><li>живые выноски и схемы</li><li>интерактивное сравнение кейсов</li><li>тонкая типографическая анимация</li></ul></div>
+  </article>
+
+  <article class="direction" data-choice="b-pink-blackbox" onclick="toggleSelect(this)">
+    <div class="preview b">
+      <div class="preview-top"><span>Povkh.Dev</span><span class="accent">System online</span></div>
+      <div class="hero-word">Проектируем путь к решению.</div>
+      <div><p class="preview-copy">Тёмная кинематографичная среда, где электрический розовый работает как главный системный сигнал.</p><div class="chip-row"><span class="chip">live system map</span><span class="chip">depth motion</span></div></div>
+    </div>
+    <div class="direction-body"><span class="pink-note">Розовый · свет</span><h3>B · Pink Blackbox Interface</h3><p>Самый технологичный вариант: розовое свечение, слои данных и ощущение собственного интерфейса студии.</p><ul class="features"><li>реактивная координатная сетка</li><li>живой маршрут проекта</li><li>кинематографичные переходы кейсов</li></ul></div>
+  </article>
+
+  <article class="direction" data-choice="c-pink-constructivism" onclick="toggleSelect(this)">
+    <div class="preview c">
+      <div class="preview-top"><span>POVKH / DEV</span><span>Россия</span></div>
+      <div class="hero-word">Находим. Собираем. Запускаем.</div>
+      <div><p class="preview-copy">Розовый становится главным полем: крупная графика, резкие диагонали и контрастный синий.</p><div class="chip-row"><span class="chip">scroll choreography</span><span class="chip">drag cases</span></div></div>
+    </div>
+    <div class="direction-body"><span class="pink-note">Розовый · основа</span><h3>C · Pink Kinetic Constructivism</h3><p>Самый эмоциональный и заметный вариант — выразительный, дерзкий и отлично узнаваемый.</p><ul class="features"><li>хореография секций при скролле</li><li>перетаскиваемая лента кейсов</li><li>генеративные графические акценты</li></ul></div>
+  </article>
+</div>

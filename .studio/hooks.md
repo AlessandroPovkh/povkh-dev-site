@@ -19,3 +19,5 @@
 | H-011 | review_required | P-006-complex-product-proof-routes | resolved | Пользователь утвердил продолжение с correction: публично КЗМС описывается как переработка каталога; служебные статусы и внутренняя речь запрещены. | D-007; P-007 Messaging |
 | H-012 | review_required | P-007-complex-product-copy | resolved | Пользователь утвердил публичные тексты командой собирать страницы. | D-008; P-008 website build |
 | H-013 | review_required | P-008-complex-product-pages | resolved | Пользователь утвердил результат командой отправить все изменения в GitHub сайта. | D-013; P-009 GitHub handoff |
+| H-014 | decision_required | P-010-project-context | resolved | content_requirements: Какие материалы и форматы обязательны? — Определяет состав и ограничения контента. | Ответить: Какие материалы и форматы обязательны? |
+| H-015 | review_required | P-010-project-context | open | Проверить собранный контекст и exact summary | approved или rework с замечаниями |

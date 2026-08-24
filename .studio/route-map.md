@@ -13,3 +13,4 @@
 | P-007 | Complex-product public copy | approved | D-008: user approved the copy and asked to build the pages | claim-safe Russian copy for homepage, work index and KZMS/ENDOkey cases |
 | P-008 | Complex-product pages | done | D-013: user approved the result and requested GitHub handoff | KZMS before/after proof and a clearer, visually stronger ENDOkey evidence page |
 | P-009 | GitHub handoff | done | Commit `d665cec` was pushed to the existing fork branch; upstream PR #1 is open, ready for review and mergeable; merge/deploy remain untouched | committed branch, pushed fork and updated upstream pull request |
+| P-010 | Project context | ready_for_review | collect resumable context for the selected executor | context coverage and reviewable summary |

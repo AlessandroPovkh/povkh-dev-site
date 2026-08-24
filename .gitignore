@@ -13,3 +13,8 @@ output/
 
 .DS_Store
 *.log
+
+# Local Harness and browser runtime state
+.playwright-cli/
+.superpowers/**/state/
+.superpowers/brainstorm/.last-*

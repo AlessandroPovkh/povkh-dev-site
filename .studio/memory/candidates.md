@@ -143,3 +143,99 @@
 - Known conflicts: None recorded.
 - Promotion condition: Explicit approval of the compiled summary.
 - Status: `promoted`
+
+## MC-010: desired_result
+
+- Type: `decision`
+- Field: `desired_result`
+- Proposed text: Создать новый дизайн сайта Povkh.Dev, сохранив все существующие тексты, их смыслы, факты, маршруты и основные действия.
+- Proposed text (JSON): "Создать новый дизайн сайта Povkh.Dev, сохранив все существующие тексты, их смыслы, факты, маршруты и основные действия."
+- Packet: `P-010-project-context`
+- Destination: `.studio/packets/P-010-project-context/PACKET.md#context-desired_result`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `ready_for_review`
+
+## MC-011: target_action
+
+- Type: `decision`
+- Field: `target_action`
+- Proposed text: Основное действие — перейти к мягкому обсуждению проекта без ощущения большой анкеты. Вспомогательный путь — сначала изучить кейсы и затем перейти к обсуждению.
+- Proposed text (JSON): "Основное действие — перейти к мягкому обсуждению проекта без ощущения большой анкеты. Вспомогательный путь — сначала изучить кейсы и затем перейти к обсуждению."
+- Packet: `P-010-project-context`
+- Destination: `.studio/packets/P-010-project-context/PACKET.md#context-target_action`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `ready_for_review`
+
+## MC-012: success_criteria
+
+- Type: `decision`
+- Field: `success_criteria`
+- Proposed text: Сайт выглядит полностью новым, узнаваемым и производит сильное визуальное впечатление; существующие тексты, смыслы и факты сохранены; кейсы заметны; путь к мягкому обсуждению понятен; мобильная и десктопная версии работают; технические интерактивные фичи усиливают образ студии и пользовательский опыт, не мешая чтению и доступности.
+- Proposed text (JSON): "Сайт выглядит полностью новым, узнаваемым и производит сильное визуальное впечатление; существующие тексты, смыслы и факты сохранены; кейсы заметны; путь к мягкому обсуждению понятен; мобильная и десктопная версии работают; технические интерактивные фичи усиливают образ студии и пользовательский опыт, не мешая чтению и доступности."
+- Packet: `P-010-project-context`
+- Destination: `.studio/packets/P-010-project-context/PACKET.md#context-success_criteria`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `ready_for_review`
+
+## MC-013: page_job
+
+- Type: `decision`
+- Field: `page_job`
+- Proposed text: Главная страница должна провести посетителя по сценарию: узнать свою проблему, увидеть доказательства уровня и выполненной работы в кейсах, затем естественно перейти к мягкому обсуждению проекта.
+- Proposed text (JSON): "Главная страница должна провести посетителя по сценарию: узнать свою проблему, увидеть доказательства уровня и выполненной работы в кейсах, затем естественно перейти к мягкому обсуждению проекта."
+- Packet: `P-010-project-context`
+- Destination: `.studio/packets/P-010-project-context/PACKET.md#context-page_job`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `ready_for_review`
+
+## MC-014: brand_direction
+
+- Type: `decision`
+- Field: `brand_direction`
+- Proposed text: Отправная точка — Dark Editorial Interface: тёмное почти чёрное поле, чистая редакционная композиция, крупная нейтральная типографика, точная модульная сетка, кинематографичная подача кейсов, большие паузы и электрический розовый как фирменный сигнал. Технические интерактивы раскрывают смысл и доказательства, поддерживают маршрут проблема → подход → кейсы → мягкое обсуждение и не становятся самоцелью.
+- Proposed text (JSON): "Отправная точка — Dark Editorial Interface: тёмное почти чёрное поле, чистая редакционная композиция, крупная нейтральная типографика, точная модульная сетка, кинематографичная подача кейсов, большие паузы и электрический розовый как фирменный сигнал. Технические интерактивы раскрывают смысл и доказательства, поддерживают маршрут проблема → подход → кейсы → мягкое обсуждение и не становятся самоцелью."
+- Packet: `P-010-project-context`
+- Destination: `.studio/memory/context.md#brand_direction`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `ready_for_review`
+
+## MC-015: content_requirements
+
+- Type: `decision`
+- Field: `content_requirements`
+- Proposed text: Обязательно сохранить все уже написанные русские и английские тексты, их смыслы и подтверждённые факты, а также все существующие кейсы. Остальное разрешено менять: визуальную систему, композицию, порядок и формат блоков, изображения, анимацию, интерактивы и техническую подачу.
+- Proposed text (JSON): "Обязательно сохранить все уже написанные русские и английские тексты, их смыслы и подтверждённые факты, а также все существующие кейсы. Остальное разрешено менять: визуальную систему, композицию, порядок и формат блоков, изображения, анимацию, интерактивы и техническую подачу."
+- Packet: `P-010-project-context`
+- Destination: `.studio/packets/P-010-project-context/PACKET.md#context-content_requirements`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `ready_for_review`
