@@ -7,9 +7,10 @@ interface Props {
   locale: Locale;
   currentPath: string;
   site: CollectionEntry<"site">["data"];
+  hasAlternate?: boolean;
 }
 
-const { locale, currentPath, site } = Astro.props;
+const { locale, currentPath, site, hasAlternate = true } = Astro.props;
 const isRu = locale === "ru";
 const contactHref = site.nav.find(({ id }) => id === "contact")?.href ?? "/contact/";
 ---
@@ -17,7 +18,7 @@ const contactHref = site.nav.find(({ id }) => id === "contact")?.href ?? "/conta
 <header class="site-header" data-site-header>
   <div class="header-inner container">
     <a class="wordmark" href={locale === "ru" ? "/ru/" : "/"} aria-label={isRu ? "Главная Povkh.Dev" : "Povkh.Dev home"}>
-      POVKH<span class="wordmark-dot">.</span>DEV
+      {isRu ? <>Povkh<span class="wordmark-dot">.</span>Dev</> : <>POVKH<span class="wordmark-dot">.</span>DEV</>}
     </a>
     <nav class="primary-nav" aria-label={isRu ? "Основная навигация" : "Primary navigation"}>
       <ul class="primary-links" data-testid="primary-links" data-primary-links>
@@ -29,7 +30,7 @@ const contactHref = site.nav.find(({ id }) => id === "contact")?.href ?? "/conta
       </ul>
     </nav>
     <div class="header-actions">
-      <LanguageSwitch locale={locale} currentPath={currentPath} />
+      {hasAlternate && <LanguageSwitch locale={locale} currentPath={currentPath} />}
       <a class="button header-cta" href={contactHref}>{site.hero.primaryCta}</a>
       <button
         class="menu-toggle"

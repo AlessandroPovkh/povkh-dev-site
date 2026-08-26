@@ -1,0 +1,36 @@
+{
+  "status": "ready_for_review",
+  "items": [
+    {
+      "source": "/ru/",
+      "destination": "/ru/",
+      "disposition": "retained-refactor",
+      "reason": "Homepage keeps its route and gains the approved direction and proof pair."
+    },
+    {
+      "source": "/ru/work/",
+      "destination": "/ru/work/",
+      "disposition": "retained-update",
+      "reason": "Existing work index remains the case directory and adds KZMS."
+    },
+    {
+      "source": null,
+      "destination": "/ru/work/kzms/",
+      "disposition": "new-required",
+      "reason": "D-006 and D-007 require a first-party Povkh.Dev case about the KZMS catalogue redesign."
+    },
+    {
+      "source": "/ru/work/endokey/",
+      "destination": "/ru/work/endokey/",
+      "disposition": "retained-refactor",
+      "reason": "Route remains stable; its role is sharpened as complex-product proof."
+    },
+    {
+      "source": "/ru/work/povkh-lab/",
+      "destination": "/ru/work/povkh-lab/",
+      "disposition": "retained-unchanged",
+      "reason": "Founder-led evidence remains available but is not part of the primary proof pair."
+    }
+  ],
+  "redirects": []
+}

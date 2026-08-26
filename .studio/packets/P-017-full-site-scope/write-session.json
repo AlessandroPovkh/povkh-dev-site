@@ -1,0 +1,18 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-017-full-site-scope",
+  "contract_sha256": "f85584d08edd284461b8888fa863a6f344d13821445e3d6cc5b76edde601d6e1",
+  "authority_sha256": {
+    ".studio/packets/P-017-full-site-scope/PACKET.md": "d49b3bb872a63008c0c97f4fe173089aa7d01eb02b4543eff8c3702adba5600e",
+    ".studio/decisions.md": "82469fa879d7fe1dcba21ed895a95b574bbae73b8721519e514d7d9909499555",
+    ".studio/packets/P-017-full-site-scope/write-contract.json": "f85584d08edd284461b8888fa863a6f344d13821445e3d6cc5b76edde601d6e1"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "1ccbb230cfb8a01ef1218bbab88db32a4f44b8da",
+  "branch": "feature/p-017-full-site-scope",
+  "worktree_path": "/Users/alessandropovkh/Desktop/studio-harness-2026-08-24/.worktrees/projects/povkh-dev/P-017-full-site-scope",
+  "harness_fingerprint": "79be8a239e0220206b9196d70713289a3cf881f9572e6e52c1db8b9dcd00ae39",
+  "stable_project_fingerprint": "cc5f17b2a3f6aaa4b30e2638ddf70c2e1b9720d5d80de94df76911889ee25090",
+  "prepared_at": "2026-08-26T22:21:51Z"
+}

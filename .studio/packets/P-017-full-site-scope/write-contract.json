@@ -1,0 +1,51 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-017-full-site-scope",
+  "mode": "project-write",
+  "packet_sha256": "d49b3bb872a63008c0c97f4fe173089aa7d01eb02b4543eff8c3702adba5600e",
+  "authorization": {
+    "status": "approved",
+    "id": "D-021",
+    "ref": ".studio/decisions.md",
+    "approved_by": "user",
+    "approved_at": "2026-08-26T22:21:02Z",
+    "expires_at": "2026-09-01T22:21:02Z",
+    "payload_sha256": "6acc3107f19f8be7dbada8b490a5d57f985d7fca550739586fe68ee7eefd0e46"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "1ccbb230cfb8a01ef1218bbab88db32a4f44b8da",
+  "branch": "feature/p-017-full-site-scope",
+  "harness_revision": "1dc068bb1926d27e329ff17c6e8184cd880ab65f",
+  "harness_baseline_sha256": "79be8a239e0220206b9196d70713289a3cf881f9572e6e52c1db8b9dcd00ae39",
+  "stable_project_baseline_sha256": "cc5f17b2a3f6aaa4b30e2638ddf70c2e1b9720d5d80de94df76911889ee25090",
+  "decisions_baseline_sha256": "55b111c9e322a6c2f8ce5de847e87ff4e79ff04c111f5e7f0b52a3465da8d0e8",
+  "included_roots": [
+    ".studio/decisions.md",
+    ".studio/hooks.md",
+    ".studio/memory",
+    ".studio/packets/P-013-project-context",
+    ".studio/packets/P-014-project-context",
+    ".studio/packets/P-015-project-context",
+    ".studio/packets/P-016-project-context",
+    ".studio/packets/P-017-full-site-scope",
+    ".studio/route-map.md",
+    ".studio/scope-contract.json",
+    "PROJECT.md"
+  ],
+  "excluded_roots": [],
+  "external_actions": [],
+  "required_checks": [
+    {
+      "id": "content-contract",
+      "runner": "node",
+      "args": [
+        "--test",
+        "tests/content/content-contract.test.mjs"
+      ],
+      "timeout_seconds": 120
+    }
+  ],
+  "expected_result": "A validated full-site multilingual scope contract preserves RU-first delivery with required English and Italian follow-up surfaces and routes every required deliverable without changing site subject files.",
+  "rollback_limit": "leave-managed-worktree-no-automatic-cleanup"
+}

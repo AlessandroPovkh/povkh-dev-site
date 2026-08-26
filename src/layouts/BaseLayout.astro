@@ -7,37 +7,55 @@ import { getSite } from "../lib/content";
 import type { Locale } from "../lib/i18n";
 import "../styles/tokens.css";
 import "../styles/global.css";
+import "../styles/editorial-interior.css";
 
 interface Props {
   locale: Locale;
   currentPath: string;
   title: string;
   description: string;
+  hasAlternate?: boolean;
+  shell?: "default" | "immersive";
+  bodyClass?: string;
+  preloadFonts?: string[];
 }
 
-const { locale, currentPath, title, description } = Astro.props;
+const {
+  locale,
+  currentPath,
+  title,
+  description,
+  hasAlternate = true,
+  shell = "default",
+  bodyClass,
+  preloadFonts = [],
+} = Astro.props;
 const robots = __POVKH_SITE_MODE__ === "production"
   ? "index, follow, max-image-preview:large"
   : "noindex, nofollow";
 const site = await getSite(locale);
 const isRu = locale === "ru";
+const resolvedBodyClass = bodyClass ?? (isRu && shell === "default" ? "editorial-interior" : undefined);
 ---
 
 <!doctype html>
 <html lang={locale} data-site-mode={__POVKH_SITE_MODE__}>
   <head>
-    <SeoHead {locale} {currentPath} {title} {description} {robots} />
+    <SeoHead {locale} {currentPath} {title} {description} {robots} {hasAlternate} />
+    {preloadFonts.map((href) => (
+      <link rel="preload" href={href} as="font" type="font/woff2" crossorigin="anonymous" />
+    ))}
     <script is:inline>
       document.documentElement.dataset.enhanced = "true";
       document.documentElement.dataset.motion = matchMedia("(prefers-reduced-motion: reduce)").matches ? "reduced" : "standard";
     </script>
   </head>
-  <body>
+  <body class={resolvedBodyClass}>
     <a class="skip-link" href="#main-content">{isRu ? "Перейти к содержанию" : "Skip to content"}</a>
     {__POVKH_SITE_MODE__ !== "production" && <div class="preview-banner" role="status">{site.previewNotice}</div>}
-    <Header {locale} {currentPath} {site} />
-    <main id="main-content" tabindex="-1"><slot /></main>
-    <Footer {locale} />
+    {shell === "default" && <Header {locale} {currentPath} {site} {hasAlternate} />}
+    {shell === "default" ? <main id="main-content" tabindex="-1"><slot /></main> : <slot />}
+    {shell === "default" && <Footer {locale} />}
     <ConsentControls {locale} />
     <script>
       import "../scripts/site";

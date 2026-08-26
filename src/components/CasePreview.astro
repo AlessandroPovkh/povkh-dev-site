@@ -16,3 +16,8 @@ const { title, context, summary, href, action, accessibleAction } = Astro.props;
   <p>{summary}</p>
   <a class="button" href={href} aria-label={accessibleAction}>{action}</a>
 </article>
+
+<style>
+  .case-preview { min-width: 0; }
+  h2 { min-width: 0; overflow-wrap: anywhere; hyphens: auto; }
+</style>

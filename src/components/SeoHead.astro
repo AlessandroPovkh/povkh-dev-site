@@ -8,12 +8,13 @@ interface Props {
   title: string;
   description: string;
   robots: string;
+  hasAlternate?: boolean;
 }
 
-const { locale, currentPath, title, description, robots } = Astro.props;
-const alternatePath = equivalentRoute(currentPath);
+const { locale, currentPath, title, description, robots, hasAlternate = true } = Astro.props;
+const alternatePath = hasAlternate ? equivalentRoute(currentPath) : undefined;
 const canonical = Astro.site ? new URL(currentPath, Astro.site).href : currentPath;
-const alternate = Astro.site ? new URL(alternatePath, Astro.site).href : alternatePath;
+const alternate = alternatePath && Astro.site ? new URL(alternatePath, Astro.site).href : alternatePath;
 const ogImage = Astro.site ? new URL("/og/povkh-dev-og.png", Astro.site).href : "/og/povkh-dev-og.png";
 const structuredData = {
   "@context": "https://schema.org",
@@ -43,6 +44,6 @@ const structuredData = {
 <title>{title}</title>
 <link rel="canonical" href={canonical} />
 <link rel="alternate" hreflang={locale} href={canonical} />
-<link rel="alternate" hreflang={locale === "en" ? "ru" : "en"} href={alternate} />
-<link rel="alternate" hreflang="x-default" href={locale === "en" ? canonical : alternate} />
+{hasAlternate && alternate && <link rel="alternate" hreflang={locale === "en" ? "ru" : "en"} href={alternate} />}
+<link rel="alternate" hreflang="x-default" href={locale === "en" && alternate ? canonical : (alternate ?? canonical)} />
 <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />

@@ -11,7 +11,7 @@ const cases = [
   {
     path: "/ru/",
     language: "ru",
-    heading: "Сайт должен вести к заявке. Бренд — помогать выбрать вас.",
+    heading: "Помогаем клиентам понять сложный продукт и выбрать вас",
     equivalent: "/",
     menuLabel: "Открыть меню",
   },
@@ -79,6 +79,18 @@ const localizedRoutes = [
   ["/privacy/", "/ru/privacy/"],
   ["/cookies/", "/ru/cookies/"],
 ] as const;
+
+const russianOnlyRoutes = ["/ru/work/kzms/"] as const;
+
+for (const route of russianOnlyRoutes) {
+  test(`${route} exposes canonical Russian metadata without inventing an English equivalent`, async ({ page }) => {
+    const response = await page.goto(route);
+    expect(response?.ok()).toBe(true);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", route);
+    await expect(page.locator('link[rel="alternate"][hreflang="ru"]')).toHaveAttribute("href", route);
+    await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveCount(0);
+  });
+}
 
 for (const [en, ru] of localizedRoutes) {
   test(`${en} and ${ru} expose reciprocal localized metadata`, async ({ page }) => {

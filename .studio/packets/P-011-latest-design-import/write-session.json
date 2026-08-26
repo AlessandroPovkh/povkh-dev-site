@@ -1,0 +1,18 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-011-latest-design-import",
+  "contract_sha256": "18f356426eaf841f736ca0921e8d1452f75077c5995bcfd7322d2358a31a853d",
+  "authority_sha256": {
+    ".studio/packets/P-011-latest-design-import/PACKET.md": "074fef55bd95833b611ccc74e2b0db9907cd0bb2c4d88a2fc6b4ed0e5b73e591",
+    ".studio/decisions.md": "c0f13c8b25a96c1308e1c9899ae0ae5b06f06fedb4fea97c2dfcdaf90cc92e58",
+    ".studio/packets/P-011-latest-design-import/write-contract.json": "18f356426eaf841f736ca0921e8d1452f75077c5995bcfd7322d2358a31a853d"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "65e68777c1d3303fac13c6a3193ec450359e582d",
+  "branch": "feature/p-011-latest-design-import",
+  "worktree_path": "/Users/alessandropovkh/Desktop/studio-harness-2026-08-24/.worktrees/projects/povkh-dev/P-011-latest-design-import",
+  "harness_fingerprint": "73c460f9f5875427439d549cb56b55461df6777859c4c6a25660f11d37f21081",
+  "stable_project_fingerprint": "1e016c7f5386fc122eb45664402dac4091b2d0da24b6d4c215cf45902e9c5252",
+  "prepared_at": "2026-08-26T21:18:33Z"
+}

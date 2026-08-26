@@ -1,0 +1,51 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-011-latest-design-import",
+  "mode": "project-write",
+  "packet_sha256": "074fef55bd95833b611ccc74e2b0db9907cd0bb2c4d88a2fc6b4ed0e5b73e591",
+  "authorization": {
+    "status": "approved",
+    "id": "D-016",
+    "ref": ".studio/decisions.md",
+    "approved_by": "user",
+    "approved_at": "2026-08-26T21:09:36Z",
+    "expires_at": "2026-09-01T21:09:36Z",
+    "payload_sha256": "f4af2f249484bb7a6cb1a2cb4776337a0d3171f1e2abbd89e98b3b4779642f3a"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "65e68777c1d3303fac13c6a3193ec450359e582d",
+  "branch": "feature/p-011-latest-design-import",
+  "harness_revision": "64ca47b9d928a700ae357274a7c253faff11c147",
+  "harness_baseline_sha256": "73c460f9f5875427439d549cb56b55461df6777859c4c6a25660f11d37f21081",
+  "stable_project_baseline_sha256": "1e016c7f5386fc122eb45664402dac4091b2d0da24b6d4c215cf45902e9c5252",
+  "decisions_baseline_sha256": "8a738093446a80ac47be2f95a195356dfe871655e6b3f12abe4145881b7759f1",
+  "included_roots": [
+    ".studio/decisions.md",
+    ".studio/packets/P-011-latest-design-import",
+    ".studio/packets/P-010-project-context",
+    ".studio/hooks.md",
+    ".studio/memory",
+    ".studio/route-map.md",
+    "PROJECT.md",
+    "design",
+    "public/assets/work/giulia",
+    "src",
+    "tests"
+  ],
+  "excluded_roots": [],
+  "external_actions": [],
+  "required_checks": [
+    {
+      "id": "content-contract",
+      "runner": "node",
+      "args": [
+        "--test",
+        "tests/content/content-contract.test.mjs"
+      ],
+      "timeout_seconds": 120
+    }
+  ],
+  "expected_result": "The exact latest Russian dark-editorial candidate and approved P-010 state are committed in a bounded managed worktree, ready for visual QA and human review.",
+  "rollback_limit": "leave-managed-worktree-no-automatic-cleanup"
+}

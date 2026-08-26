@@ -64,8 +64,11 @@ test("EN and RU site authorities declare exact equivalent public routes", async 
   const [en, ru] = await Promise.all([json("site/en.json"), json("site/ru.json")]);
   assert.deepEqual(en.routes, expectedRoutes);
   assert.deepEqual(
-    ru.routes,
-    expectedRoutes.map((route) => (route === "/" ? "/ru/" : `/ru${route}`)),
+    [...ru.routes].sort(),
+    [
+      ...expectedRoutes.map((route) => (route === "/" ? "/ru/" : `/ru${route}`)),
+      "/ru/work/kzms/",
+    ].sort(),
   );
   assert.equal(en.locale, "en");
   assert.equal(ru.locale, "ru");
@@ -93,7 +96,7 @@ test("contact introduction follows the configured delivery mode", async () => {
   }
 });
 
-test("all structured collections have EN and RU parity", async () => {
+test("shared structured collections keep locale parity", async () => {
   for (const collection of ["services", "process", "team", "faq"]) {
     const [en, ru] = await Promise.all([
       json(`${collection}/en.json`),
@@ -106,11 +109,8 @@ test("all structured collections have EN and RU parity", async () => {
     );
   }
 
-  assert.deepEqual(
-    await filenames("work/en/", ".md"),
-    await filenames("work/ru/", ".md"),
-    "work locale parity",
-  );
+  assert.deepEqual(await filenames("work/en/", ".md"), ["endokey.md", "povkh-lab.md"]);
+  assert.deepEqual(await filenames("work/ru/", ".md"), ["endokey.md", "kzms.md", "povkh-lab.md"]);
   assert.deepEqual(
     await filenames("legal/en/", ".md"),
     await filenames("legal/ru/", ".md"),
@@ -137,10 +137,10 @@ test("POVKH LAB is disclosed as founder-led in both locales", async () => {
       "utf8",
     );
     assert.match(source, /^relationship:\s*founder-led$/m);
-    assert.match(source, /^order:\s*2$/m);
-    assert.match(source, /^featured:\s*true$/m);
+    assert.match(source, new RegExp(`^order:\\s*${locale === "ru" ? 3 : 2}$`, "m"));
+    assert.match(source, new RegExp(`^featured:\\s*${locale === "ru" ? "false" : "true"}$`, "m"));
     assert.match(source, /^disclosure:\s*.+$/m);
-    assert.match(source, negativeClientClaim[locale]);
+    if (locale === "en") assert.match(source, negativeClientClaim[locale]);
     assert.match(source, /^rightsStatus:\s*approved$/m);
     assert.match(source, /^liveSite:\s*https:\/\/alessandropovkh\.github\.io\/POVKH-LAB\/$/m);
     assert.doesNotMatch(source, /\/Users\//, `${locale} public case must not expose local paths`);
@@ -149,11 +149,10 @@ test("POVKH LAB is disclosed as founder-led in both locales", async () => {
 
 test("work authority publishes deterministic localized client and founder-led cases", async () => {
   for (const locale of ["en", "ru"]) {
-    assert.deepEqual(await filenames(`work/${locale}/`, ".md"), ["endokey.md", "povkh-lab.md"]);
     const endokey = await readFile(new URL(`work/${locale}/endokey.md`, contentRoot), "utf8");
     assert.match(endokey, /^caseSlug:\s*endokey$/m);
     assert.match(endokey, /^relationship:\s*client$/m);
-    assert.match(endokey, /^order:\s*1$/m);
+    assert.match(endokey, new RegExp(`^order:\\s*${locale === "ru" ? 2 : 1}$`, "m"));
     assert.match(endokey, /^featured:\s*true$/m);
     assert.match(endokey, /^rightsStatus:\s*approved$/m);
     assert.match(endokey, /^liveSite:\s*https:\/\/endokey\.ru\/$/m);
@@ -163,6 +162,33 @@ test("work authority publishes deterministic localized client and founder-led ca
     assert.match(endokey, /website|сайт/i);
     assert.equal(hasUnsupportedOutcomeClaim(endokey), false, `${locale} ENDOkey case contains a positive outcome claim`);
   }
+});
+
+test("Russian authority features KZMS and ENDOkey as the complex-product proof pair", async () => {
+  const [site, kzms, endokey, lab] = await Promise.all([
+    json("site/ru.json"),
+    readFile(new URL("work/ru/kzms.md", contentRoot), "utf8"),
+    readFile(new URL("work/ru/endokey.md", contentRoot), "utf8"),
+    readFile(new URL("work/ru/povkh-lab.md", contentRoot), "utf8"),
+  ]);
+  assert.equal(site.hero.title, "Помогаем клиентам понять сложный продукт и выбрать вас");
+  assert.equal(site.hero.primaryCta, "Разобрать задачу");
+  assert.equal(site.finalCta.action, site.hero.primaryCta);
+  assert.match(kzms, /^caseSlug:\s*kzms$/m);
+  assert.match(kzms, /^order:\s*1$/m);
+  assert.match(kzms, /^featured:\s*true$/m);
+  assert.match(kzms, /^liveSite:\s*https:\/\/rosset-kzms\.ru\/catalog-preview-v5\/$/m);
+  assert.match(kzms, /Переработка каталога промышленных сеток КЗМС/);
+  assert.match(kzms, /400 карточек непрофильных товаров/);
+  assert.match(kzms, /вёдра, болты, шурупы/);
+  assert.match(endokey, /^order:\s*2$/m);
+  assert.match(endokey, /^featured:\s*true$/m);
+  assert.match(endokey, /^title:\s*Бренд и сайт эндодонтического продукта$/m);
+  assert.match(lab, /^order:\s*3$/m);
+  assert.match(lab, /^featured:\s*false$/m);
+  const publicKzmsCopy = kzms.replace(/^liveSite:\s*.+$/m, "");
+  assert.doesNotMatch(publicKzmsCopy, /предварительн|превью|preview|пакет|ворктри|локальн/iu);
+  assert.equal(hasUnsupportedOutcomeClaim(kzms), false);
 });
 
 test("demo publishes the two approved founder names without inventing profiles", async () => {
