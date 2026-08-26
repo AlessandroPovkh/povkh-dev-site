@@ -1,0 +1,95 @@
+{
+  "contract_version": 1,
+  "surface": "full-site",
+  "objective_status": "in_progress",
+  "deliverables": [
+    {
+      "id": "routes",
+      "description": "Every required RU, EN and IT route is accounted for without orphaned or silently removed pages.",
+      "required": true,
+      "covered_by_packets": ["P-019", "P-024"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "inner-pages",
+      "description": "All Russian inner pages use the approved homepage design system before EN and IT synchronization.",
+      "required": true,
+      "covered_by_packets": ["P-022", "P-024"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "build",
+      "description": "The approved full-site direction is implemented as a bounded runnable build.",
+      "required": true,
+      "covered_by_packets": ["P-022", "P-024"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "seo",
+      "description": "Routes, metadata, internal linking and applicable structured data are verified for the multilingual surface.",
+      "required": true,
+      "covered_by_packets": ["P-025"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "responsive",
+      "description": "Representative and critical routes are verified on desktop and mobile without overflow, clipping or broken alignment.",
+      "required": true,
+      "covered_by_packets": ["P-023", "P-026"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "local-preview",
+      "description": "A real local preview passes functional, visual and technical checks for the delivered route set.",
+      "required": true,
+      "covered_by_packets": ["P-023", "P-026"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "design-system",
+      "description": "Rounded premium glass, typography, header, controls, texture and motion form one approved non-generic visual system.",
+      "required": true,
+      "covered_by_packets": ["P-021"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "case-evidence",
+      "description": "KZMS, ENDOkey, POVKH LAB and Giulia Povkh retain complete factual copy and high-quality real media.",
+      "required": true,
+      "covered_by_packets": ["P-020", "P-022"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "interactions-motion",
+      "description": "Clickable states and scroll transitions are meaningful, polished and reduced-motion safe.",
+      "required": true,
+      "covered_by_packets": ["P-021", "P-022", "P-023"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "locales",
+      "description": "RU is approved first; EN and IT are then synchronized without deleting or degrading either locale.",
+      "required": true,
+      "covered_by_packets": ["P-024", "P-026"],
+      "status": "open",
+      "evidence_refs": []
+    },
+    {
+      "id": "visual-qa",
+      "description": "No stray line, overlap, clipping, sharp unintended card, misaligned marker or degraded case image remains.",
+      "required": true,
+      "covered_by_packets": ["P-023", "P-026"],
+      "status": "open",
+      "evidence_refs": []
+    }
+  ]
+}

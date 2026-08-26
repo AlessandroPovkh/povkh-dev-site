@@ -239,3 +239,163 @@
 - Known conflicts: None recorded.
 - Promotion condition: Explicit approval of the compiled summary.
 - Status: `promoted`
+
+## MC-016: desired_result
+
+- Type: `decision`
+- Field: `desired_result`
+- Proposed text: Сначала улучшить всю русскую версию Povkh.Dev в визуальной системе новой главной; убрать лишние линии, сетку, AI-looking fragments, мелкую нумерацию и нелогичный шар; применить мягкие premium glass fragments и закругления; улучшить верхний бар, типографику, кнопки, качество и полноту кейсов включая Giulia Povkh; исправить overlap и выравнивания; добавить кликабельные анимации и стильный motion между scroll-переходами; затем провести дизайнерские и технические тесты, и только после утверждения синхронизировать EN.
+- Proposed text (JSON): "Сначала улучшить всю русскую версию Povkh.Dev в визуальной системе новой главной; убрать лишние линии, сетку, AI-looking fragments, мелкую нумерацию и нелогичный шар; применить мягкие premium glass fragments и закругления; улучшить верхний бар, типографику, кнопки, качество и полноту кейсов включая Giulia Povkh; исправить overlap и выравнивания; добавить кликабельные анимации и стильный motion между scroll-переходами; затем провести дизайнерские и технические тесты, и только после утверждения синхронизировать EN."
+- Packet: `P-013-project-context`
+- Destination: `.studio/packets/P-013-project-context/PACKET.md#context-desired_result`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `promoted`
+
+## MC-017: target_action
+
+- Type: `decision`
+- Field: `target_action`
+- Proposed text: Нажать «Разобрать задачу» и перейти к короткому брифу или обсуждению проекта.
+- Proposed text (JSON): "Нажать «Разобрать задачу» и перейти к короткому брифу или обсуждению проекта."
+- Packet: `P-013-project-context`
+- Destination: `.studio/packets/P-013-project-context/PACKET.md#context-target_action`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `promoted`
+
+## MC-018: success_criteria
+
+- Type: `decision`
+- Field: `success_criteria`
+- Proposed text: На всех русских страницах единая визуальная система новой главной; нет лишних линий, наложений, обрезанного текста, неровных точек и острых неуместных карточек; кейсы полные и качественные; desktop и mobile ровные; интерактивы и scroll-motion работают; профильные дизайнерские и технические проверки проходят без новых ошибок.
+- Proposed text (JSON): "На всех русских страницах единая визуальная система новой главной; нет лишних линий, наложений, обрезанного текста, неровных точек и острых неуместных карточек; кейсы полные и качественные; desktop и mobile ровные; интерактивы и scroll-motion работают; профильные дизайнерские и технические проверки проходят без новых ошибок."
+- Packet: `P-013-project-context`
+- Destination: `.studio/packets/P-013-project-context/PACKET.md#context-success_criteria`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `promoted`
+
+## MC-019: page_job
+
+- Type: `decision`
+- Field: `page_job`
+- Proposed text: Русская поверхность должна последовательно показать специализацию Povkh.Dev на сложных продуктах, доказать её реальными кейсами и привести заинтересованного посетителя к разбору собственной задачи; внутренние страницы должны продолжать дизайн и логику главной, а не выглядеть отдельными шаблонами.
+- Proposed text (JSON): "Русская поверхность должна последовательно показать специализацию Povkh.Dev на сложных продуктах, доказать её реальными кейсами и привести заинтересованного посетителя к разбору собственной задачи; внутренние страницы должны продолжать дизайн и логику главной, а не выглядеть отдельными шаблонами."
+- Packet: `P-013-project-context`
+- Destination: `.studio/packets/P-013-project-context/PACKET.md#context-page_job`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `promoted`
+
+## MC-020: content_requirements
+
+- Type: `decision`
+- Field: `content_requirements`
+- Proposed text: Сохранить утверждённые русские смыслы и полные описания кейсов; обязательно показать КЗМС, ENDOkey, POVKH LAB и кейс Giulia Povkh реальными качественными материалами. Убрать декоративную сетку, случайные фрагменты, мелкие служебные слова и нумерацию без функции, нелогичный шар и AI-looking композиции. Использовать мягкие закруглённые premium glass-фрагменты, улучшенную типографику в характере логотипа Povkh.Dev, аккуратный верхний бар и кнопки, ровные маркеры, кликабельные состояния и осмысленный motion. Сначала меняется только русская версия; English синхронизируется после её утверждения.
+- Proposed text (JSON): "Сохранить утверждённые русские смыслы и полные описания кейсов; обязательно показать КЗМС, ENDOkey, POVKH LAB и кейс Giulia Povkh реальными качественными материалами. Убрать декоративную сетку, случайные фрагменты, мелкие служебные слова и нумерацию без функции, нелогичный шар и AI-looking композиции. Использовать мягкие закруглённые premium glass-фрагменты, улучшенную типографику в характере логотипа Povkh.Dev, аккуратный верхний бар и кнопки, ровные маркеры, кликабельные состояния и осмысленный motion. Сначала меняется только русская версия; English синхронизируется после её утверждения."
+- Packet: `P-013-project-context`
+- Destination: `.studio/packets/P-013-project-context/PACKET.md#context-content_requirements`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `promoted`
+
+## MC-021: desired_result
+
+- Type: `decision`
+- Field: `desired_result`
+- Proposed text: Зафиксировать IA всей русской версии Povkh.Dev без перестройки почти готового сайта с нуля: сохранить существующие маршруты и утверждённые смыслы, унифицировать внутренние страницы с новой главной, обеспечить полные кейсы КЗМС, ENDOkey, POVKH LAB и Giulia Povkh, устранить наложения, обрезки и лишние служебные элементы; English не менять до утверждения RU.
+- Proposed text (JSON): "Зафиксировать IA всей русской версии Povkh.Dev без перестройки почти готового сайта с нуля: сохранить существующие маршруты и утверждённые смыслы, унифицировать внутренние страницы с новой главной, обеспечить полные кейсы КЗМС, ENDOkey, POVKH LAB и Giulia Povkh, устранить наложения, обрезки и лишние служебные элементы; English не менять до утверждения RU."
+- Packet: `P-014-project-context`
+- Destination: `.studio/packets/P-014-project-context/PACKET.md#context-desired_result`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `promoted`
+
+## MC-022: success_criteria
+
+- Type: `decision`
+- Field: `success_criteria`
+- Proposed text: Карта русских маршрутов и page jobs сохраняет существующую структуру без ненужной перестройки; каждая внутренняя страница продолжает логику новой главной; КЗМС, ENDOkey, POVKH LAB и Giulia Povkh доступны и содержательно полны; нет потерянных, дублированных или осиротевших русских страниц; English остаётся без изменений до утверждения RU.
+- Proposed text (JSON): "Карта русских маршрутов и page jobs сохраняет существующую структуру без ненужной перестройки; каждая внутренняя страница продолжает логику новой главной; КЗМС, ENDOkey, POVKH LAB и Giulia Povkh доступны и содержательно полны; нет потерянных, дублированных или осиротевших русских страниц; English остаётся без изменений до утверждения RU."
+- Packet: `P-014-project-context`
+- Destination: `.studio/packets/P-014-project-context/PACKET.md#context-success_criteria`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `promoted`
+
+## MC-023: content_requirements
+
+- Type: `decision`
+- Field: `content_requirements`
+- Proposed text: Сохранить существующие русские маршруты, утверждённые смыслы, реальные материалы и полные описания кейсов КЗМС, ENDOkey, POVKH LAB и Giulia Povkh. Унифицировать навигацию и последовательность page jobs в логике проблема → подход → доказательства → действие «Разобрать задачу». Не вводить мелкие служебные подписи и нумерацию без функции, не сокращать доказательный контент кейсов и не менять English surface.
+- Proposed text (JSON): "Сохранить существующие русские маршруты, утверждённые смыслы, реальные материалы и полные описания кейсов КЗМС, ENDOkey, POVKH LAB и Giulia Povkh. Унифицировать навигацию и последовательность page jobs в логике проблема → подход → доказательства → действие «Разобрать задачу». Не вводить мелкие служебные подписи и нумерацию без функции, не сокращать доказательный контент кейсов и не менять English surface."
+- Packet: `P-014-project-context`
+- Destination: `.studio/packets/P-014-project-context/PACKET.md#context-content_requirements`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `promoted`
+
+## MC-024: desired_result
+
+- Type: `decision`
+- Field: `desired_result`
+- Proposed text: Зафиксировать scope текущего этапа: улучшение всей русской версии Povkh.Dev в существующем Astro-проекте и визуальной системе новой главной; сохранить маршруты и реальные кейсы; English, deployment, внешние интеграции и публикацию не менять до отдельного утверждения.
+- Proposed text (JSON): "Зафиксировать scope текущего этапа: улучшение всей русской версии Povkh.Dev в существующем Astro-проекте и визуальной системе новой главной; сохранить маршруты и реальные кейсы; English, deployment, внешние интеграции и публикацию не менять до отдельного утверждения."
+- Packet: `P-015-project-context`
+- Destination: `.studio/packets/P-015-project-context/PACKET.md#context-desired_result`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `ready_for_review`
+
+## MC-025: desired_result
+
+- Type: `decision`
+- Field: `desired_result`
+- Proposed text: Зафиксировать scope: сначала улучшить всю русскую версию Povkh.Dev в существующем Astro-проекте и визуальной системе новой главной, сохранив маршруты и реальные кейсы. Итоговая языковая поверхность обязана включать RU, EN и IT; на текущем этапе EN и IT не удалять и не ухудшать, а синхронизировать их с утверждённой RU-версией на следующем этапе. Deployment, внешние интеграции и публикацию не менять без отдельного утверждения.
+- Proposed text (JSON): "Зафиксировать scope: сначала улучшить всю русскую версию Povkh.Dev в существующем Astro-проекте и визуальной системе новой главной, сохранив маршруты и реальные кейсы. Итоговая языковая поверхность обязана включать RU, EN и IT; на текущем этапе EN и IT не удалять и не ухудшать, а синхронизировать их с утверждённой RU-версией на следующем этапе. Deployment, внешние интеграции и публикацию не менять без отдельного утверждения."
+- Packet: `P-016-project-context`
+- Destination: `.studio/packets/P-016-project-context/PACKET.md#context-desired_result`
+- Source / provenance: user-confirmed
+- Confidence: `high`
+- Readiness: `confirmed`
+- Why retain: Explicit project-context interview answer.
+- Known conflicts: None recorded.
+- Promotion condition: Explicit approval of the compiled summary.
+- Status: `promoted`

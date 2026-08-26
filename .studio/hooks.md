@@ -22,3 +22,10 @@
 | H-014 | decision_required | P-010-project-context | resolved | content_requirements: Какие материалы и форматы обязательны? — Определяет состав и ограничения контента. | Ответить: Какие материалы и форматы обязательны? |
 | H-015 | review_required | P-010-project-context | resolved | Проверить собранный контекст и exact summary | approved или rework с замечаниями |
 | H-016 | missing_input | P-011-latest-design-import | resolved | `node_modules/` (432 MB) с разрешения пользователя перемещён без удаления в `/Users/alessandropovkh/Desktop/povkh-dev-node_modules-backup-20260826`; stable project root снова доступен для bounded fingerprint. | Закрыт явным подтверждением пользователя; повторить authorization preview. |
+| H-017 | review_required | P-011-latest-design-import | resolved | P-011 получил `boundary-verified`; full suite на feature branch и повторно на merged `main` завершился без failures; пользователь выбрал локальную интеграцию вариантом `1`. | P-011 approved; открыть ранее выбранный P-012 `visual-qa`. |
+| H-018 | decision_required | P-013-project-context | resolved | content_requirements: Какие материалы и форматы обязательны? — Определяет состав и ограничения контента. | Ответить: Какие материалы и форматы обязательны? |
+| H-019 | review_required | P-013-project-context | resolved | Проверить собранный контекст и exact summary | approved или rework с замечаниями |
+| H-020 | decision_required | P-014-project-context | resolved | content_requirements: Какие материалы и форматы обязательны? — Определяет состав и ограничения контента. | Ответить: Какие материалы и форматы обязательны? |
+| H-021 | review_required | P-014-project-context | resolved | Проверить собранный контекст и exact summary | approved или rework с замечаниями |
+| H-022 | review_required | P-015-project-context | open | Проверить собранный контекст и exact summary | approved или rework с замечаниями |
+| H-023 | review_required | P-016-project-context | resolved | Проверить собранный контекст и exact summary | approved или rework с замечаниями |

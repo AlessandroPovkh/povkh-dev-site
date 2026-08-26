@@ -20,9 +20,14 @@
 | 2026-08-22 | D-013: утвердить P-008 и отправить все накопленные изменения сайта в GitHub; обновить существующий fork PR №1, не сливать его и не выполнять deployment | пользователь | явная команда «Залей в гитхаб сайта эти правки все. И пока наверное все» | P-008 approval, P-009 GitHub handoff |
 | 2026-08-22 | D-014: P-009 завершён; существующий PR №1 обновлён и переведён в ready for review без merge или deployment | результат утверждённого GitHub handoff | GitHub подтвердил head `d665cec`, состояние `OPEN`, `MERGEABLE`, `CLEAN` | P-009 evidence, project and route status |
 | 2026-08-26 | D-015: утверждён project context P-010-project-context | user | Exact summary SHA-256 f82acf8e48a7d891bedf8664512cef8466a9737f2d03314da3c9570903b4f9fe | `.studio/memory/context.md`, `PROJECT.md`, `.studio/packets/P-010-project-context/PACKET.md` |
+| 2026-08-26 | D-017: P-011 approved и локально интегрирован в `main` | user | Пользователь выбрал вариант `1` после `boundary-verified`; full suite на feature branch и merged `main`: 498 E2E passed, 47 skipped, 0 failed; Astro check 0/0/0; build/22 routes/Lighthouse 4 URL passed | `PROJECT.md`, `.studio/hooks.md`, `.studio/route-map.md`, commit `1ccbb23` |
 
 ## Project write authorizations v1
 
 | authorization_id | project_id | packet_id | payload_sha256 | approved_by | status | approved_at | expires_at |
 |---|---|---|---|---|---|---|---|
 | D-016 | povkh-dev | P-011-latest-design-import | f4af2f249484bb7a6cb1a2cb4776337a0d3171f1e2abbd89e98b3b4779642f3a | user | approved | 2026-08-26T21:09:36Z | 2026-09-01T21:09:36Z |
+| D-021 | povkh-dev | P-017-full-site-scope | 6acc3107f19f8be7dbada8b490a5d57f985d7fca550739586fe68ee7eefd0e46 | user | approved | 2026-08-26T22:21:02Z | 2026-09-01T22:21:02Z |
+| 2026-08-27 | D-018: утверждён project context P-013-project-context | user | Exact summary SHA-256 d1d8825c1657913cfba112eac7ccf60a27dbd9b3ef638e46995dc6c3b7a69720 | `.studio/memory/context.md`, `PROJECT.md`, `.studio/packets/P-013-project-context/PACKET.md` |
+| 2026-08-27 | D-019: утверждён project context P-014-project-context | user | Exact summary SHA-256 e47a6cd857b490dfaac520ec82ceaf225dbefbbc88eaa57c4277b7b5acadb9aa | `.studio/memory/context.md`, `PROJECT.md`, `.studio/packets/P-014-project-context/PACKET.md` |
+| 2026-08-27 | D-020: утверждён project context P-016-project-context | user | Exact summary SHA-256 e5789d50558521b35fd8b5ce2285ea1311116e14c79612c75ce9fbbe8eb9421b | `.studio/memory/context.md`, `PROJECT.md`, `.studio/packets/P-016-project-context/PACKET.md` |
