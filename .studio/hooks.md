@@ -20,4 +20,5 @@
 | H-012 | review_required | P-007-complex-product-copy | resolved | Пользователь утвердил публичные тексты командой собирать страницы. | D-008; P-008 website build |
 | H-013 | review_required | P-008-complex-product-pages | resolved | Пользователь утвердил результат командой отправить все изменения в GitHub сайта. | D-013; P-009 GitHub handoff |
 | H-014 | decision_required | P-010-project-context | resolved | content_requirements: Какие материалы и форматы обязательны? — Определяет состав и ограничения контента. | Ответить: Какие материалы и форматы обязательны? |
-| H-015 | review_required | P-010-project-context | open | Проверить собранный контекст и exact summary | approved или rework с замечаниями |
+| H-015 | review_required | P-010-project-context | resolved | Проверить собранный контекст и exact summary | approved или rework с замечаниями |
+| H-016 | missing_input | P-011-latest-design-import | resolved | `node_modules/` (432 MB) с разрешения пользователя перемещён без удаления в `/Users/alessandropovkh/Desktop/povkh-dev-node_modules-backup-20260826`; stable project root снова доступен для bounded fingerprint. | Закрыт явным подтверждением пользователя; повторить authorization preview. |

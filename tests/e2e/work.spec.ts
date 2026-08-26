@@ -29,18 +29,21 @@ test.describe("localized work cases", () => {
       await expect(page.locator("main").getByRole("heading", { level: 1 })).toContainText(
         route.startsWith("/ru") ? "Работы со сложными продуктами" : "Built",
       );
-      await expect(page.locator(".case-list-item")).toHaveCount(route.startsWith("/ru") ? 3 : 2);
+      await expect(page.locator(".case-list-item")).toHaveCount(route.startsWith("/ru") ? 4 : 2);
       await expect(page.getByText(/client work|клиентский проект/i).first()).toBeVisible();
       await expect(page.getByText(/founder-led|основател/i).first()).toBeVisible();
       await expect(page.locator("main")).not.toContainText("/Users/");
       const links = page.locator(".case-preview .button");
-      await expect(links).toHaveCount(route.startsWith("/ru") ? 3 : 2);
+      await expect(links).toHaveCount(route.startsWith("/ru") ? 4 : 2);
       if (route.startsWith("/ru")) {
         await expect(links.nth(0)).toHaveAccessibleName("Открыть кейс Переработка каталога промышленных сеток КЗМС");
         await expect(links.nth(0)).toHaveAttribute("href", "/ru/work/kzms/");
         await expect(links.nth(1)).toHaveAccessibleName("Открыть кейс Бренд и сайт эндодонтического продукта");
         await expect(links.nth(1)).toHaveAttribute("href", "/ru/work/endokey/");
         await expect(links.nth(2)).toHaveAttribute("href", "/ru/work/povkh-lab/");
+        await expect(links.nth(3)).toHaveAccessibleName("Смотреть сайт Giulia Povkh");
+        await expect(links.nth(3)).toHaveAttribute("href", "https://giuliapovkh.ru");
+        await expect(page.getByRole("img", { name: "Новая главная страница портфолио Giulia Povkh" })).toBeVisible();
       } else {
         await expect(links.nth(0)).toHaveAccessibleName("Read the ENDOkey case");
         await expect(links.nth(1)).toHaveAccessibleName("Read the POVKH LAB case");

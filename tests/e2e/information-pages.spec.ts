@@ -65,7 +65,7 @@ for (const pageCase of localizedCases) {
     await expect(page.getByText(/Discovery|Исследование/).first()).toBeVisible();
     await expect(page.getByText(/Evolution|Развитие/).first()).toBeVisible();
     await expect(page.getByText(/not included automatically|не включаются автоматически/i).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /Discuss (?:your |a )?project|Обсудить (?:задачу|проект)/i }).first()).toHaveAttribute("href", pageCase.contact);
+    await expect(page.getByRole("link", { name: /Discuss (?:your |a )?project|(?:Обсудить|Разобрать) (?:задачу|проект)/i }).first()).toHaveAttribute("href", pageCase.contact);
   });
 
   test(`${pageCase.locale} process exposes five stage outputs`, async ({ page }) => {
@@ -75,7 +75,7 @@ for (const pageCase of localizedCases) {
       await expect(page.getByText(output, { exact: false })).toBeVisible();
     }
     await expect(page.locator("ol").getByRole("listitem")).toHaveCount(5);
-    await expect(page.getByRole("link", { name: /Discuss (?:your |a )?project|Обсудить (?:задачу|проект)/i }).first()).toHaveAttribute("href", pageCase.contact);
+    await expect(page.getByRole("link", { name: /Discuss (?:your |a )?project|(?:Обсудить|Разобрать) (?:задачу|проект)/i }).first()).toHaveAttribute("href", pageCase.contact);
   });
 
   test(`${pageCase.locale} studio publishes approved names without invented profiles`, async ({ page }) => {
@@ -85,7 +85,7 @@ for (const pageCase of localizedCases) {
     await expect(page.getByRole("heading", { name: "Alessandro Povkh" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Egor Vereshagin" })).toBeVisible();
     await expect(page.getByText(/profiles will be added|профили будут дополнены|публичные профили появятся/i).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /Discuss (?:your |a )?project|Обсудить (?:задачу|проект)/i }).first()).toHaveAttribute("href", pageCase.contact);
+    await expect(page.getByRole("link", { name: /Discuss (?:your |a )?project|(?:Обсудить|Разобрать) (?:задачу|проект)/i }).first()).toHaveAttribute("href", pageCase.contact);
   });
 
   test(`${pageCase.locale} information pages reflow long content without horizontal scroll`, async ({ page }) => {
@@ -107,6 +107,6 @@ for (const pageCase of localizedCases) {
     await expect(page.getByRole("heading", { level: 1, name: pageCase.notFoundHeading })).toBeVisible();
     await expect(page.getByRole("link", { name: /home|главн/i }).first()).toHaveAttribute("href", pageCase.home);
     await expect(page.getByRole("link", { name: /services|услуг/i }).first()).toHaveAttribute("href", pageCase.services);
-    await expect(page.getByRole("link", { name: /Discuss (?:your |a )?project|Обсудить (?:задачу|проект)/i }).first()).toHaveAttribute("href", pageCase.contact);
+    await expect(page.getByRole("link", { name: /Discuss (?:your |a )?project|(?:Обсудить|Разобрать) (?:задачу|проект)/i }).first()).toHaveAttribute("href", pageCase.contact);
   });
 }

@@ -18,7 +18,7 @@ const contactHref = site.nav.find(({ id }) => id === "contact")?.href ?? "/conta
 <header class="site-header" data-site-header>
   <div class="header-inner container">
     <a class="wordmark" href={locale === "ru" ? "/ru/" : "/"} aria-label={isRu ? "Главная Povkh.Dev" : "Povkh.Dev home"}>
-      POVKH<span class="wordmark-dot">.</span>DEV
+      {isRu ? <>Povkh<span class="wordmark-dot">.</span>Dev</> : <>POVKH<span class="wordmark-dot">.</span>DEV</>}
     </a>
     <nav class="primary-nav" aria-label={isRu ? "Основная навигация" : "Primary navigation"}>
       <ul class="primary-links" data-testid="primary-links" data-primary-links>

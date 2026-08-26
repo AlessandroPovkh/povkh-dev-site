@@ -1,12 +1,148 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import DualHero from "../../components/home/DualHero.astro";
-import { getFeaturedWork, getSite } from "../../lib/content";
-import "../../styles/home.css";
+import { getSite } from "../../lib/content";
+import { editorialBody, editorialScriptSource, editorialStyles } from "../../lib/ru-home-prototype";
+import plexSansCyrillic from "../../assets/fonts/ibm-plex-sans-cyrillic-wght-normal.woff2?url";
+import plexSansLatin from "../../assets/fonts/ibm-plex-sans-latin-wght-normal.woff2?url";
 
 const site = await getSite("ru");
-const featuredWork = await getFeaturedWork("ru");
-if (featuredWork.length !== 2) throw new Error("Russian homepage requires exactly two featured cases");
+const assetRoutes: Record<string, string> = {
+  "/files/endokey-product.jpg": "/assets/work/endokey/site-home.jpg",
+  "/files/endokey-site.jpg": "/assets/work/endokey/site-home.jpg",
+  "/files/kzms-before.jpg": "/assets/work/kzms/catalog-before.jpg",
+  "/files/kzms-after.jpg": "/assets/work/kzms/catalog-after.jpg",
+  "/files/povkh-lab-home.webp": "/assets/work/povkh-lab/home-en-desktop.webp",
+  "/files/povkh-lab-catalog.webp": "/assets/work/povkh-lab/catalog-en-mobile.webp",
+  "/files/povkh-lab-release.webp": "/assets/work/povkh-lab/release-en-desktop.webp",
+  "/files/povkh-lab-audio.webp": "/assets/work/povkh-lab/audio-player-desktop.webp",
+  "/files/povkh-lab-smartlink.webp": "/assets/work/povkh-lab/smartlink-en-desktop.webp",
+  "/files/giulia-before-full.png": "/assets/work/giulia/before-full.jpg",
+  "/files/giulia-after-full.png": "/assets/work/giulia/after-full.jpg",
+};
+
+const replaceAssets = (value: string) => Object.entries(assetRoutes)
+  .reduce((result, [from, to]) => result.replaceAll(from, to), value);
+
+const editorialMarkup = replaceAssets(editorialBody)
+  .replace(/<div class="hero-macro"[\s\S]*?<\/div>/, "")
+  .replace("<main>", '<main id="main-content" tabindex="-1">')
+  .replace('alt="Продукт ENDOkey"', 'alt="Интерфейс сайта ENDOkey"')
+  .replace(/<button class="review"[\s\S]*?<\/button>/, "")
+  .replace('<div class="hero-image"><img', '<div class="hero-image"><img fetchpriority="high" decoding="sync" width="1400" height="788"')
+  .replace("Кейс / ENDOkey", "ENDOkey · бренд и сайт")
+  .replace('<nav class="site-nav">', '<nav class="site-nav" aria-label="Основная">')
+  .replace('<button class="menu-toggle"', '<button class="menu-toggle" data-menu-toggle aria-label="Открыть меню"')
+  .replace(
+    '<div class="menu-panel" id="menu-panel" aria-hidden="true">',
+    '<div class="menu-panel" id="menu-panel" role="dialog" aria-modal="true" aria-label="Навигационное меню" aria-hidden="true">',
+  )
+  .replace('<a class="logo" href="#hero">', '<a class="logo" href="/ru/">')
+  .replace('<a class="nav-cta mono" href="#final"><span>Обсудить проект</span></a>', '<a class="nav-cta mono" href="/ru/contact/" aria-label="Разобрать задачу"><span>Разобрать задачу</span></a>')
+  .replace('<a class="button" href="#final">Разобрать задачу</a>', '<a class="button" href="/ru/contact/" aria-label="Разобрать задачу">Разобрать задачу</a>')
+  .replace(
+    /<div class="menu-list">[\s\S]*?<\/div><aside/,
+    '<div class="menu-list" data-testid="primary-links"><a href="/ru/work/"><span>01</span>Работы</a><a href="/ru/services/"><span>02</span>Услуги</a><a href="/ru/process/"><span>03</span>Процесс</a><a href="/ru/studio/"><span>04</span>Студия</a><a href="/ru/blog/"><span>05</span>Блог</a><a href="/ru/contact/"><span>06</span>Контакт</a></div><aside',
+  )
+  .replace("Povkh.Dev / Brescia · Москва", '<a href="/" hreflang="en" data-testid="language-switch">English version ↗</a>')
+  .replace('<section class="section" id="problems">', '<section class="section" id="problems" data-section="problems">')
+  .replace('<section class="section proof" id="proof">', '<section class="section proof" id="proof" data-section="proof">')
+  .replace('<section class="section method" id="method">', '<section class="section method" id="method" data-section="method">')
+  .replace('<section class="section" id="result">', '<section class="section" id="result" data-section="result">')
+  .replace('<section class="final" id="final">', '<section class="final" id="final" data-section="final-cta">')
+  .replace('<a class="case-link mono" href="#">Открыть кейс ↗</a>', '<a class="case-link mono" href="/ru/work/kzms/" aria-label="Открыть кейс КЗМС">Открыть кейс ↗</a>')
+  .replace('<a class="case-link mono" href="#">Открыть кейс ↗</a>', '<a class="case-link mono" href="/ru/work/endokey/" aria-label="Открыть кейс ENDOkey">Открыть кейс ↗</a>')
+  .replace('<a class="case-link mono" href="#">Открыть кейс ↗</a>', '<a class="case-link mono" href="/ru/work/povkh-lab/" aria-label="Открыть кейс POVKH LAB">Открыть кейс ↗</a>')
+  .replace('<a class="case-link mono" href="https://giuliapovkh.ru">Смотреть живой сайт ↗</a>', '<a class="case-link mono" href="https://giuliapovkh.ru" rel="external" aria-label="Смотреть живой сайт Giulia Povkh">Смотреть живой сайт ↗</a>')
+  .replace('<div class="lab-scroll" data-lab-scroll>', '<div class="lab-scroll" data-lab-scroll tabindex="0" aria-label="Прокручиваемый экран сайта POVKH LAB">')
+  .replace('<img src="/assets/work/giulia/before-full.jpg" alt="Старая версия сайта Giulia Povkh">', '<img loading="eager" fetchpriority="low" decoding="async" src="/assets/work/giulia/before-01.jpg" alt="Старая версия сайта Giulia Povkh, верхняя часть"><img loading="lazy" decoding="async" src="/assets/work/giulia/before-02.jpg" alt="Старая версия сайта Giulia Povkh, нижняя часть">')
+  .replace('<img src="/assets/work/giulia/after-full.jpg" alt="Новая версия сайта Giulia Povkh">', '<img loading="eager" fetchpriority="low" decoding="async" src="/assets/work/giulia/after-01.jpg" alt="Новая версия сайта Giulia Povkh, часть 1"><img loading="lazy" decoding="async" src="/assets/work/giulia/after-02.jpg" alt="Новая версия сайта Giulia Povkh, часть 2"><img loading="lazy" decoding="async" src="/assets/work/giulia/after-03.jpg" alt="Новая версия сайта Giulia Povkh, часть 3"><img loading="lazy" decoding="async" src="/assets/work/giulia/after-04.jpg" alt="Новая версия сайта Giulia Povkh, часть 4">')
+  .replace('<span>Поле исследования</span>', '<span data-research-output>Выберите слой исследования</span>')
+  .replace('<div class="research-line" data-index="A"><span>Продукт</span><strong>что выбирают</strong></div>', '<button class="research-line" type="button" aria-pressed="false" data-index="A"><span>Продукт</span><strong>что выбирают</strong></button>')
+  .replace('<div class="research-line" data-index="B"><span>Спрос</span><strong>как ищут</strong></div>', '<button class="research-line" type="button" aria-pressed="false" data-index="B"><span>Спрос</span><strong>как ищут</strong></button>')
+  .replace('<div class="research-line" data-index="C"><span>Материалы</span><strong>что объясняют</strong></div>', '<button class="research-line" type="button" aria-pressed="false" data-index="C"><span>Материалы</span><strong>что объясняют</strong></button>')
+  .replace('<div class="research-line" data-index="D"><span>Продажи</span><strong>где теряются</strong></div>', '<button class="research-line" type="button" aria-pressed="false" data-index="D"><span>Продажи</span><strong>где теряются</strong></button>')
+  .replaceAll('<img src="/assets/work/kzms/', '<img loading="lazy" decoding="async" src="/assets/work/kzms/')
+  .replace('<img class="after" src="/assets/work/kzms/', '<img class="after" loading="lazy" decoding="async" src="/assets/work/kzms/')
+  .replaceAll('<img src="/assets/work/endokey/site-home.jpg"', '<img loading="lazy" decoding="async" src="/assets/work/endokey/site-home.jpg"')
+  .replaceAll('<img src="/assets/work/povkh-lab/', '<img loading="lazy" decoding="async" src="/assets/work/povkh-lab/')
+  .replace('<img loading="lazy" decoding="async" src="/assets/work/povkh-lab/home-en-desktop.webp" alt="Экран Home', '<img src="/assets/work/povkh-lab/home-en-desktop.webp" alt="Экран Home')
+  .replaceAll(' role="tablist"', "")
+  .replaceAll(' role="tab"', "")
+  .replaceAll(' role="tabpanel"', "")
+  .replaceAll(' aria-selected="true"', "")
+  .replaceAll(' aria-selected="false"', "")
+  .replace('<a class="button" href="#">Разобрать задачу</a>', '<a class="button" href="/ru/contact/?goal=launch" aria-label="Разобрать задачу">Разобрать задачу</a>')
+  .replace(
+    '<div class="footer-links mono"><a href="#proof">Работы</a><a href="#method">Процесс</a><a href="#final">Обсудить</a></div>',
+    '<div class="footer-links mono"><a href="/ru/work/">Работы</a><a href="/ru/process/">Процесс</a><a href="/ru/contact/">Обсудить</a><a href="/ru/privacy/">Конфиденциальность</a><a href="/ru/cookies/">Cookie</a></div>',
+  );
+
+const editorialScript = replaceAssets(editorialScriptSource)
+  .replace("`${(i+1)*25}%`", "`${((i+1)/caseCards.length)*100}%`")
+  .replace("menuPanel?.querySelector('a')?.focus(),260)", "menuPanel?.querySelector('a')?.focus(),520)")
+  .replace("tab.setAttribute('aria-selected',String(active));", "")
+  .replace("menuToggle?.setAttribute('aria-expanded','false')", "menuToggle?.setAttribute('aria-expanded','false');menuToggle?.setAttribute('aria-label','Открыть меню')")
+  .replace("menuToggle?.setAttribute('aria-expanded','true')", "menuToggle?.setAttribute('aria-expanded','true');menuToggle?.setAttribute('aria-label','Закрыть меню')")
+  .replace(/function toggleSelect[\s\S]*$/, "") + `
+    const coveredRegions = [
+      document.querySelector('#main-content'),
+      document.querySelector('.site-footer'),
+      document.querySelector('.logo'),
+      document.querySelector('.nav-center'),
+      document.querySelector('.nav-cta'),
+    ];
+    const syncMenuModal = () => {
+      const open = menuToggle?.getAttribute('aria-expanded') === 'true';
+      coveredRegions.forEach(region => { if (region) region.inert = open; });
+    };
+    const focusOpenMenu = () => {
+      if (menuToggle?.getAttribute('aria-expanded') !== 'true' || !menuPanel) return;
+      const firstLink = [...menuPanel.querySelectorAll('a[href]')].find(link => link.getClientRects().length > 0);
+      if (getComputedStyle(menuPanel).visibility === 'visible' && firstLink) firstLink.focus();
+      else requestAnimationFrame(focusOpenMenu);
+    };
+    menuToggle?.addEventListener('click', () => {
+      syncMenuModal();
+      if (menuToggle.getAttribute('aria-expanded') === 'true') requestAnimationFrame(focusOpenMenu);
+    });
+    menuPanel?.querySelectorAll('a').forEach(link => link.addEventListener('click', syncMenuModal));
+    addEventListener('keydown', event => {
+      if (event.key === 'Escape') syncMenuModal();
+      if (event.key !== 'Tab' || menuToggle?.getAttribute('aria-expanded') !== 'true') return;
+      const focusable = [...menuPanel.querySelectorAll('a[href]')].filter(link => link.getClientRects().length > 0);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+    const researchLayers = [...document.querySelectorAll('.research-line')];
+    const researchOutput = document.querySelector('[data-research-output]');
+    researchLayers.forEach(layer => layer.addEventListener('click', () => {
+      researchLayers.forEach(item => item.setAttribute('aria-pressed', String(item === layer)));
+      if (researchOutput) researchOutput.textContent = layer.querySelector('span')?.textContent + ' — ' + layer.querySelector('strong')?.textContent;
+    }));
+    const motionSections = [...document.querySelectorAll('[data-section]')];
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const setMotionState = (section, visible) => {
+      section.dataset.motionState = visible ? 'visible' : 'idle';
+    };
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      motionSections.forEach(section => setMotionState(section, true));
+    } else {
+      const motionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => setMotionState(entry.target, entry.isIntersecting));
+      }, { rootMargin: '-8% 0px -8% 0px', threshold: .08 });
+      motionSections.forEach(section => {
+        setMotionState(section, false);
+        motionObserver.observe(section);
+      });
+    }`;
 ---
 
 <BaseLayout
@@ -14,62 +150,491 @@ if (featuredWork.length !== 2) throw new Error("Russian homepage requires exactl
   currentPath="/ru/"
   title={site.meta.title}
   description={site.meta.description}
+  shell="immersive"
+  bodyClass="editorial-homepage"
+  preloadFonts={[plexSansCyrillic, plexSansLatin]}
 >
-  <DualHero locale="ru" {site} work={featuredWork} />
+  <style is:global set:html={editorialStyles}></style>
+  <style is:global>
+    .editorial-homepage { color-scheme: dark; background: #08080a; }
+    .editorial-homepage #main-content { outline: none; }
+    .editorial-homepage [data-section] {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 1000px;
+      scroll-margin-top: calc(var(--nav-h, 80px) + 16px);
+    }
+    .editorial-homepage .nav-status,
+    .editorial-homepage .nav-links a,
+    .editorial-homepage .footer-meta,
+    .editorial-homepage .signal-track span { color: #aaa6ac; }
+    .editorial-homepage .signal-strip h3 span,
+    .editorial-homepage .signal-track span:last-of-type { color: #ff5eaa; }
+    .editorial-homepage .reveal-panel { opacity: 1; }
+    .editorial-homepage .intro-curtain { display: none; }
+    .editorial-homepage .page-progress { display: none; }
+    .editorial-homepage .ambient-field::after,
+    .editorial-homepage .hero-macro { display: none; }
+    .editorial-homepage .hero::after,
+    .editorial-homepage .proof::before,
+    .editorial-homepage .proof::after,
+    .editorial-homepage .method::before,
+    .editorial-homepage .method::after,
+    .editorial-homepage .process-system::before,
+    .editorial-homepage .lab-screen-grid,
+    .editorial-homepage #problems::before,
+    .editorial-homepage #result::before,
+    .editorial-homepage .route-map::after { display: none; }
+    .editorial-homepage .term-cloud {
+      background: radial-gradient(circle at 50% 52%, #ff2f921d, transparent 35%), #09090b;
+    }
+    .editorial-homepage .process-artifact::before { content: "ПРОЦЕСС"; }
+    .editorial-homepage .verify-row::after { content: "ЖДЁТ"; }
+    .editorial-homepage .verify-row.is-pass::after { content: "ГОТОВО"; }
+    .editorial-homepage .method .eyebrow { color: #a80d4e; }
+    .editorial-homepage .process-tab span,
+    .editorial-homepage .process-tab strong,
+    .editorial-homepage .artifact-head,
+    .editorial-homepage .lab-view { color: #aaa6ac; }
+    .editorial-homepage .process-copy .mono,
+    .editorial-homepage .process-counter span { color: #ff77b9; }
+    .editorial-homepage .giulia-case .mono { color: #a4373c; }
+    .editorial-homepage .giulia-copy h3 em { color: #b93835; }
+    .editorial-homepage .hero-copy,
+    .editorial-homepage .hero-art { animation: none; }
+    .editorial-homepage .hero-macro img { animation: none; transform: scale(1.02); }
+    .editorial-homepage .case-info h3,
+    .editorial-homepage .endokey-copy h3 { overflow-wrap: normal; hyphens: none; word-break: normal; }
+    .editorial-homepage .process-copy h3 { max-width: 100%; font-size: clamp(48px, 4.5vw, 76px); }
+    .editorial-homepage .footer-links { flex-wrap: wrap; }
+    .editorial-homepage .menu-side a { color: #ff5eaa; }
+    .editorial-homepage .menu-list a span { color: #aaa6ac; }
 
-  <section class="task-fit" data-section="task-fit" aria-labelledby="task-fit-title">
-    <div class="container">
-      <header class="section-heading">
-        <p class="eyebrow">01 / Ваша задача</p>
-        <h2 id="task-fit-title">С чем к нам приходят</h2>
-      </header>
-      <ul class="task-fit-list">
-        <li><h3>Клиенты не понимают продукт</h3><p>На сайте много терминов и характеристик. Человеку трудно связать их со своей задачей и принять решение.</p></li>
-        <li><h3>Сайт не приводит к предметному запросу</h3><p>Посетитель читает страницы, но не видит понятного маршрута, нужных аргументов и следующего действия.</p></li>
-        <li><h3>Продвижение собрано по частям</h3><p>Бренд, сайт, поиск и реклама говорят разными словами и ведут клиента в разные стороны.</p></li>
-        <li><h3>Сложный продукт нужно вывести на рынок</h3><p>Нужно определить аудиторию, собрать оффер и подготовить первую воронку без выдуманных обещаний.</p></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="approach-home" data-section="approach" aria-labelledby="approach-title">
-    <div class="container">
-      <header class="section-heading">
-        <p class="eyebrow">02 / Работа</p>
-        <h2 id="approach-title">Сначала находим, где теряется продажа</h2>
-      </header>
-      <ol class="approach-list">
-        <li><span class="metadata">01</span><h3>Исследуем</h3><p>Изучаем продукт, спрос, материалы компании и работу продаж. Находим вопросы, которые влияют на выбор клиента.</p></li>
-        <li><span class="metadata">02</span><h3>Выбираем фокус</h3><p>Определяем аудиторию, задачу, оффер и главное действие. Фиксируем, что человек должен понять до обращения.</p></li>
-        <li><span class="metadata">03</span><h3>Собираем путь</h3><p>Связываем сообщения, бренд, страницы, формы и материалы в последовательный маршрут.</p></li>
-        <li><span class="metadata">04</span><h3>Проверяем</h3><p>Проверяем понятность, техническое качество и путь до заявки. Затем развиваем поиск, рекламу и содержание.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="capabilities-home" data-section="capabilities" aria-labelledby="capabilities-title">
-    <div class="container">
-      <header class="section-heading">
-        <p class="eyebrow">03 / Результат</p>
-        <h2 id="capabilities-title">Собираем путь от поиска до заявки</h2>
-      </header>
-      <div class="capability-grid">
-        <article><h3>Находят</h3><p>Семантика, поисковые страницы и рекламные материалы отвечают на реальные запросы клиентов.</p></article>
-        <article><h3>Понимают</h3><p>Оффер, структура и тексты объясняют продукт через задачи, условия выбора и применение.</p></article>
-        <article><h3>Доверяют</h3><p>Бренд, кейсы и доказательства показывают уровень работы без громких неподтверждённых обещаний.</p></article>
-        <article><h3>Обращаются</h3><p>Понятный следующий шаг, формы, аналитика и рабочие интеграции помогают довести интерес до предметного запроса.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="final-home" data-section="final-cta" aria-labelledby="final-title">
-    <div class="final-home-inner container">
-      <div>
-        <p class="eyebrow">04 / Следующий шаг</p>
-        <h2 id="final-title">{site.finalCta.title}</h2>
-        <p>{site.finalCta.body}</p>
-      </div>
-      <a class="button" href="/ru/contact/">{site.finalCta.action}</a>
-    </div>
-  </section>
+    /* Quiet-luxury layer: typography first, glass only where it has a job. */
+    .editorial-homepage {
+      --glass: rgb(20 19 24 / 0.72);
+      --glass-strong: rgb(25 23 29 / 0.9);
+      --glass-line: rgb(255 255 255 / 0.13);
+      --soft-shadow: 0 30px 90px rgb(0 0 0 / 0.38), inset 0 1px 0 rgb(255 255 255 / 0.08);
+      background:
+        radial-gradient(ellipse at 78% 4%, rgb(255 47 146 / 0.11), transparent 34rem),
+        #08080a;
+      font-feature-settings: "kern" 1, "liga" 1;
+    }
+    .editorial-homepage .site-nav {
+      top: 12px;
+      width: calc(100% - (var(--pad) * 2));
+      height: 68px;
+      margin: 12px var(--pad) 0;
+      padding-inline: 12px 10px;
+      border: 1px solid var(--glass-line);
+      border-radius: 28px;
+      background: linear-gradient(120deg, rgb(34 31 39 / 0.88), rgb(13 13 16 / 0.74));
+      box-shadow: 0 18px 60px rgb(0 0 0 / 0.32), inset 0 1px 0 rgb(255 255 255 / 0.1);
+      backdrop-filter: blur(28px) saturate(1.25);
+    }
+    .editorial-homepage .logo {
+      padding: 0 12px;
+      font-family: "Unbounded Variable", "IBM Plex Sans Variable", sans-serif;
+      font-size: 15px;
+      font-weight: 560;
+      letter-spacing: -0.045em;
+    }
+    .editorial-homepage .logo::after { display: none; }
+    .editorial-homepage .nav-center { gap: 0; }
+    .editorial-homepage .nav-center { border-inline: 0; }
+    .editorial-homepage .nav-status { display: none; }
+    .editorial-homepage .nav-links { gap: 6px; }
+    .editorial-homepage .nav-links a {
+      min-height: 44px;
+      padding-inline: 15px;
+      border-radius: 18px;
+      color: #d3cfd5;
+      font-family: "Unbounded Variable", "IBM Plex Sans Variable", sans-serif;
+      font-size: 11px;
+      font-weight: 480;
+      letter-spacing: -0.035em;
+      text-transform: none;
+      transition: color .2s ease, background .2s ease;
+    }
+    .editorial-homepage .nav-links a:hover,
+    .editorial-homepage .nav-links a.is-active { color: #fff; background: rgb(255 255 255 / 0.08); }
+    .editorial-homepage .nav-cta,
+    .editorial-homepage .button {
+      min-height: 50px;
+      padding: 0 10px 0 22px;
+      border: 1px solid rgb(255 255 255 / 0.15);
+      border-radius: 999px;
+      color: #1a0d14;
+      background: linear-gradient(135deg, #ff83bc, #ff3f97 72%);
+      box-shadow: 0 12px 34px rgb(255 47 146 / 0.2), inset 0 1px 0 rgb(255 255 255 / 0.48);
+      font-family: "Unbounded Variable", "IBM Plex Sans Variable", sans-serif;
+      font-size: 14px;
+      font-weight: 610;
+      letter-spacing: -0.012em;
+      text-transform: none;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .editorial-homepage .nav-cta::after,
+    .editorial-homepage .button::after {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      margin-left: 14px;
+      border: 1px solid rgb(22 9 16 / 0.15);
+      border-radius: 50%;
+      background: rgb(255 255 255 / 0.42);
+      content: "↗";
+      place-items: center;
+    }
+    .editorial-homepage .nav-cta:hover,
+    .editorial-homepage .button:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 18px 42px rgb(255 47 146 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.52); }
+    .editorial-homepage .nav-cta {
+      display: inline-flex;
+      height: 50px;
+      padding: 0 9px 0 18px;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .editorial-homepage .nav-cta::after { width: 30px; height: 30px; margin-left: 10px; }
+    .editorial-homepage .nav-cta span { padding-left: 0; }
+    .editorial-homepage .menu-toggle {
+      height: 50px;
+      padding-inline: 16px;
+      border-color: var(--glass-line);
+      border-radius: 999px;
+      background: rgb(255 255 255 / .055);
+      font-family: "Unbounded Variable", "IBM Plex Sans Variable", sans-serif;
+      font-size: 11px;
+      font-weight: 480;
+      letter-spacing: -.035em;
+      line-height: 1;
+      text-transform: none;
+    }
+    .editorial-homepage .hero {
+      min-height: calc(100svh - 92px);
+      border-bottom: 0;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+      column-gap: clamp(40px, 6vw, 110px);
+    }
+    .editorial-homepage .hero::before { background: radial-gradient(circle at 78% 38%, rgb(255 47 146 / 0.13), transparent 32%); }
+    .editorial-homepage .hero-copy { padding-bottom: clamp(40px, 7vh, 90px); }
+    .editorial-homepage .hero h1 {
+      max-width: 11ch;
+      font-weight: 470;
+      letter-spacing: -.068em;
+      line-height: .88;
+    }
+    .editorial-homepage .hero-lead { max-width: 38rem; color: #d1cdd2; font-size: clamp(17px, 1.3vw, 20px); line-height: 1.55; }
+    .editorial-homepage .hero-art { min-width: 0; }
+    .editorial-homepage .hero-scan,
+    .editorial-homepage .orbit-note,
+    .editorial-homepage .orbit-index,
+    .editorial-homepage .rail { display: none; }
+    .editorial-homepage .hero-orbit {
+      width: min(43vw, 650px);
+      aspect-ratio: 1.18;
+      padding: 12px 12px 62px;
+      border: 1px solid var(--glass-line);
+      border-radius: 36px;
+      background: linear-gradient(145deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.025));
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(20px) saturate(1.2);
+      transform: perspective(1200px) rotateY(-3deg) rotateX(1deg);
+    }
+    .editorial-homepage .hero-orbit::before,
+    .editorial-homepage .hero-orbit::after { display: none; }
+    .editorial-homepage .hero-image {
+      inset: 12px 12px 62px;
+      border: 1px solid rgb(255 255 255 / 0.12);
+      border-radius: 26px;
+      background: #111114;
+      filter: none;
+    }
+    .editorial-homepage .hero-image img { object-position: top; }
+    .editorial-homepage .hero-image::after { background: linear-gradient(180deg, transparent 72%, rgb(8 8 10 / .28)); }
+    .editorial-homepage .orbit-label {
+      top: auto;
+      right: auto;
+      bottom: 14px;
+      left: 22px;
+      padding: 8px 0;
+      border: 0;
+      border-radius: 0;
+      color: #e9e5e9;
+      background: transparent;
+      font-family: "IBM Plex Sans Variable", sans-serif;
+      font-size: 13px;
+      font-weight: 520;
+      letter-spacing: -0.005em;
+      text-transform: none;
+    }
+    .editorial-homepage .section { border-bottom: 0; }
+    .editorial-homepage .section-head .eyebrow,
+    .editorial-homepage .problem-no,
+    .editorial-homepage .case-divider,
+    .editorial-homepage .case-sequence,
+    .editorial-homepage .proof-note,
+    .editorial-homepage .process-copy .mono,
+    .editorial-homepage .process-counter,
+    .editorial-homepage .process-foot,
+    .editorial-homepage .result-state { display: none; }
+    .editorial-homepage .endokey::before,
+    .editorial-homepage .proof-bridge-section::before,
+    .editorial-homepage .final::before,
+    .editorial-homepage .process-artifact::before,
+    .editorial-homepage .research-line::before { display: none; }
+    .editorial-homepage .section-head { display: block; }
+    .editorial-homepage .section h2 { max-width: 12ch; font-weight: 460; letter-spacing: -.06em; }
+    .editorial-homepage .problems {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: minmax(460px, auto);
+      gap: 18px;
+    }
+    .editorial-homepage .problem {
+      display: grid;
+      min-width: 0;
+      min-height: 460px;
+      padding: clamp(28px, 3vw, 42px);
+      border: 1px solid var(--glass-line) !important;
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgb(255 255 255 / .075), rgb(255 255 255 / .025));
+      box-shadow: inset 0 1px 0 rgb(255 255 255 / .06);
+      backdrop-filter: blur(18px);
+      grid-template-rows: 152px minmax(0, 1fr);
+    }
+    .editorial-homepage .problem:nth-child(n) { margin: 0; grid-column: auto; }
+    .editorial-homepage .problem::before,
+    .editorial-homepage .problem::after,
+    .editorial-homepage .channel-stack::after { display: none; }
+    .editorial-homepage .problem-visual {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      width: 100%;
+      height: 152px;
+      border: 0;
+      border-radius: 22px;
+      isolation: isolate;
+    }
+    .editorial-homepage .problem-visual span,
+    .editorial-homepage .problem-visual strong,
+    .editorial-homepage .problem-visual .channel { display: none; }
+    .editorial-homepage .term-cloud {
+      background-image:
+        radial-gradient(ellipse at 16% 18%, rgb(255 93 170 / .26), transparent 30%),
+        radial-gradient(ellipse at 76% 72%, rgb(129 91 255 / .2), transparent 34%),
+        linear-gradient(128deg, rgb(255 255 255 / .085), transparent 38% 62%, rgb(255 47 146 / .08));
+    }
+    .editorial-homepage .term-cloud::after {
+      position: absolute;
+      inset: 22% 9%;
+      border-radius: 999px 34px 999px 38px;
+      background: linear-gradient(110deg, rgb(255 255 255 / .13), rgb(255 255 255 / .015));
+      box-shadow: 0 24px 70px rgb(0 0 0 / .28), inset 0 1px rgb(255 255 255 / .12);
+      content: "";
+      transform: rotate(-6deg);
+    }
+    .editorial-homepage .route-map {
+      background-image:
+        linear-gradient(145deg, rgb(255 255 255 / .06), transparent 48%),
+        radial-gradient(ellipse at 58% 54%, rgb(255 47 146 / .16), transparent 38%);
+    }
+    .editorial-homepage .route-map svg { inset: 20px; width: calc(100% - 40px); height: calc(100% - 40px); opacity: .82; }
+    .editorial-homepage .route-map .route { stroke-dasharray: 2 10; }
+    .editorial-homepage .route-map .route-live { filter: drop-shadow(0 0 8px rgb(255 47 146 / .5)); }
+    .editorial-homepage .channel-stack {
+      padding: 0;
+      background-image:
+        linear-gradient(152deg, transparent 0 16%, rgb(255 255 255 / .08) 16.2% 35%, transparent 35.2%),
+        linear-gradient(152deg, transparent 0 43%, rgb(255 47 146 / .14) 43.2% 59%, transparent 59.2%),
+        linear-gradient(152deg, transparent 0 68%, rgb(255 255 255 / .055) 68.2% 82%, transparent 82.2%),
+        radial-gradient(ellipse at 74% 24%, rgb(255 47 146 / .15), transparent 31%);
+    }
+    .editorial-homepage #problem-launch .problem-visual {
+      background-image:
+        linear-gradient(118deg, transparent 0 42%, rgb(255 255 255 / .09) 42.2% 49%, transparent 49.2%),
+        linear-gradient(118deg, transparent 0 56%, rgb(255 47 146 / .18) 56.2% 64%, transparent 64.2%),
+        radial-gradient(ellipse at 73% 42%, rgb(255 47 146 / .2), transparent 34%);
+    }
+    .editorial-homepage #problem-launch .radar-svg { display: none; }
+    .editorial-homepage .problem-body { display: flex; min-height: 0; height: auto; padding: 30px 0 0; flex-direction: column; justify-content: flex-end; }
+    .editorial-homepage .problem h3 { max-width: 14ch; margin: 0 0 20px; font-weight: 510; }
+    .editorial-homepage .signal-strip { position: relative; z-index: 2; margin-top: 48px; border: 1px solid var(--glass-line); border-radius: 30px; background: var(--glass); box-shadow: inset 0 1px 0 rgb(255 255 255 / .06); }
+    .editorial-homepage .case-index {
+      position: relative;
+      top: auto;
+      overflow: hidden;
+      margin-bottom: 32px;
+      border: 1px solid var(--glass-line);
+      border-radius: 24px;
+      background: rgb(19 18 22 / .8);
+      box-shadow: 0 18px 60px rgb(0 0 0 / .22), inset 0 1px 0 rgb(255 255 255 / .08);
+      backdrop-filter: blur(24px) saturate(1.2);
+    }
+    .editorial-homepage .case-index-label,
+    .editorial-homepage .case-index a span { display: none; }
+    .editorial-homepage .case-index-links { font-family: "IBM Plex Sans Variable", sans-serif; font-size: 13px; letter-spacing: 0; text-transform: none; }
+    .editorial-homepage .case-index a { justify-content: center; border-radius: 18px; }
+    .editorial-homepage .case-index a + a { border-left-color: transparent; }
+    .editorial-homepage .case-index a.is-active { background: rgb(255 255 255 / .09); }
+    .editorial-homepage :where(.case-stage, .endokey, .lab-case, .giulia-case, .evolution-stage) { overflow: hidden; border-radius: 36px; }
+    .editorial-homepage .case-stage,
+    .editorial-homepage .endokey {
+      padding: 18px;
+      gap: 14px;
+      background: linear-gradient(145deg, rgb(255 255 255 / .07), rgb(255 255 255 / .02));
+    }
+    .editorial-homepage .case-info {
+      min-width: 0;
+      margin: 0;
+      border-radius: 28px;
+    }
+    .editorial-homepage .case-info h3 { max-width: 100%; font-size: clamp(34px, 3.4vw, 54px); }
+    .editorial-homepage .compare { min-width: 0; border-radius: 28px; }
+    .editorial-homepage .endokey-copy {
+      min-width: 0;
+      margin: 0;
+      border-radius: 28px;
+    }
+    .editorial-homepage .endokey { grid-template-columns: .48fr .52fr; }
+    .editorial-homepage .endokey-copy h3 { max-width: 100%; font-size: clamp(30px, 2.7vw, 44px); }
+    .editorial-homepage .endokey-image { border-radius: 28px; }
+    .editorial-homepage .evolution-grid {
+      grid-template-columns: minmax(0, 390px) minmax(0, 394px);
+      justify-content: center;
+    }
+    .editorial-homepage .site-scroll img { image-rendering: auto; }
+    .editorial-homepage .case-card.is-current { outline: none; box-shadow: 0 30px 100px rgb(0 0 0 / .25); }
+    .editorial-homepage .method { color: #f4f1ef; background: radial-gradient(circle at 18% 18%, rgb(255 47 146 / .1), transparent 28rem), #0b0a0d; }
+    .editorial-homepage .method .eyebrow { color: #ff70b5; }
+    .editorial-homepage .process-system { overflow: hidden; border: 1px solid var(--glass-line); border-radius: 36px; background: var(--glass); box-shadow: var(--soft-shadow); }
+    .editorial-homepage .process-rail { padding: 12px; gap: 8px; border-right: 1px solid var(--glass-line); }
+    .editorial-homepage .process-tab { overflow: hidden; border: 1px solid transparent; border-radius: 18px; }
+    .editorial-homepage .process-tab[aria-pressed="true"] { border-color: var(--glass-line); background: rgb(255 255 255 / .08); }
+    .editorial-homepage .process-tab span { display: none; }
+    .editorial-homepage .process-scene { border-radius: 0 36px 36px 0; }
+    .editorial-homepage .process-artifact { overflow: hidden; border-radius: 26px; background: rgb(8 8 10 / .52); }
+    .editorial-homepage .research-line {
+      appearance: none;
+      color: #f4f1ef;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    .editorial-homepage .research-line:hover,
+    .editorial-homepage .research-line:focus-visible,
+    .editorial-homepage .research-line[aria-pressed="true"] {
+      z-index: 3;
+      border-color: rgb(255 47 146 / .72);
+      background: linear-gradient(100deg, rgb(255 47 146 / .17), rgb(255 255 255 / .05));
+      box-shadow: 0 16px 42px rgb(0 0 0 / .28);
+      transform: translateX(8px) rotate(0deg);
+      outline: none;
+    }
+    .editorial-homepage .process-scene.is-active .process-copy,
+    .editorial-homepage .process-scene.is-active .process-artifact {
+      animation: process-enter .72s var(--ease-out) both;
+    }
+    .editorial-homepage .process-scene.is-active .process-artifact { animation-delay: .08s; }
+    @keyframes process-enter {
+      from { transform: translateY(24px) scale(.985); }
+      to { transform: none; }
+    }
+    .editorial-homepage .result-grid { gap: 18px; }
+    .editorial-homepage .result-item {
+      min-height: 310px;
+      padding-block: clamp(30px, 4vw, 56px);
+      padding-inline: clamp(54px, 4.5vw, 72px);
+      border: 1px solid var(--glass-line) !important;
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgb(255 255 255 / .07), rgb(255 255 255 / .02));
+      box-shadow: inset 0 1px 0 rgb(255 255 255 / .06);
+      align-items: start;
+    }
+    .editorial-homepage .result-item::after,
+    .editorial-homepage .result-grid::before,
+    .editorial-homepage .result-grid::after { display: none; }
+    .editorial-homepage .result-item::before {
+      top: calc(clamp(30px, 4vw, 56px) + clamp(24px, 3.15vw, 48px) - 8px);
+      left: clamp(18px, 2.2vw, 32px);
+      width: 16px;
+      height: 16px;
+      transform: none;
+    }
+    .editorial-homepage .result-item h3 { margin: 0 0 22px; line-height: .9; }
+    @media (prefers-reduced-motion: no-preference) {
+      .editorial-homepage [data-section] > * {
+        transition: transform .9s var(--ease-out);
+      }
+      .editorial-homepage [data-section][data-motion-state="idle"] > * {
+        transform: translateY(42px) scale(.988);
+      }
+      .editorial-homepage [data-section][data-motion-state="visible"] > * {
+        transform: none;
+      }
+    }
+    .editorial-homepage .final { margin: var(--pad); min-height: calc(90svh - (var(--pad) * 2)); border: 1px solid var(--glass-line); border-radius: 42px; background: radial-gradient(circle at 82% 24%, rgb(255 47 146 / .22), transparent 28%), var(--glass); box-shadow: var(--soft-shadow); }
+    .editorial-homepage .brief-console { overflow: hidden; border-radius: 30px; background: rgb(10 9 12 / .78); }
+    .editorial-homepage .brief-head,
+    .editorial-homepage .brief-foot { display: none; }
+    .editorial-homepage .brief-option { min-height: 50px; border-radius: 16px; font-family: "IBM Plex Sans Variable", sans-serif; font-size: 14px; letter-spacing: -.005em; text-transform: none; }
+    .editorial-homepage .site-footer { border-top: 0; }
+    @media (max-width: 1050px) {
+      .editorial-homepage .nav-cta { display: none; }
+    }
+    @media (max-width: 900px) {
+      .editorial-homepage .hero { grid-template-columns: minmax(0, 1fr); column-gap: 0; }
+      .editorial-homepage .problems { grid-template-columns: minmax(0, 1fr); grid-auto-rows: minmax(430px, auto); }
+      .editorial-homepage .case-index { overflow-x: auto; overflow-y: hidden; }
+      .editorial-homepage .endokey { grid-template-columns: 1fr; }
+      .editorial-homepage .evolution-grid {
+        overflow-x: auto;
+        grid-template-columns: minmax(230px, 390px) minmax(230px, 394px);
+        justify-content: start;
+      }
+    }
+    @media (max-width: 640px) {
+      .editorial-homepage .site-nav {
+        top: 8px;
+        width: calc(100% - 24px);
+        height: 60px;
+        margin: 8px 12px 0;
+        border-radius: 22px;
+      }
+      .editorial-homepage .logo { padding-inline: 8px; font-size: 13px; }
+      .editorial-homepage .menu-toggle { border-radius: 16px; }
+      .editorial-homepage .hero { padding-top: 50px; }
+      .editorial-homepage .hero-copy { min-height: 570px; }
+      .editorial-homepage .hero-orbit { width: min(90vw, 500px); border-radius: 28px; transform: none; }
+      .editorial-homepage .hero-image { border-radius: 20px; }
+      .editorial-homepage .problems { gap: 12px; }
+      .editorial-homepage .problem { min-height: 410px; border-radius: 24px; grid-template-rows: 132px minmax(0, 1fr); }
+      .editorial-homepage .problem-visual { height: 132px; border-radius: 18px; }
+      .editorial-homepage .problem-body { padding-top: 24px; }
+      .editorial-homepage .case-index { top: auto; border-radius: 20px 0 0 20px; }
+      .editorial-homepage :where(.case-stage, .endokey, .lab-case, .giulia-case, .evolution-stage, .process-system) { border-radius: 26px; }
+      .editorial-homepage .case-stage,
+      .editorial-homepage .endokey { padding: 10px; gap: 10px; }
+      .editorial-homepage .case-info h3,
+      .editorial-homepage .endokey-copy h3 { font-size: 30px; }
+      .editorial-homepage :where(.case-info, .compare, .endokey-copy, .endokey-image) { border-radius: 20px; }
+      .editorial-homepage .process-rail { border-right: 0; }
+      .editorial-homepage .result-grid { gap: 12px; }
+      .editorial-homepage .result-item { min-height: 260px; border-radius: 24px; }
+      .editorial-homepage .final { margin: 12px; padding-inline: 18px; border-radius: 28px; }
+      .editorial-homepage .process-copy h3 { font-size: 16vw; }
+    }
+    @media (max-width: 340px) {
+      .editorial-homepage .case-info h3,
+      .editorial-homepage .endokey-copy h3 { font-size: 26px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .editorial-homepage *,
+      .editorial-homepage *::before,
+      .editorial-homepage *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+  <Fragment set:html={editorialMarkup} />
+  <script is:inline set:html={editorialScript}></script>
 </BaseLayout>

@@ -19,3 +19,10 @@
 | 2026-08-22 | D-012: убрать неудачный обрезанный скриншот сайта из первого экрана ENDOkey; использовать более чистое предметное изображение, а доказательство сайта показывать отдельно и без обрезки | пользователь | явная visual correction после просмотра локальной страницы | P-008 ENDOkey media composition rework |
 | 2026-08-22 | D-013: утвердить P-008 и отправить все накопленные изменения сайта в GitHub; обновить существующий fork PR №1, не сливать его и не выполнять deployment | пользователь | явная команда «Залей в гитхаб сайта эти правки все. И пока наверное все» | P-008 approval, P-009 GitHub handoff |
 | 2026-08-22 | D-014: P-009 завершён; существующий PR №1 обновлён и переведён в ready for review без merge или deployment | результат утверждённого GitHub handoff | GitHub подтвердил head `d665cec`, состояние `OPEN`, `MERGEABLE`, `CLEAN` | P-009 evidence, project and route status |
+| 2026-08-26 | D-015: утверждён project context P-010-project-context | user | Exact summary SHA-256 f82acf8e48a7d891bedf8664512cef8466a9737f2d03314da3c9570903b4f9fe | `.studio/memory/context.md`, `PROJECT.md`, `.studio/packets/P-010-project-context/PACKET.md` |
+
+## Project write authorizations v1
+
+| authorization_id | project_id | packet_id | payload_sha256 | approved_by | status | approved_at | expires_at |
+|---|---|---|---|---|---|---|---|
+| D-016 | povkh-dev | P-011-latest-design-import | f4af2f249484bb7a6cb1a2cb4776337a0d3171f1e2abbd89e98b3b4779642f3a | user | approved | 2026-08-26T21:09:36Z | 2026-09-01T21:09:36Z |

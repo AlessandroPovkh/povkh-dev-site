@@ -2,9 +2,12 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import CasePreview from "../../../components/CasePreview.astro";
 import { getLocalizedWork } from "../../../lib/content";
+import { getImage } from "astro:assets";
+import giuliaHome from "../../../../.superpowers/brainstorm/63039-1787593737/content/giulia-live-home.png";
 
 const locale = "ru" as const;
 const cases = await getLocalizedWork(locale);
+const giuliaPreview = await getImage({ src: giuliaHome, width: 1200, format: "webp", quality: 76 });
 ---
 
 <BaseLayout locale={locale} currentPath="/ru/work/" title="Работы Povkh.Dev | Сложные продукты, брендинг и сайты" description="Кейсы Povkh.Dev: переработка промышленного каталога КЗМС, бренд и сайт ENDOkey, многоязычная система POVKH LAB.">
@@ -33,6 +36,24 @@ const cases = await getLocalizedWork(locale);
             />
           </div>
         ))}
+        <div class="case-list-item giulia-index-card">
+          <CasePreview
+            title="Giulia Povkh"
+            context="Клиентский проект · портфолио Content Creator & SMM"
+            summary="Трёхъязычное портфолио собирает проекты, видео и направления работы в понятный путь: выбрать формат, увидеть работу в контексте и перейти к обсуждению."
+            href="https://giuliapovkh.ru"
+            action="Смотреть живой сайт"
+            accessibleAction="Смотреть сайт Giulia Povkh"
+          />
+          <img
+            src={giuliaPreview.src}
+            alt="Новая главная страница портфолио Giulia Povkh"
+            width="1200"
+            height="833"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
     </section>
   </div>
@@ -52,9 +73,16 @@ const cases = await getLocalizedWork(locale);
   .case-list-item :global(.case-preview h2) { margin-block: var(--space-4); font-family: var(--font-display); font-size: clamp(2.4rem, 6vw, 6rem); letter-spacing: -0.07em; line-height: 0.9; }
   .case-list-item :global(.case-preview p:not(.metadata)) { max-width: 34rem; }
   .case-list-item :global(.case-preview .button) { align-self: flex-start; margin-top: var(--space-4); }
+  .giulia-index-card { display: grid; overflow: hidden; border: 1px solid var(--ink); grid-template-columns: minmax(20rem, 0.8fr) minmax(0, 1.2fr); background: #c7b4f2; box-shadow: var(--shadow-offset); }
+  .giulia-index-card :global(.case-preview) { min-height: 36rem; border: 0; background: #f1eee6; color: #171615; box-shadow: none; }
+  .giulia-index-card :global(.case-preview .metadata) { color: #a4373c; }
+  .giulia-index-card :global(.case-preview .button) { color: #f4f1ef; background: #171615; }
+  .giulia-index-card > img { width: 100%; height: 100%; min-height: 36rem; object-fit: cover; object-position: top; }
   @media (max-width: 56rem) {
     .section-heading { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
     .section-heading > * { min-width: 0; }
     .section-heading h2 { overflow-wrap: anywhere; font-size: clamp(1.8rem, 8vw, 3rem); hyphens: auto; }
+    .giulia-index-card { grid-template-columns: minmax(0, 1fr); }
+    .giulia-index-card > img { min-height: 24rem; }
   }
 </style>

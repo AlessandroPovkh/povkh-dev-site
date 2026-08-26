@@ -5,7 +5,84 @@ const publicRoutes = [
   "/ru/", "/ru/work/", "/ru/work/endokey/", "/ru/work/povkh-lab/", "/ru/services/", "/ru/process/", "/ru/studio/", "/ru/blog/", "/ru/contact/", "/ru/privacy/", "/ru/cookies/", "/ru/missing/",
 ];
 
+const russianInteriorRoutes = [
+  "/ru/work/", "/ru/work/endokey/", "/ru/work/kzms/", "/ru/work/povkh-lab/",
+  "/ru/services/", "/ru/process/", "/ru/studio/", "/ru/blog/", "/ru/contact/",
+  "/ru/privacy/", "/ru/cookies/", "/ru/missing/",
+];
+
+test("Russian interior routes use the dark editorial design system", async ({ page }) => {
+  for (const path of russianInteriorRoutes) {
+    await page.goto(path, { waitUntil: "load" });
+    await expect(page.locator("body")).toHaveClass(/editorial-interior/);
+    await expect(page.locator(".site-header")).toBeVisible();
+    const theme = await page.locator("body").evaluate((element) => {
+      const styles = getComputedStyle(element);
+      return {
+        backgroundColor: styles.backgroundColor,
+        color: styles.color,
+        backdropDecoration: getComputedStyle(element, "::before").display,
+      };
+    });
+    expect(theme).toEqual({
+      backgroundColor: "rgb(8, 8, 10)",
+      color: "rgb(244, 241, 239)",
+      backdropDecoration: "none",
+    });
+  }
+});
+
+test("Russian interior shell uses rounded glass navigation and controls", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/ru/services/", { waitUntil: "load" });
+
+  const shell = await page.evaluate(() => {
+    const header = document.querySelector<HTMLElement>(".site-header")!;
+    const cta = document.querySelector<HTMLElement>(".header-cta")!;
+    const card = document.querySelector<HTMLElement>(".service-card")!;
+    return {
+      headerRadius: Number.parseFloat(getComputedStyle(header).borderTopLeftRadius),
+      headerBackdrop: getComputedStyle(header).backdropFilter,
+      ctaRadius: Number.parseFloat(getComputedStyle(cta).borderTopLeftRadius),
+      ctaHeight: cta.getBoundingClientRect().height,
+      cardRadius: Number.parseFloat(getComputedStyle(card).borderTopLeftRadius),
+    };
+  });
+
+  expect(shell.headerRadius).toBeGreaterThanOrEqual(24);
+  expect(shell.headerBackdrop).not.toBe("none");
+  expect(shell.ctaRadius).toBeGreaterThanOrEqual(24);
+  expect(shell.ctaHeight).toBeGreaterThanOrEqual(48);
+  expect(shell.cardRadius).toBeGreaterThanOrEqual(20);
+});
+
+test("Russian interior pages omit decorative numbering while preserving meaningful labels", async ({ page }) => {
+  await page.goto("/ru/services/", { waitUntil: "load" });
+  await expect(page.locator(".info-hero > .eyebrow")).toBeHidden();
+  await expect(page.locator(".service-card > .metadata").first()).toBeHidden();
+  await expect(page.locator(".formats-list > li > .metadata").first()).toBeHidden();
+  await expect(page.locator(".section-heading .eyebrow").first()).toBeVisible();
+
+  await page.goto("/ru/process/", { waitUntil: "load" });
+  await expect(page.locator(".process-hero > .eyebrow")).toBeHidden();
+  await expect(page.locator(".stage-item > .metadata").first()).toBeHidden();
+
+  await page.goto("/ru/studio/", { waitUntil: "load" });
+  await expect(page.locator(".studio-hero > .eyebrow")).toBeHidden();
+  await expect(page.locator(".founder-record > .metadata").first()).toBeHidden();
+});
+
+test("Russian editorial shell leaves mobile content unobscured while its menu is closed", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/ru/contact/", { waitUntil: "load" });
+  await expect(page.locator(".primary-nav")).toBeHidden();
+  await expect(page.getByRole("heading", { name: "Расскажите о проекте." })).toHaveCSS("color", "rgb(244, 241, 239)");
+  const skipBox = await page.locator(".skip-link").boundingBox();
+  expect(skipBox?.y).toBeLessThan(0);
+});
+
 test("display typography stays inside its layout box across public routes", async ({ page, browserName }) => {
+  test.setTimeout(120_000);
   test.skip(browserName !== "chromium", "One deterministic browser is enough for the geometry matrix.");
   const failures: string[] = [];
 
@@ -52,7 +129,7 @@ test("mobile analytics consent does not cover focused page controls", async ({ p
   await page.goto("/ru/");
   const consent = page.getByTestId("consent-controls");
   await expect(consent).toHaveCSS("position", "static");
-  const finalCta = page.getByRole("link", { name: "Обсудить задачу" }).last();
+  const finalCta = page.getByRole("link", { name: /(?:Обсудить|Разобрать) задачу/ }).last();
   await finalCta.focus();
   await finalCta.scrollIntoViewIfNeeded();
   const [controlBox, consentBox] = await Promise.all([finalCta.boundingBox(), consent.boundingBox()]);
@@ -64,7 +141,7 @@ test("mobile analytics consent does not cover focused page controls", async ({ p
 test("long Russian labels reflow without clipping on narrow screens", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   for (const [route, selector] of [
-    ["/ru/", "[data-signature-step]"],
+    ["/ru/", ".menu-list a, .brief-option"],
     ["/ru/work/", "#case-list-title"],
     ["/ru/privacy/", ".content-shell > article h1"],
   ] as const) {

@@ -158,7 +158,7 @@
 - Why retain: Explicit project-context interview answer.
 - Known conflicts: None recorded.
 - Promotion condition: Explicit approval of the compiled summary.
-- Status: `ready_for_review`
+- Status: `promoted`
 
 ## MC-011: target_action
 
@@ -174,7 +174,7 @@
 - Why retain: Explicit project-context interview answer.
 - Known conflicts: None recorded.
 - Promotion condition: Explicit approval of the compiled summary.
-- Status: `ready_for_review`
+- Status: `promoted`
 
 ## MC-012: success_criteria
 
@@ -190,7 +190,7 @@
 - Why retain: Explicit project-context interview answer.
 - Known conflicts: None recorded.
 - Promotion condition: Explicit approval of the compiled summary.
-- Status: `ready_for_review`
+- Status: `promoted`
 
 ## MC-013: page_job
 
@@ -206,7 +206,7 @@
 - Why retain: Explicit project-context interview answer.
 - Known conflicts: None recorded.
 - Promotion condition: Explicit approval of the compiled summary.
-- Status: `ready_for_review`
+- Status: `promoted`
 
 ## MC-014: brand_direction
 
@@ -222,7 +222,7 @@
 - Why retain: Explicit project-context interview answer.
 - Known conflicts: None recorded.
 - Promotion condition: Explicit approval of the compiled summary.
-- Status: `ready_for_review`
+- Status: `promoted`
 
 ## MC-015: content_requirements
 
@@ -238,4 +238,4 @@
 - Why retain: Explicit project-context interview answer.
 - Known conflicts: None recorded.
 - Promotion condition: Explicit approval of the compiled summary.
-- Status: `ready_for_review`
+- Status: `promoted`

@@ -22,10 +22,12 @@ for (const locale of locales) {
     await page.goto(locale.path);
     await expect(page.getByRole("heading", { level: 1, name: locale.title })).toBeVisible();
     await expect(page.getByRole("link", { name: locale.primary }).first()).toHaveAttribute("href", locale.contact);
-    const selectedWork = page.getByTestId("hero-selected-work");
-    await expect(selectedWork.getByRole("link")).toHaveCount(2);
+    const selectedWork = locale.path === "/ru/"
+      ? page.locator('[data-section="proof"]')
+      : page.getByTestId("hero-selected-work");
+    await expect(selectedWork.locator("[data-case-card], .hero-work-record")).toHaveCount(locale.path === "/ru/" ? 4 : 2);
     for (const [name, href] of locale.cases) {
-      await expect(selectedWork.getByRole("link", { name: new RegExp(name, "i") })).toHaveAttribute("href", href);
+      await expect(selectedWork.getByRole("link", { name: new RegExp(name, "i") }).last()).toHaveAttribute("href", href);
     }
     await expect(page.getByTestId("hero-explorer")).toHaveCount(0);
     await expect(page.getByTestId("proof-strip")).toHaveCount(0);
@@ -35,7 +37,7 @@ for (const locale of locales) {
       sections.map((section) => section.getAttribute("data-section")),
     );
     expect(order).toEqual(locale.path === "/ru/"
-      ? ["task-fit", "approach", "capabilities", "final-cta"]
+      ? ["problems", "proof", "method", "result", "final-cta"]
       : expect.arrayContaining(["signature", "process", "studio-summary", "final-cta"]));
   });
 }
@@ -88,11 +90,11 @@ test("mobile homepage is linear and does not overflow", async ({ page }) => {
   expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
 });
 
-test("hero uses one action and selected work instead of a service accordion", async ({ page }) => {
+test("Russian hero uses one action without a service accordion", async ({ page }) => {
   await page.goto("/ru/");
-  const hero = page.locator(".dual-hero");
+  const hero = page.locator(".hero");
   await expect(hero.getByRole("link", { name: "Разобрать задачу" })).toHaveCount(1);
-  await expect(hero.getByRole("link")).toHaveCount(3);
+  await expect(hero.getByRole("link")).toHaveCount(1);
   await expect(hero.locator("details, summary")).toHaveCount(0);
 });
 
@@ -101,17 +103,18 @@ test("Russian homepage explains the approach and offer", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "С чем к нам приходят" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Сначала находим, где теряется продажа" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Собираем путь от поиска до заявки" })).toBeVisible();
-  await expect(page.locator(".task-fit-list li")).toHaveCount(4);
-  await expect(page.locator(".approach-list li")).toHaveCount(4);
-  await expect(page.locator(".capability-grid article")).toHaveCount(4);
+  await expect(page.locator(".problems .problem")).toHaveCount(4);
+  await expect(page.locator(".process-rail .process-tab")).toHaveCount(4);
+  await expect(page.locator(".result-grid .result-item")).toHaveCount(4);
 });
 
-test("Russian homepage repeats one low-commitment conversion action", async ({ page }) => {
+test("Russian homepage repeats one low-commitment conversion action", async ({ page }, testInfo) => {
   await page.goto("/ru/");
   await expect(page.locator("main")).not.toContainText(/\bCTA\b/);
   const conversionLinks = page.getByRole("link", { name: "Разобрать задачу", exact: true });
-  await expect(conversionLinks).toHaveCount(3);
+  const isMobile = testInfo.project.name.startsWith("mobile-");
+  await expect(conversionLinks).toHaveCount(isMobile ? 2 : 3);
   for (const link of await conversionLinks.all()) {
-    await expect(link).toHaveAttribute("href", "/ru/contact/");
+    await expect(link).toHaveAttribute("href", /\/ru\/contact\//);
   }
 });

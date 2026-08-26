@@ -30,7 +30,7 @@
 
 | Тип знания | Канонический источник | Владелец решения |
 |---|---|---|
-| Предметный контекст | .studio/memory/context.md | D-003 |
+| Предметный контекст | .studio/memory/context.md | D-015 |
 | Исходный код и технические проверки | `https://github.com/AlessandroPovkh/povkh-dev-site` | Alessandro Povkh |
 | Предметный контекст и ограничения | `PROJECT.md`, `.studio/decisions.md` | Alessandro Povkh |
 
@@ -57,9 +57,9 @@
 
 ## 4. Текущий рабочий пакет
 
-- ID: `P-009-github-handoff`
-- Статус: `approved` <!-- not-started | in_progress | ready_for_review | approved | rework | blocked -->
-- Карточка: `.studio/packets/P-009-github-handoff/PACKET.md`
+- ID: `P-011-latest-design-import`
+- Статус: `ready_for_review` <!-- not-started | in_progress | ready_for_review | approved | rework | blocked -->
+- Карточка: `.studio/packets/P-011-latest-design-import/PACKET.md`
 - Следующий hook: нет
 
 ## 5. Решения и approvals
