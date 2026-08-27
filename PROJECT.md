@@ -58,10 +58,10 @@
 
 ## 4. Текущий рабочий пакет
 
-- ID: `P-017-full-site-scope`
+- ID: `P-021-russian-ux-ui`
 - Статус: `approved` <!-- not-started | in_progress | ready_for_review | approved | rework | blocked -->
-- Карточка: `.studio/packets/P-017-full-site-scope/PACKET.md`
-- Следующий hook: `H-018`
+- Карточка: `.studio/packets/P-021-russian-ux-ui/PACKET.md`
+- Следующий hook: `H-024`
 
 ## 5. Решения и approvals
 

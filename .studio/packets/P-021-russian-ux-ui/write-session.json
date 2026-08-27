@@ -1,0 +1,18 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-021-russian-ux-ui",
+  "contract_sha256": "c576dbba1c4b739c03f80208788a7aeed5fd7239de5e7379d667a1d96bcee238",
+  "authority_sha256": {
+    ".studio/packets/P-021-russian-ux-ui/PACKET.md": "f983a7f6bb2929a80ac7ac04df30bb0194005b66e35ea3fd4ee42c080679cca6",
+    ".studio/decisions.md": "45443e4525073ae3193091f9e88fc0eb3060ed39b8da041a3e56515928313c5c",
+    ".studio/packets/P-021-russian-ux-ui/write-contract.json": "c576dbba1c4b739c03f80208788a7aeed5fd7239de5e7379d667a1d96bcee238"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "25b6d7fbcd1b121c2f6f37a38f00bd5466b70b29",
+  "branch": "feature/p-021-russian-ux-ui",
+  "worktree_path": "/Users/alessandropovkh/Desktop/harness studio/.worktrees/projects/povkh-dev/P-021-russian-ux-ui",
+  "harness_fingerprint": "6ebba961e127d4f7b92ff50c2a46afa9a92efe2fb6f9f6849f9009d2ee94b9d3",
+  "stable_project_fingerprint": "5f1a3c217f166401ff29a97b7c6afc9eb345f1478e5eeab204a05f37b5dece57",
+  "prepared_at": "2026-08-27T20:41:35Z"
+}

@@ -1,0 +1,47 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-021-russian-ux-ui",
+  "mode": "project-write",
+  "packet_sha256": "f983a7f6bb2929a80ac7ac04df30bb0194005b66e35ea3fd4ee42c080679cca6",
+  "authorization": {
+    "status": "approved",
+    "id": "D-023",
+    "ref": ".studio/decisions.md",
+    "approved_by": "user",
+    "approved_at": "2026-08-27T20:39:11Z",
+    "expires_at": "2026-09-01T20:39:11Z",
+    "payload_sha256": "e01240f84fd71e783b4e4e742faac7fc2d1ed72cfeae30558d5e801bbd159907"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "25b6d7fbcd1b121c2f6f37a38f00bd5466b70b29",
+  "branch": "feature/p-021-russian-ux-ui",
+  "harness_revision": "bdab16e1e5eecb42465187d356b6421106ac504f",
+  "harness_baseline_sha256": "6ebba961e127d4f7b92ff50c2a46afa9a92efe2fb6f9f6849f9009d2ee94b9d3",
+  "stable_project_baseline_sha256": "5f1a3c217f166401ff29a97b7c6afc9eb345f1478e5eeab204a05f37b5dece57",
+  "decisions_baseline_sha256": "791cca36b402cf6f0219be4365118d7d3bd5426bb11798ebe3940fc1642ff851",
+  "included_roots": [
+    ".studio/decisions.md",
+    ".studio/hooks.md",
+    ".studio/packets/P-021-russian-ux-ui",
+    ".studio/route-map.md",
+    ".studio/scope-contract.json",
+    "PROJECT.md",
+    "docs/superpowers/specs/2026-08-27-povkh-dev-russian-design-system-design.md"
+  ],
+  "excluded_roots": [],
+  "external_actions": [],
+  "required_checks": [
+    {
+      "id": "content-contract",
+      "runner": "node",
+      "args": [
+        "--test",
+        "tests/content/content-contract.test.mjs"
+      ],
+      "timeout_seconds": 120
+    }
+  ],
+  "expected_result": "A reviewable Russian full-site design specification records the user-selected identity, glyph interaction, route-wide visual system, responsive and accessibility rules without changing public content or site subject files.",
+  "rollback_limit": "leave-managed-worktree-no-automatic-cleanup"
+}

@@ -23,7 +23,7 @@
 | P-018 | Current site inventory | proposed | P-017 scope approval; existing independent checkout must be inventoried before IA | verified routes, source snapshot and runnable-build status |
 | P-019 | Russian information architecture | proposed | P-018 inventory and approved P-014 context | route/page-job map preserving all Russian pages and cases |
 | P-020 | Russian commercial and content requirements | proposed | P-019 IA and approved evidence boundaries | approved content hierarchy and complete case requirements |
-| P-021 | Russian UX/UI choice | proposed | P-019 and P-020 approved; must produce structurally distinct options | approved reference lock for the Russian design system |
+| P-021 | Russian UX/UI choice | approved | User approved the written specification on 2026-08-27; current routes and content are frozen as baseline while P-018/P-019/P-020 remain incomplete and are not claimed as evidence | approved reference lock and implementation-ready Russian design specification |
 | P-022 | Russian full-site build | proposed | approved P-021 direction and runnable workspace | implemented Russian pages, interactions and motion |
 | P-023 | Russian technical and visual QA | proposed | runnable P-022 build and approved reference lock | responsive, functional, visual and technical evidence |
 | P-024 | English and Italian synchronization | proposed | explicit approval of P-023 Russian surface | EN and IT surfaces synchronized without dropping locale routes |

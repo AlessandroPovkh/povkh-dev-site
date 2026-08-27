@@ -53,11 +53,11 @@
     },
     {
       "id": "design-system",
-      "description": "Rounded premium glass, typography, header, controls, texture and motion form one approved non-generic visual system.",
+      "description": "A black-and-pink authorial system, approved geometric mark, protected reading zones and dense microtypographic glyph interaction form one non-generic visual system without fake HUD copy, LED dots or dominant glassmorphism.",
       "required": true,
       "covered_by_packets": ["P-021"],
-      "status": "open",
-      "evidence_refs": []
+      "status": "covered",
+      "evidence_refs": ["docs/superpowers/specs/2026-08-27-povkh-dev-russian-design-system-design.md"]
     },
     {
       "id": "case-evidence",
@@ -69,7 +69,7 @@
     },
     {
       "id": "interactions-motion",
-      "description": "Clickable states and scroll transitions are meaningful, polished and reduced-motion safe.",
+      "description": "Homepage drag rotation and soft glyph-field alignment are optional, polished, progressive-enhancement safe and reduced-motion safe; inner pages use restrained static derivatives.",
       "required": true,
       "covered_by_packets": ["P-021", "P-022", "P-023"],
       "status": "open",

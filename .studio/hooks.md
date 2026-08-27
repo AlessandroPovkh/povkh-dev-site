@@ -29,3 +29,4 @@
 | H-021 | review_required | P-014-project-context | resolved | Проверить собранный контекст и exact summary | approved или rework с замечаниями |
 | H-022 | review_required | P-015-project-context | open | Проверить собранный контекст и exact summary | approved или rework с замечаниями |
 | H-023 | review_required | P-016-project-context | resolved | Проверить собранный контекст и exact summary | approved или rework с замечаниями |
+| H-024 | review_required | P-021-russian-ux-ui | resolved | Пользователь утвердил письменную спецификацию командой «давай»; approval относится к design target, а не к push/deploy. | закрыт; следующий отдельный пакет P-022 implementation |

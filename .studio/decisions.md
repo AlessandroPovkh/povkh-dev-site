@@ -31,3 +31,9 @@
 | 2026-08-27 | D-018: утверждён project context P-013-project-context | user | Exact summary SHA-256 d1d8825c1657913cfba112eac7ccf60a27dbd9b3ef638e46995dc6c3b7a69720 | `.studio/memory/context.md`, `PROJECT.md`, `.studio/packets/P-013-project-context/PACKET.md` |
 | 2026-08-27 | D-019: утверждён project context P-014-project-context | user | Exact summary SHA-256 e47a6cd857b490dfaac520ec82ceaf225dbefbbc88eaa57c4277b7b5acadb9aa | `.studio/memory/context.md`, `PROJECT.md`, `.studio/packets/P-014-project-context/PACKET.md` |
 | 2026-08-27 | D-020: утверждён project context P-016-project-context | user | Exact summary SHA-256 e5789d50558521b35fd8b5ce2285ea1311116e14c79612c75ce9fbbe8eb9421b | `.studio/memory/context.md`, `PROJECT.md`, `.studio/packets/P-016-project-context/PACKET.md` |
+| D-022 | povkh-dev | P-018-current-site-inventory | 6116266a3546ab693e04281ad1f1696f104da47c7e2afc2a8e2507a1ad761fb6 | user | approved | 2026-08-27T17:30:33Z | 2026-09-01T17:30:33Z |
+| D-022 | povkh-dev | P-018-current-site-inventory | 11e278ffba73de0c58e265ee102e140a65673b86f45c4dff6400564c809eabae | user | approved | 2026-08-27T17:30:33Z | 2026-09-01T17:30:33Z |
+| D-022 | povkh-dev | P-018-current-site-inventory | 4e8aeeca3267962e0aca2ac0fc87ca0c53851044cfa8502dc5d62abd671318fa | user | approved | 2026-08-27T17:30:33Z | 2026-09-01T17:30:33Z |
+| D-022 | povkh-dev | P-018-current-site-inventory | 34dc21dcff2c1990df601e7fe84f22461b2300387b69117c648102f12fcc0735 | user | approved | 2026-08-27T17:30:33Z | 2026-09-01T17:30:33Z |
+| D-022 | povkh-dev | P-018-current-site-inventory | 324d3be75bf00efc17920f404f0ce394eae921438cf282208857aa490dccb8f1 | user | approved | 2026-08-27T17:30:33Z | 2026-09-01T17:30:33Z |
+| D-023 | povkh-dev | P-021-russian-ux-ui | e01240f84fd71e783b4e4e742faac7fc2d1ed72cfeae30558d5e801bbd159907 | user | approved | 2026-08-27T20:39:11Z | 2026-09-01T20:39:11Z |
