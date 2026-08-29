@@ -11,13 +11,13 @@
     "approved_by": "user",
     "approved_at": "2026-08-28T21:08:39Z",
     "expires_at": "2026-09-02T21:08:39Z",
-    "payload_sha256": "c64964761b470ffb2a79c43132c5487b8a51a3ba8c519a2d017851cc170abb7d"
+    "payload_sha256": "36860e7d83662d13809b50ab2cdfdb6478aba8f2837b70c288181296943ad339"
   },
   "base_ref": "refs/heads/main",
   "base_commit": "c28596add4549daddaf7ecf8b317693bc28947ca",
   "branch": "feature/p-029-aurora-silk",
   "harness_revision": "bdab16e1e5eecb42465187d356b6421106ac504f",
-  "harness_baseline_sha256": "574178faf4fd510a8e313850d297fc0f7162924542475609bfc6d5edba9daad5",
+  "harness_baseline_sha256": "2d160d4d846549cabbba1c3c5bfd2b59a1e793ab6f0c0467d78815dd91275232",
   "stable_project_baseline_sha256": "31e72614e693017b016f3def53d1d0464f8951f453b8b31903e04e8b2d480933",
   "decisions_baseline_sha256": "791cca36b402cf6f0219be4365118d7d3bd5426bb11798ebe3940fc1642ff851",
   "included_roots": [
