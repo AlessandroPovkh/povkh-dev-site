@@ -6,18 +6,35 @@ interface Props {
   href: string;
   action: string;
   accessibleAction?: string;
+  signalVariant?: string;
 }
-const { title, context, summary, href, action, accessibleAction } = Astro.props;
+import SignalField from "./SignalField.astro";
+const { title, context, summary, href, action, accessibleAction, signalVariant } = Astro.props;
 ---
 
 <article class="case-preview">
-  <p class="metadata">{context}</p>
-  <h2>{title}</h2>
-  <p>{summary}</p>
-  <a class="button" href={href} aria-label={accessibleAction}>{action}</a>
+  {signalVariant ? (
+    <>
+      <SignalField variant={signalVariant} caseField />
+      <div class="case-preview-copy">
+        <p class="metadata">{context}</p>
+        <h2>{title}</h2>
+        <p>{summary}</p>
+        <a class="button" href={href} aria-label={accessibleAction}>{action}</a>
+      </div>
+    </>
+  ) : (
+    <>
+      <p class="metadata">{context}</p>
+      <h2>{title}</h2>
+      <p>{summary}</p>
+      <a class="button" href={href} aria-label={accessibleAction}>{action}</a>
+    </>
+  )}
 </article>
 
 <style>
   .case-preview { min-width: 0; }
+  .case-preview-copy { display: flex; min-width: 0; flex: 1; flex-direction: column; justify-content: flex-end; }
   h2 { min-width: 0; overflow-wrap: anywhere; hyphens: auto; }
 </style>

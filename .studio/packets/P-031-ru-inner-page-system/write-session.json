@@ -1,0 +1,18 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-031-ru-inner-page-system",
+  "contract_sha256": "b4e3fa4a3beea58d4c36b88b128b2949799c32a816653606c9d621677c06d27f",
+  "authority_sha256": {
+    ".studio/packets/P-031-ru-inner-page-system/PACKET.md": "554a7c5f1bd12e132f60d8881fc3059b2635c29358c31a4d14755b6dc696eef2",
+    ".studio/decisions.md": "24b2019aaca358b810fd212438d8d3f40cacbb79913acb6c88d4f7cabd21564e",
+    ".studio/packets/P-031-ru-inner-page-system/write-contract.json": "b4e3fa4a3beea58d4c36b88b128b2949799c32a816653606c9d621677c06d27f"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "f4e61a0f2db391a254c1437d7ca4821601c9f792",
+  "branch": "feature/p-031-ru-inner-page-system",
+  "worktree_path": "/Users/alessandropovkh/Desktop/harness studio/.worktrees/projects/povkh-dev/P-031-ru-inner-page-system",
+  "harness_fingerprint": "2d160d4d846549cabbba1c3c5bfd2b59a1e793ab6f0c0467d78815dd91275232",
+  "stable_project_fingerprint": "7a329ea1ade999a5a1e6e05d1ff3d18c582cca7681a852dfacd96c3e3f6213ec",
+  "prepared_at": "2026-08-29T14:47:15Z"
+}

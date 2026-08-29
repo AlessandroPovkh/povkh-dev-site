@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "../lib/i18n";
 import InnerHeroSignal from "./InnerHeroSignal.astro";
+import SignalField from "./SignalField.astro";
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -64,7 +65,8 @@ const notes = isRu ? [
 
 <section class="blog-notes container" aria-label={isRu ? "Заметки" : "Notes"}>
   {notes.map((note) => (
-    <article class="blog-note" data-blog-note>
+    <article class:list={["blog-note", { "blog-note-ru": isRu }]} data-blog-note>
+      {isRu && <SignalField variant={`blog-note-${note.number}`} compact />}
       <header>
         <span class="metadata">{note.number} / {note.tag}</span>
         <h2>{note.title}</h2>
@@ -90,6 +92,11 @@ const notes = isRu ? [
   .blog-notes { padding-block: var(--space-8); }
   .blog-note { display: grid; padding-block: var(--space-7); border-top: 1px solid var(--ink); grid-template-columns: 5fr 7fr; gap: var(--space-7); }
   .blog-note:last-child { border-bottom: 1px solid var(--ink); }
+  .blog-note-ru { min-width: 0; margin-bottom: var(--space-5); overflow: hidden; padding: 0; border: 1px solid var(--line); border-radius: 0.8rem; grid-template-columns: minmax(12rem, 3fr) minmax(0, 4fr) minmax(0, 5fr); gap: 0; background: rgb(10 9 12 / 0.82); }
+  .blog-note-ru > :global(.signal-field) { min-height: 100%; border-bottom: 0; border-right: 1px solid var(--line); }
+  .blog-note-ru > header, .blog-note-ru > div { padding: var(--space-6); }
+  .blog-note-ru > div { border-left: 1px solid var(--line); }
+  .blog-note-ru:last-child { border-bottom: 1px solid var(--line); }
   .blog-note h2 { max-width: 18ch; margin: var(--space-4) 0 0; font-family: var(--font-display); font-size: clamp(1.8rem, 3.8vw, 3.8rem); letter-spacing: -0.05em; line-height: 1.05; }
   .blog-note p { max-width: 42rem; }
   .note-lead { font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 600; }
@@ -98,6 +105,8 @@ const notes = isRu ? [
   @media (max-width: 52rem) {
     .blog-hero, .blog-note { grid-template-columns: minmax(0, 1fr); }
     .blog-hero { min-height: auto; }
+    .blog-note-ru > :global(.signal-field) { min-height: 9rem; border-right: 0; border-bottom: 1px solid var(--line); }
+    .blog-note-ru > div { border-top: 1px solid var(--line); border-left: 0; }
     .blog-hero > p:last-child { grid-column: 1; }
     .blog-cta { align-items: flex-start; flex-direction: column; }
   }

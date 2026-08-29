@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import InnerHeroSignal from "../../components/InnerHeroSignal.astro";
+import SignalField from "../../components/SignalField.astro";
 import { getFaq, getSite, getTeam } from "../../lib/content";
 
 const locale = "ru" as const;
@@ -35,9 +36,12 @@ const faq = await getFaq(locale);
       <div class="founder-records" aria-label="Записи об основателях">
         {team.items.map((founder, index) => (
           <article class="founder-record" data-testid="founder-record">
+            <SignalField variant={`studio-founder-${index + 1}`} compact />
+            <div class="founder-copy">
             <p class="metadata">Запись основателя 0{index + 1}</p>
             <h3>{founder.publicName}</h3>
             <p>Детали профиля основателя будут опубликованы после личного подтверждения.</p>
+            </div>
           </article>
         ))}
       </div>
@@ -46,9 +50,9 @@ const faq = await getFaq(locale);
     <section class="collaboration-section container" aria-labelledby="collaboration-title">
       <h2 id="collaboration-title">Близость — часть метода.</h2>
       <div class="collaboration-grid">
-        <p><strong>Работа напрямую.</strong><br />Стратегия, дизайн и разработка остаются рядом с теми, кто выполняет работу: меньше передач и понятнее решения.</p>
-        <p><strong>Профильные специалисты — по задаче.</strong><br />Если проекту нужен специалист вне постоянной команды, мы подключаем его под согласованную задачу, сохраняя одну точку ответственности внутри Povkh.Dev.</p>
-        <p><strong>Доказательства вместо декора.</strong><br />Наш сайт и кейс проекта основателей POVKH LAB показывают системы, которые мы умеем объяснять, тестировать и передавать.</p>
+        <div><SignalField variant="studio-direct" compact /><p><strong>Работа напрямую.</strong><br />Стратегия, дизайн и разработка остаются рядом с теми, кто выполняет работу: меньше передач и понятнее решения.</p></div>
+        <div><SignalField variant="studio-network" compact /><p><strong>Профильные специалисты — по задаче.</strong><br />Если проекту нужен специалист вне постоянной команды, мы подключаем его под согласованную задачу, сохраняя одну точку ответственности внутри Povkh.Dev.</p></div>
+        <div><SignalField variant="studio-proof" compact /><p><strong>Доказательства вместо декора.</strong><br />Наш сайт и кейс проекта основателей POVKH LAB показывают системы, которые мы умеем объяснять, тестировать и передавать.</p></div>
       </div>
     </section>
 
@@ -79,18 +83,26 @@ const faq = await getFaq(locale);
   .section-heading h2 { max-width: 20ch; margin-block: var(--space-3) 0; font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3.5rem); letter-spacing: -0.06em; line-height: 1; }
   .studio-gate-copy { max-width: 46rem; font-size: 1.2rem; }
   .founder-records { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--ink); background: var(--ink); }
-  .founder-record { padding: var(--space-5); background: var(--paper); }
+  .founder-record { display: grid; padding: 0; grid-template-columns: minmax(10rem, 0.75fr) minmax(0, 1.25fr); background: var(--paper); }
+  .founder-record > :global(.signal-field) { min-height: 100%; border-bottom: 0; border-right: 1px solid var(--line); }
+  .founder-copy { padding: var(--space-5); }
   .founder-record h3 { margin-block: var(--space-3); font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 2rem); letter-spacing: -0.05em; line-height: 1.1; }
   .collaboration-section h2, .faq-section h2 { margin-block: 0 var(--space-6); font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3.5rem); letter-spacing: -0.06em; line-height: 1; }
   .collaboration-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
-  .collaboration-grid p { margin: 0; padding-block-start: var(--space-4); border-top: 2px solid var(--warm-coral); }
-  .faq-list { border-top: 1px solid var(--line); }
-  .faq-list details { padding-block: var(--space-4); border-bottom: 1px solid var(--line); }
-  .faq-list summary { cursor: pointer; font-size: 1.2rem; font-weight: 700; }
-  .faq-list p { max-width: 48rem; margin: var(--space-3) 0 0; }
+  .collaboration-grid > div { overflow: hidden; border: 1px solid var(--line); border-radius: 0.8rem; background: rgb(10 9 12 / 0.82); }
+  .collaboration-grid p { margin: 0; padding: var(--space-5); }
+  .faq-list { display: grid; gap: 0.75rem; }
+  .faq-list details { overflow: hidden; border: 1px solid var(--line); border-radius: 0.8rem; background: rgb(10 9 12 / 0.76); }
+  .faq-list summary { position: relative; padding: var(--space-5) 4.5rem var(--space-5) var(--space-5); cursor: pointer; font-size: 1.2rem; font-weight: 700; list-style: none; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after { position: absolute; top: 50%; right: var(--space-5); width: 1rem; height: 1rem; border-right: 2px solid var(--povkh-pink); border-bottom: 2px solid var(--povkh-pink); content: ""; transform: translateY(-70%) rotate(45deg); transition: transform 180ms ease; }
+  .faq-list details[open] summary::after { transform: translateY(-30%) rotate(225deg); }
+  .faq-list details[open] summary { color: var(--povkh-pink); }
+  .faq-list p { max-width: 48rem; margin: 0; padding: 0 var(--space-5) var(--space-5); }
   .studio-cta { display: grid; grid-template-columns: 2fr 2fr auto; align-items: end; gap: var(--space-5); }
   .studio-cta h2 { margin: 0; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); letter-spacing: -0.05em; line-height: 1; }
   .studio-cta p { margin: 0; }
   @media (max-width: 56rem) { .founder-records, .collaboration-grid { grid-template-columns: 1fr; } .studio-cta { grid-template-columns: 1fr 1fr; } .studio-cta .button { grid-column: 1 / -1; justify-self: start; } }
+  @media (max-width: 38rem) { .founder-record { grid-template-columns: 1fr; } .founder-record > :global(.signal-field) { min-height: 8rem; border-right: 0; border-bottom: 1px solid var(--line); } }
   @media (max-width: 36rem) { .studio-cta { grid-template-columns: 1fr; } }
 </style>

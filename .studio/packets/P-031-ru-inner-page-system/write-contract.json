@@ -1,0 +1,50 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-031-ru-inner-page-system",
+  "mode": "project-write",
+  "packet_sha256": "554a7c5f1bd12e132f60d8881fc3059b2635c29358c31a4d14755b6dc696eef2",
+  "authorization": {
+    "status": "approved",
+    "id": "D-031",
+    "ref": ".studio/decisions.md",
+    "approved_by": "user",
+    "approved_at": "2026-08-29T14:06:33Z",
+    "expires_at": "2026-09-03T14:06:33Z",
+    "payload_sha256": "a4468f93462b057785da498b7d23095cff3491bc11d79349a7412b5a7048411b"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "f4e61a0f2db391a254c1437d7ca4821601c9f792",
+  "branch": "feature/p-031-ru-inner-page-system",
+  "harness_revision": "bdab16e1e5eecb42465187d356b6421106ac504f",
+  "harness_baseline_sha256": "2d160d4d846549cabbba1c3c5bfd2b59a1e793ab6f0c0467d78815dd91275232",
+  "stable_project_baseline_sha256": "7a329ea1ade999a5a1e6e05d1ff3d18c582cca7681a852dfacd96c3e3f6213ec",
+  "decisions_baseline_sha256": "791cca36b402cf6f0219be4365118d7d3bd5426bb11798ebe3940fc1642ff851",
+  "included_roots": [
+    ".studio/decisions.md",
+    ".studio/packets/P-031-ru-inner-page-system",
+    ".studio/route-map.md",
+    "PROJECT.md",
+    "artifacts/website-build",
+    "src/components",
+    "src/layouts",
+    "src/pages/ru",
+    "src/styles",
+    "tests"
+  ],
+  "excluded_roots": [],
+  "external_actions": [],
+  "required_checks": [
+    {
+      "id": "content-contract",
+      "runner": "node",
+      "args": [
+        "--test",
+        "tests/content/content-contract.test.mjs"
+      ],
+      "timeout_seconds": 120
+    }
+  ],
+  "expected_result": "Every existing RU inner route has a complete, readable and distinctive body composition in the approved Povkh.Dev pink, ASCII/signal and Aurora Silk system without content, case, route or EN mutations.",
+  "rollback_limit": "leave-managed-worktree-no-automatic-cleanup"
+}

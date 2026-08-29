@@ -60,7 +60,7 @@ const copy = isRu ? {
 };
 ---
 
-<div class="brief-shell" data-project-brief data-locale={locale} data-delivery-mode={demoMode ? "demo" : "live"}>
+<div class:list={["brief-shell", { "brief-shell-ru": isRu }]} data-project-brief data-locale={locale} data-delivery-mode={demoMode ? "demo" : "live"}>
   <div
     class="brief-progress metadata"
     data-testid="brief-progress"
@@ -177,19 +177,27 @@ const copy = isRu ? {
 
 <style>
   .brief-shell { display: grid; gap: var(--space-5); }
+  .brief-shell-ru { position: relative; overflow: hidden; padding: clamp(1rem, 3vw, 2rem); border: 1px solid rgb(255 255 255 / 0.14); border-radius: 0.8rem; background: rgb(10 9 12 / 0.76); }
+  .brief-shell-ru::before { position: absolute; top: 0; left: 0; width: 38%; height: 1px; background: linear-gradient(90deg, transparent, var(--povkh-pink)); content: ""; }
   .brief-progress { padding: var(--space-3) var(--space-4); border: 1px solid var(--ink); justify-self: start; background: var(--signal-lime); }
+  .brief-shell-ru .brief-progress { position: relative; min-width: 8rem; overflow: hidden; border-color: rgb(255 47 146 / 0.45); border-radius: 999px; color: #f4f1ef !important; background: rgb(255 47 146 / 0.08); }
+  .brief-shell-ru .brief-progress::after { position: absolute; right: 0.35rem; bottom: 0.35rem; left: 0.35rem; height: 2px; border-radius: 999px; background: linear-gradient(90deg, var(--povkh-pink) 33%, rgb(255 255 255 / 0.12) 33%); content: ""; }
   .brief-error { padding: var(--space-4); border: 2px solid var(--ink); background: var(--warm-coral); font-weight: 700; }
   .brief-success { padding: var(--space-7); border: 1px solid var(--ink); background: var(--signal-lime); }
   .brief-success h2 { margin: var(--space-4) 0; font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.05em; }
   form { border-top: 1px solid var(--ink); }
   fieldset { display: grid; margin: 0; padding: var(--space-7) 0; border: 0; border-bottom: 1px solid var(--ink); gap: var(--space-5); }
+  .brief-shell-ru form { border-top-color: rgb(255 255 255 / 0.14); }
+  .brief-shell-ru fieldset { padding-bottom: var(--space-5); border-bottom: 0; }
   html[data-enhanced] fieldset[hidden] { display: none; }
   legend { width: 100%; padding: 0; font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3.8rem); font-weight: 650; letter-spacing: -0.055em; }
   legend .metadata { display: block; margin-bottom: var(--space-3); color: var(--muted); }
   .choice-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .brief-shell-ru .choice-grid { overflow: hidden; border: 1px solid rgb(255 255 255 / 0.18); border-radius: 0.8rem; }
   .choice-grid label { position: relative; min-width: 0; }
   .choice-grid input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; opacity: 0; }
   .choice-grid span { display: flex; min-height: 5rem; padding: var(--space-4); border: 1px solid var(--ink); align-items: center; font-family: var(--font-display); font-size: clamp(0.95rem, 2vw, 1.4rem); cursor: pointer; }
+  .brief-shell-ru .choice-grid span { border-color: rgb(255 255 255 / 0.12); transition: color 160ms ease, background-color 160ms ease; }
   .choice-grid label:nth-child(even) span { border-left: 0; }
   .choice-grid label:nth-child(n + 3) span { border-top: 0; }
   .choice-grid input:checked + span { background: var(--signal-lime); box-shadow: inset 0 0 0 0.2rem var(--ink); }
@@ -206,6 +214,7 @@ const copy = isRu ? {
   .step-actions { display: flex; margin-top: var(--space-4); flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); }
   .honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
   .delivery-fallback { padding: var(--space-5); border: 1px dashed var(--ink); }
+  .brief-shell-ru .delivery-fallback { border-style: solid; border-color: rgb(255 255 255 / 0.12); border-radius: 0.8rem; background: linear-gradient(100deg, rgb(255 47 146 / 0.08), transparent 45%); }
   .delivery-fallback p:last-child { margin-bottom: 0; }
   @media (max-width: 40rem) {
     .choice-grid,

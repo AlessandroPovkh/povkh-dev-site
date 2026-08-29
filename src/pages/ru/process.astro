@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import InnerHeroSignal from "../../components/InnerHeroSignal.astro";
+import SignalField from "../../components/SignalField.astro";
 import { getProcess, getSite } from "../../lib/content";
 
 const locale = "ru" as const;
@@ -33,6 +34,7 @@ const process = await getProcess(locale);
       <ol class="stage-list">
         {process.items.map((stage, index) => (
           <li class="stage-item">
+            <SignalField variant={`process-stage-${index + 1}`} compact />
             <span class="metadata">0{index + 1}</span>
             <div class="stage-copy">
               <h3>{stage.title}</h3>
@@ -47,9 +49,9 @@ const process = await getProcess(locale);
     <section class="process-principles container" aria-labelledby="principles-title">
       <h2 id="principles-title">Полезная часть — на виду.</h2>
       <div class="principles-grid">
-        <p><strong>Границы остаются явными.</strong><br />У каждого этапа есть согласованное решение или результат, поэтому изменения получают понятное место.</p>
-        <p><strong>Качество проверяем в рамках работы.</strong><br />Доступность, производительность, отображение на разных экранах и передача проверяются до завершения работы.</p>
-        <p><strong>Одна точка ответственности.</strong><br />Если нужен специалист, Povkh.Dev остаётся ответственным за согласованный результат и коммуникацию.</p>
+        <div><SignalField variant="principle-boundary" compact /><p><strong>Границы остаются явными.</strong><br />У каждого этапа есть согласованное решение или результат, поэтому изменения получают понятное место.</p></div>
+        <div><SignalField variant="principle-quality" compact /><p><strong>Качество проверяем в рамках работы.</strong><br />Доступность, производительность, отображение на разных экранах и передача проверяются до завершения работы.</p></div>
+        <div><SignalField variant="principle-owner" compact /><p><strong>Одна точка ответственности.</strong><br />Если нужен специалист, Povkh.Dev остаётся ответственным за согласованный результат и коммуникацию.</p></div>
       </div>
     </section>
 
@@ -69,17 +71,23 @@ const process = await getProcess(locale);
   .process-stages, .process-principles, .process-cta { padding-block: var(--space-8); border-top: 1px solid var(--ink); }
   .section-heading { margin-block-end: var(--space-6); }
   .section-heading h2 { max-width: 22ch; margin-block: var(--space-3) 0; font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3.5rem); letter-spacing: -0.06em; line-height: 1; }
-  .stage-list { margin: 0; padding: 0; border-top: 1px solid var(--line); list-style: none; }
-  .stage-item { display: grid; padding-block: var(--space-5); grid-template-columns: 4rem minmax(12rem, 1fr) minmax(16rem, 1.2fr); gap: var(--space-5); border-bottom: 1px solid var(--line); }
+  .stage-list { display: grid; margin: 0; padding: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--line); background: var(--line); list-style: none; }
+  .stage-item { display: flex; min-width: 0; padding: 0 0 var(--space-5); border: 0; flex-direction: column; gap: var(--space-4); background: rgb(10 9 12 / 0.88); }
+  .stage-item > :not(.signal-field) { margin-inline: var(--space-4); }
   .stage-item h3 { margin: 0 0 var(--space-2); font-family: var(--font-display); font-size: clamp(1.4rem, 2.8vw, 2.4rem); letter-spacing: -0.06em; }
+  .stage-item:nth-child(5) { grid-column: 1 / -1; }
+  .stage-item:nth-child(5) > :global(.signal-field) { min-height: 11rem; }
+  .stage-item h3 { overflow-wrap: anywhere; hyphens: auto; }
   .stage-item p { margin: 0; }
-  .stage-output { padding-inline-start: var(--space-5); border-inline-start: 2px solid var(--signal-lime); }
+  .stage-output { margin-top: auto !important; padding-block-start: var(--space-4); border-top: 1px solid rgb(255 47 146 / 0.5); }
   .process-principles h2 { margin-block: 0 var(--space-6); font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3.5rem); letter-spacing: -0.06em; line-height: 1; }
   .principles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
-  .principles-grid p { margin: 0; padding-block-start: var(--space-4); border-top: 2px solid var(--electric-cobalt); }
+  .principles-grid > div { overflow: hidden; border: 1px solid var(--line); border-radius: 0.8rem; background: rgb(10 9 12 / 0.82); }
+  .principles-grid p { margin: 0; padding: var(--space-5); }
   .process-cta { display: grid; grid-template-columns: 2fr 2fr auto; align-items: end; gap: var(--space-5); }
   .process-cta h2 { margin: 0; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); letter-spacing: -0.05em; line-height: 1; }
   .process-cta p { margin: 0; }
-  @media (max-width: 56rem) { .stage-item { grid-template-columns: 3rem 1fr; } .stage-output { grid-column: 2; } .principles-grid { grid-template-columns: 1fr; } .process-cta { grid-template-columns: 1fr 1fr; } .process-cta .button { grid-column: 1 / -1; justify-self: start; } }
-  @media (max-width: 36rem) { .stage-item { grid-template-columns: 1fr; gap: var(--space-2); } .stage-output { grid-column: auto; } .process-cta { grid-template-columns: 1fr; } }
+  @media (max-width: 70rem) { .stage-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stage-item:last-child { grid-column: 1 / -1; } }
+  @media (max-width: 56rem) { .principles-grid { grid-template-columns: 1fr; } .process-cta { grid-template-columns: 1fr 1fr; } .process-cta .button { grid-column: 1 / -1; justify-self: start; } }
+  @media (max-width: 36rem) { .stage-list { grid-template-columns: 1fr; } .stage-item:last-child { grid-column: auto; } .process-cta { grid-template-columns: 1fr; } }
 </style>
