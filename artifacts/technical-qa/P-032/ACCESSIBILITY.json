@@ -1,0 +1,12 @@
+{
+  "packet": "P-032-process-imagery-full-qa",
+  "standard": "WCAG 2.x automated coverage via axe-core 4.13.0 plus interaction checks",
+  "profiles": ["Chromium 151.0.7922.34", "Firefox 153.0", "WebKit 26.5", "Pixel 7 emulation", "iPhone 13 emulation"],
+  "routes": ["/", "/work/endokey/", "/work/povkh-lab/", "/services/", "/contact/", "/ru/", "/ru/contact/", "/ru/missing/"],
+  "states": ["default shell", "opened menu", "interactive process", "focus-visible", "reduced motion", "200 percent zoom", "JavaScript disabled"],
+  "automated_violations": 0,
+  "keyboard_and_focus": "pass",
+  "reflow_and_overflow": "pass",
+  "reduced_motion": "pass",
+  "notes": "Generated process photographs are decorative, have empty alt text, explicit dimensions and local sources. Hidden process scenes are inert."
+}

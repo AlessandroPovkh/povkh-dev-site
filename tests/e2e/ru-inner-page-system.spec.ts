@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const expectedFields: Record<string, number> = {
   "/ru/services/": 8,
-  "/ru/process/": 8,
+  "/ru/process/": 3,
   "/ru/work/": 4,
   "/ru/studio/": 5,
   "/ru/blog/": 3,
@@ -22,6 +22,11 @@ for (const [route, minimum] of Object.entries(expectedFields)) {
     expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
   });
 }
+
+test("process stages use distinct photographic fields instead of repeated signal diagrams", async ({ page }) => {
+  await page.goto("/ru/process/");
+  await expect(page.locator("[data-process-stage-image]")).toHaveCount(5);
+});
 
 test("work index gives every case a distinct visual field", async ({ page }) => {
   await page.goto("/ru/work/");

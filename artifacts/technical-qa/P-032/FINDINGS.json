@@ -1,0 +1,13 @@
+{
+  "packet": "P-032-process-imagery-full-qa",
+  "status": "resolved",
+  "findings": [
+    {"id":"P032-A11Y-01","severity":"serious","area":"contrast","summary":"Inactive RU homepage case links were below 4.5:1.","resolution":"Raised link color to the existing accessible muted token.","status":"fixed"},
+    {"id":"P032-A11Y-02","severity":"serious","area":"contrast","summary":"Secondary controls inherited a pink background with light text.","resolution":"Restored a dark secondary surface with light text and visible border.","status":"fixed"},
+    {"id":"P032-RESP-01","severity":"moderate","area":"responsive typography","summary":"Four result headings overflowed at 320–375 px.","resolution":"Reduced excessive card inset and added a bounded mobile type scale without changing copy.","status":"fixed"},
+    {"id":"P032-A11Y-03","severity":"serious","area":"focus management","summary":"Controls inside an aria-hidden process scene could remain focusable during state changes.","resolution":"Inactive process scenes now receive inert in the same synchronous state update.","status":"fixed"},
+    {"id":"P032-QA-01","severity":"test-only","area":"regression harness","summary":"Several expectations and snapshots described pre-Aurora approved styling.","resolution":"Updated semantic expectations and refreshed validated visual baselines.","status":"fixed"},
+    {"id":"P032-QA-02","severity":"test-only","area":"stability","summary":"Lazy-image and motion geometry assertions raced browser loading and transitions.","resolution":"Asserted declared src values, waited for intrinsic loading, and measured geometry with reduced motion.","status":"fixed"}
+  ],
+  "open_findings": []
+}

@@ -414,6 +414,15 @@ body.editorial-interior .process-page .stage-list .stage-item {
 .editorial-interior .header-cta { background: var(--povkh-pink); box-shadow: none; }
 .editorial-interior .button:hover,
 .editorial-interior .header-cta:hover { background: #ff69ad; box-shadow: none; }
+.editorial-interior .button.button-secondary {
+  border-color: rgb(255 255 255 / 0.22);
+  color: #f4f1ef;
+  background: #171419;
+}
+.editorial-interior .button.button-secondary:hover {
+  color: #fff;
+  background: #242027;
+}
 .editorial-interior main,
 .editorial-interior .info-page,
 .editorial-interior .process-page,

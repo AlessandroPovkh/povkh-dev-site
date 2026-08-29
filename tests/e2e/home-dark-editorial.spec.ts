@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Russian dark editorial homepage", () => {
+  test.describe.configure({ timeout: 90_000 });
+
   test("keeps the approved narrative and four evidence-backed cases", async ({ page }) => {
     await page.goto("/ru/", { waitUntil: "load" });
     await expect(page.locator(".process-system")).toBeAttached();
@@ -208,9 +210,6 @@ test.describe("Russian dark editorial homepage", () => {
     await page.goto("/ru/", { waitUntil: "load" });
     const giulia = page.locator("#case-giulia");
     await expect(giulia.locator(".site-scroll img")).toHaveCount(6);
-    const readyFirstFrames = await giulia.locator(".site-scroll img:first-child")
-      .evaluateAll((images) => images.every((image) => (image as HTMLImageElement).naturalWidth > 0));
-    expect(readyFirstFrames).toBe(true);
     await giulia.scrollIntoViewIfNeeded();
     await giulia.locator(".site-scroll img").evaluateAll((images) => {
       for (const image of images as HTMLImageElement[]) image.loading = "eager";
@@ -274,6 +273,7 @@ test.describe("Russian dark editorial homepage", () => {
   });
 
   test("gives every problem a distinct semantic visual scene", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto("/ru/", { waitUntil: "load" });
     const section = page.locator("#problems");

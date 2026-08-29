@@ -1,0 +1,13 @@
+{
+  "packet": "P-032-process-imagery-full-qa",
+  "runner": "Lighthouse CI",
+  "runs_per_url": 1,
+  "status": "pass",
+  "results": [
+    {"route":"/","scores":{"performance":97,"accessibility":100,"best_practices":100,"seo":100},"metrics_ms":{"fcp":1954,"lcp":2254,"tbt":0,"speed_index":1954},"cls":0.035342},
+    {"route":"/work/povkh-lab/","scores":{"performance":98,"accessibility":100,"best_practices":100,"seo":100},"metrics_ms":{"fcp":1952,"lcp":2102,"tbt":0,"speed_index":1952},"cls":0.000769},
+    {"route":"/services/","scores":{"performance":98,"accessibility":100,"best_practices":100,"seo":100},"metrics_ms":{"fcp":1802,"lcp":1802,"tbt":0,"speed_index":1802},"cls":0.019215},
+    {"route":"/contact/","scores":{"performance":98,"accessibility":100,"best_practices":100,"seo":100},"metrics_ms":{"fcp":1952,"lcp":2102,"tbt":0,"speed_index":1952},"cls":0.000977}
+  ],
+  "evidence": "artifacts/lighthouse/*.report.json"
+}

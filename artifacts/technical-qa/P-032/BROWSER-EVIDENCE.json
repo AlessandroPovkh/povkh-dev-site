@@ -1,0 +1,11 @@
+{
+  "packet": "P-032-process-imagery-full-qa",
+  "playwright": "1.62.1",
+  "desktop": {"chromium":"151.0.7922.34","firefox":"153.0","webkit":"26.5"},
+  "mobile_emulation": ["Pixel 7", "iPhone 13"],
+  "viewports_explicitly_exercised": [320, 375, 390, 768, 844, 897, 1024, 1092, 1280, 1440, 2048],
+  "suite": {"total":720,"passed":673,"skipped":47,"failed":0,"duration":"1.3m final cached run"},
+  "visual_snapshots": 11,
+  "process_assets": ["01-understand.webp","02-formulate.webp","03-design.webp","04-connect.webp","05-verify.webp"],
+  "status": "pass"
+}

@@ -1,0 +1,18 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-032-process-imagery-full-qa",
+  "contract_sha256": "50f0df4c99e613dba66940083995d4e64fbac9702101fe8a8e8c5a9f8442973f",
+  "authority_sha256": {
+    ".studio/packets/P-032-process-imagery-full-qa/PACKET.md": "62208dbdb3fbfbb3ddfcad7fdb31dd445ad519709b043befed0ed15a34ba00a2",
+    ".studio/decisions.md": "b1dc3e536ec14b97d13a50b8f2b6844bd176485a37d0c26c77d32b52fac9395b",
+    ".studio/packets/P-032-process-imagery-full-qa/write-contract.json": "50f0df4c99e613dba66940083995d4e64fbac9702101fe8a8e8c5a9f8442973f"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "785de154c377834f8bff988c5b442c1c3a64d7b9",
+  "branch": "feature/p-032-process-imagery-full-qa",
+  "worktree_path": "/Users/alessandropovkh/Desktop/harness studio/.worktrees/projects/povkh-dev/P-032-process-imagery-full-qa",
+  "harness_fingerprint": "2d160d4d846549cabbba1c3c5bfd2b59a1e793ab6f0c0467d78815dd91275232",
+  "stable_project_fingerprint": "479cee03f4d2fc2c51397229587095ea38a39cea90e309852ec706769c7c994e",
+  "prepared_at": "2026-08-29T18:35:13Z"
+}

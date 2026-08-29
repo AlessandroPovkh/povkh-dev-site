@@ -89,6 +89,10 @@ const editorialScript = replaceAssets(editorialScriptSource)
   .replace("tab.setAttribute('aria-selected',String(active));", "")
   .replace("menuToggle?.setAttribute('aria-expanded','false')", "menuToggle?.setAttribute('aria-expanded','false');menuToggle?.setAttribute('aria-label','Открыть меню')")
   .replace("menuToggle?.setAttribute('aria-expanded','true')", "menuToggle?.setAttribute('aria-expanded','true');menuToggle?.setAttribute('aria-label','Закрыть меню')")
+  .replace(
+    "scene.classList.toggle('is-active',active);scene.setAttribute('aria-hidden',String(!active))",
+    "scene.classList.toggle('is-active',active);scene.inert=!active;scene.setAttribute('aria-hidden',String(!active))",
+  )
   .replace(/function toggleSelect[\s\S]*$/, "") + `
     const coveredRegions = [
       document.querySelector('#main-content'),
@@ -492,7 +496,7 @@ const editorialScript = replaceAssets(editorialScriptSource)
     .editorial-homepage .case-index-label,
     .editorial-homepage .case-index a span { display: none; }
     .editorial-homepage .case-index-links { font-family: "IBM Plex Sans Variable", sans-serif; font-size: 13px; letter-spacing: 0; text-transform: none; }
-    .editorial-homepage .case-index a { justify-content: center; border-radius: 18px; }
+    .editorial-homepage .case-index a { justify-content: center; border-radius: 18px; color: #aaa6ac; }
     .editorial-homepage .case-index a + a { border-left-color: transparent; }
     .editorial-homepage .case-index a.is-active { background: rgb(255 255 255 / .09); }
     .editorial-homepage :where(.case-stage, .endokey, .lab-case, .giulia-case, .evolution-stage) { overflow: hidden; border-radius: 36px; }
@@ -633,6 +637,12 @@ const editorialScript = replaceAssets(editorialScriptSource)
         height: 60px;
         margin: 8px 12px 0;
         border-radius: 22px;
+      }
+      .editorial-homepage .result-item h3 {
+        font-size: clamp(36px, 12.4vw, 48px);
+      }
+      .editorial-homepage .result-item {
+        padding-inline: clamp(24px, 7vw, 36px);
       }
       .editorial-homepage .logo { padding-inline: 8px; font-size: 13px; }
       .editorial-homepage .menu-toggle { border-radius: 16px; }

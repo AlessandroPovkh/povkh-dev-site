@@ -1,0 +1,21 @@
+{
+  "packet": "P-032-process-imagery-full-qa",
+  "revision_base": "785de154c377834f8bff988c5b442c1c3a64d7b9",
+  "branch": "feature/p-032-process-imagery-full-qa",
+  "status": "ready_for_review",
+  "checks": {
+    "content": "pass",
+    "server": "pass",
+    "tooling": "pass",
+    "astro_check": "pass",
+    "build": "pass",
+    "localized_routes": 22,
+    "browser_e2e": "pass",
+    "visual_regression": "pass",
+    "accessibility": "pass",
+    "performance": "pass"
+  },
+  "open_findings": 0,
+  "protected_content_changed": false,
+  "ready_for_review": true
+}

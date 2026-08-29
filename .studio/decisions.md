@@ -49,3 +49,4 @@
 | D-029 | povkh-dev | P-029-aurora-silk | 36860e7d83662d13809b50ab2cdfdb6478aba8f2837b70c288181296943ad339 | user | approved | 2026-08-28T21:08:39Z | 2026-09-02T21:08:39Z |
 | D-030 | povkh-dev | P-030-standing-delegation | f4555d97a000b2e7c2f4363b39221d54c43a03f7367db1f6a4608d2b18ef25b0 | user | approved | 2026-08-29T14:06:33Z | 2026-09-03T14:06:33Z |
 | D-031 | povkh-dev | P-031-ru-inner-page-system | a4468f93462b057785da498b7d23095cff3491bc11d79349a7412b5a7048411b | user | approved | 2026-08-29T14:06:33Z | 2026-09-03T14:06:33Z |
+| D-032 | povkh-dev | P-032-process-imagery-full-qa | 7ca0f862e867777db5667454caf2c6784a67e50fca012b92289372b12c84afb3 | user | approved | 2026-08-29T17:20:00Z | 2026-09-03T17:20:00Z |
