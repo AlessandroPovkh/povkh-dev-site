@@ -37,3 +37,12 @@
 | D-022 | povkh-dev | P-018-current-site-inventory | 34dc21dcff2c1990df601e7fe84f22461b2300387b69117c648102f12fcc0735 | user | approved | 2026-08-27T17:30:33Z | 2026-09-01T17:30:33Z |
 | D-022 | povkh-dev | P-018-current-site-inventory | 324d3be75bf00efc17920f404f0ce394eae921438cf282208857aa490dccb8f1 | user | approved | 2026-08-27T17:30:33Z | 2026-09-01T17:30:33Z |
 | D-023 | povkh-dev | P-021-russian-ux-ui | e01240f84fd71e783b4e4e742faac7fc2d1ed72cfeae30558d5e801bbd159907 | user | approved | 2026-08-27T20:39:11Z | 2026-09-01T20:39:11Z |
+| D-024 | povkh-dev | P-022-russian-full-site-build | f41bee1ef7242ee597082ddede21f391a9f5458bccaf49e1d3db6d98ea2955df | user | approved | 2026-08-28T16:06:10Z | 2026-09-02T16:06:10Z |
+| D-024 | povkh-dev | P-022-russian-full-site-build | 3bb1069a9445b62e23db55386d04e75eab8438284fe3ccd497cd4e344b3ec4bb | user | approved | 2026-08-28T16:06:10Z | 2026-09-02T16:06:10Z |
+| D-024 | povkh-dev | P-022-russian-full-site-build | fc406f19b5f705e278036d0176fbd0eba08999bd738785ae525fcf47b51f3087 | user | approved | 2026-08-28T16:06:10Z | 2026-09-02T16:06:10Z |
+| D-024 | povkh-dev | P-022-russian-full-site-build | 8ee86d01ad0670d812a1ba1a9d11ff7ffd5ad0ff8de06fa65e3ddf6b4bcdc5ff | user | approved | 2026-08-28T16:06:10Z | 2026-09-02T16:06:10Z |
+| D-024 | povkh-dev | P-022-russian-full-site-build | ffbbeb949d9bc10147d842b1d2fba9fd8473d2b28f0d5a5081deafceef690acf | user | approved | 2026-08-28T16:06:10Z | 2026-09-02T16:06:10Z |
+| D-024 | povkh-dev | P-022-russian-full-site-build | c36ad82113e6d5395329bd10b9c242052cd4f7594a3eb93be05d78600a463d8a | user | approved | 2026-08-28T16:06:10Z | 2026-09-02T16:06:10Z |
+| D-024 | povkh-dev | P-022-russian-full-site-build | 262f3acecef3fac2d8c012838bfcb0f896b3d10ecca0f6dc4938a99a58d36d68 | user | approved | 2026-08-28T16:06:10Z | 2026-09-02T16:06:10Z |
+| D-027 | povkh-dev | P-025-visual-rework | 484d96f3d05396b6b175020d9c26a85849d3dfa1f72380ecf66c987136e9db54 | user | approved | 2026-08-28T19:21:48Z | 2026-09-02T19:21:48Z |
+| D-029 | povkh-dev | P-029-aurora-silk | c64964761b470ffb2a79c43132c5487b8a51a3ba8c519a2d017851cc170abb7d | user | approved | 2026-08-28T21:08:39Z | 2026-09-02T21:08:39Z |

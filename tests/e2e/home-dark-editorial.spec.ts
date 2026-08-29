@@ -47,13 +47,13 @@ test.describe("Russian dark editorial homepage", () => {
     });
   });
 
-  test("replaces technical fragments and the circular hero with a premium glass showcase", async ({ page }) => {
+  test("uses the interactive glyph field and restrained technical geometry", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto("/ru/", { waitUntil: "load" });
     await page.evaluate(() => document.fonts.ready);
 
     const presentation = await page.evaluate(() => {
-      const hero = document.querySelector<HTMLElement>(".hero-orbit")!;
+      const hero = document.querySelector<HTMLElement>("[data-glyph-field]")!;
       const nav = document.querySelector<HTMLElement>(".site-nav")!;
       const button = document.querySelector<HTMLElement>(".hero .button")!;
       const card = document.querySelector<HTMLElement>(".problem")!;
@@ -62,7 +62,7 @@ test.describe("Russian dark editorial homepage", () => {
       const heroRect = hero.getBoundingClientRect();
       return {
         heroAspect: heroRect.width / heroRect.height,
-        heroRadius: Number.parseFloat(getComputedStyle(hero).borderTopLeftRadius),
+        heroCanvas: Boolean(hero.querySelector("canvas")),
         navRadius: Number.parseFloat(getComputedStyle(nav).borderTopLeftRadius),
         navBackdrop: getComputedStyle(nav).backdropFilter,
         buttonHeight: button.getBoundingClientRect().height,
@@ -74,13 +74,14 @@ test.describe("Russian dark editorial homepage", () => {
       };
     });
 
-    expect(presentation.heroAspect).toBeGreaterThan(1.15);
-    expect(presentation.heroRadius).toBeGreaterThanOrEqual(24);
+    expect(presentation.heroAspect).toBeGreaterThan(0.9);
+    expect(presentation.heroAspect).toBeLessThan(1.1);
+    expect(presentation.heroCanvas).toBe(true);
     expect(presentation.navRadius).toBeGreaterThanOrEqual(24);
     expect(presentation.navBackdrop).not.toBe("none");
     expect(presentation.buttonHeight).toBeGreaterThanOrEqual(48);
     expect(presentation.buttonRadius).toBeGreaterThanOrEqual(24);
-    expect(presentation.cardRadius).toBeGreaterThanOrEqual(20);
+    expect(presentation.cardRadius).toBeLessThanOrEqual(18);
     expect(presentation.navDivider).toBe("0px");
     expect(presentation.logoFragment).toBe("none");
     expect(presentation.menuFont).toContain("IBM Plex Sans");
@@ -272,7 +273,7 @@ test.describe("Russian dark editorial homepage", () => {
     expect(markerAlignment.every(({ verticalDelta }) => verticalDelta <= 2)).toBe(true);
   });
 
-  test("keeps the problem-card grid aligned and gives every card a contained visual scene", async ({ page }) => {
+  test("gives every problem a distinct semantic visual scene", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto("/ru/", { waitUntil: "load" });
     const section = page.locator("#problems");
@@ -301,18 +302,36 @@ test.describe("Russian dark editorial homepage", () => {
     expect(Math.abs(geometry[0].right - geometry[2].right)).toBeLessThanOrEqual(1);
     expect(Math.abs(geometry[1].left - geometry[3].left)).toBeLessThanOrEqual(1);
     expect(Math.abs(geometry[1].right - geometry[3].right)).toBeLessThanOrEqual(1);
-    expect(geometry.every(({ radius }) => radius >= 28)).toBe(true);
+    expect(geometry.every(({ radius }) => radius <= 18)).toBe(true);
     expect(geometry.every(({ left, right, top, bottom, visual }) => (
       visual.left >= left && visual.right <= right && visual.top >= top && visual.bottom <= bottom
     ))).toBe(true);
 
     for (const visual of await visuals.all()) await expect(visual).toBeVisible();
-    const visualBackgrounds = await visuals.evaluateAll((nodes) => nodes.map((node) => getComputedStyle(node).backgroundImage));
-    expect(new Set(visualBackgrounds).size).toBe(4);
+    const visualKinds = await visuals.evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-visual")));
+    expect(visualKinds).toEqual(["translation", "route", "alignment", "launch"]);
     const fragmentLabels = section.locator(".problem-visual span, .problem-visual strong, .problem-visual .channel");
-    expect(await fragmentLabels.evaluateAll((nodes) => nodes.every((node) => getComputedStyle(node).display === "none"))).toBe(true);
+    expect(await fragmentLabels.evaluateAll((nodes) => nodes.every((node) => getComputedStyle(node).display !== "none"))).toBe(true);
     expect(await section.evaluate((node) => getComputedStyle(node, "::before").display)).toBe("none");
     expect(await page.locator(".page-progress").evaluate((node) => getComputedStyle(node).display)).toBe("none");
     expect(await page.locator(".result-grid").evaluate((node) => getComputedStyle(node, "::after").display)).toBe("none");
+  });
+
+  test("keeps result headings and explanations separated throughout hover", async ({ page }) => {
+    await page.setViewportSize({ width: 1092, height: 680 });
+    await page.goto("/ru/", { waitUntil: "load" });
+    const rows = page.locator(".result-item");
+    await rows.first().scrollIntoViewIfNeeded();
+
+    for (const row of await rows.all()) {
+      await row.hover();
+      await page.waitForTimeout(550);
+      const geometry = await row.evaluate((node) => {
+        const heading = node.querySelector<HTMLElement>("h3")!.getBoundingClientRect();
+        const copy = node.querySelector<HTMLElement>("p:not(.result-state)")!.getBoundingClientRect();
+        return { headingRight: heading.right, copyLeft: copy.left };
+      });
+      expect(geometry.headingRight).toBeLessThanOrEqual(geometry.copyLeft - 24);
+    }
   });
 });

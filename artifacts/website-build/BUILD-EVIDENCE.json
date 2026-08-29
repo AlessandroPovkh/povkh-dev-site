@@ -1,0 +1,18 @@
+{
+  "packet": "P-029-aurora-silk",
+  "date": "2026-08-28",
+  "results": {
+    "astroCheck": { "status": "passed", "files": 84, "errors": 0, "warnings": 0 },
+    "contentContract": { "status": "passed", "passed": 15, "failed": 0 },
+    "astroBuild": { "status": "passed" },
+    "playwrightChromium": { "status": "passed", "passed": 36, "failed": 0 },
+    "diffCheck": { "status": "passed" },
+    "protectedSurfaceDiff": { "status": "empty" }
+  },
+  "browserCoverage": {
+    "ruBackdropRoutes": 10,
+    "enBoundaryRoutes": 4,
+    "viewportWidth": 390,
+    "reducedMotion": true
+  }
+}

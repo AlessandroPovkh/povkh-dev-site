@@ -58,10 +58,10 @@
 
 ## 4. Текущий рабочий пакет
 
-- ID: `P-021-russian-ux-ui`
+- ID: `P-029-aurora-silk`
 - Статус: `approved` <!-- not-started | in_progress | ready_for_review | approved | rework | blocked -->
-- Карточка: `.studio/packets/P-021-russian-ux-ui/PACKET.md`
-- Следующий hook: `H-024`
+- Карточка: `.studio/packets/P-029-aurora-silk/PACKET.md`
+- Следующий hook: отсутствует
 
 ## 5. Решения и approvals
 

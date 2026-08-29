@@ -1,6 +1,7 @@
 .editorial-interior {
-  --paper: #08080a;
-  --paper-deep: #111114;
+  --povkh-pink: #ff2f92;
+  --paper: rgb(13 11 15 / 0.82);
+  --paper-deep: rgb(17 14 19 / 0.86);
   --ink: #f4f1ef;
   --muted: #aaa6ac;
   --signal-lime: #ff2f92;
@@ -16,8 +17,8 @@
   --soft-shadow: 0 28px 80px rgb(0 0 0 / 0.34), inset 0 1px 0 rgb(255 255 255 / 0.08);
   color-scheme: dark;
   color: #f4f1ef;
-  background-color: #08080a;
-  background-image: radial-gradient(circle at 82% 8%, rgb(255 47 146 / 0.08), transparent 25rem);
+  background-color: transparent;
+  background-image: none;
 }
 
 .editorial-interior::before {
@@ -368,4 +369,93 @@ body.editorial-interior .process-page .stage-list .stage-item {
   .editorial-interior .header-cta { display: none; }
   .editorial-interior .primary-nav { left: -1px; width: calc(100% + 2px); }
   .editorial-interior :where(.service-card, .founder-record, .content-shell article, .case-list-item .case-preview) { border-radius: 1.4rem; }
+}
+
+/* P-022: the Russian system is ink, typography and signal — not a glass-card theme. */
+.editorial-interior {
+  --glass: #0d0d10;
+  --glass-strong: #111114;
+  --glass-line: rgb(255 255 255 / 0.16);
+  --soft-shadow: none;
+  background: transparent;
+}
+.editorial-interior .preview-banner,
+.editorial-homepage .preview-banner {
+  border-bottom: 1px solid rgb(255 47 146 / 0.32);
+  color: #c9c3c8;
+  background: #0d0d10;
+}
+.editorial-interior .wordmark-ru { display: inline-flex; align-items: center; gap: 0.55rem; }
+.editorial-interior .wordmark-ru > span { font-size: 0.82rem; }
+.editorial-interior .site-header { border-radius: 1.15rem; background: #0d0d10f2; box-shadow: none; backdrop-filter: blur(14px); }
+.editorial-interior :where(.service-card, .founder-record, .case-list-item .case-preview, .content-shell article, .case-hero-note) {
+  border-radius: 0.8rem;
+  background: rgb(13 11 15 / 0.84);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.editorial-interior :where(.case-map, .case-proof, .site-evidence figure, .comparison-state figure) { border-radius: 0.8rem; }
+.editorial-interior .giulia-index-card { border-radius: 0.8rem; box-shadow: none; }
+.editorial-interior main :where(.work-index-hero, .info-hero, .process-hero, .studio-hero, .blog-hero) h1 {
+  color: #f7f3f5;
+  font-family: "Unbounded Variable", var(--font-body);
+  font-weight: 470;
+  letter-spacing: -0.075em;
+}
+.editorial-interior main :where(.work-index-hero, .info-hero, .process-hero, .studio-hero, .blog-hero)::after {
+  display: block;
+  width: min(14rem, 38vw);
+  height: 2px;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  background: var(--povkh-pink);
+  content: "";
+}
+.editorial-interior .button,
+.editorial-interior .header-cta { background: var(--povkh-pink); box-shadow: none; }
+.editorial-interior .button:hover,
+.editorial-interior .header-cta:hover { background: #ff69ad; box-shadow: none; }
+.editorial-interior main,
+.editorial-interior .info-page,
+.editorial-interior .process-page,
+.editorial-interior .studio-page { background: transparent; }
+.editorial-interior .site-footer { background: rgb(10 8 12 / 0.76); }
+
+/* P-025: route-specific first screens use one signal grammar with different diagrams. */
+.editorial-interior main .inner-hero-layout {
+  display: grid;
+  min-height: min(42rem, calc(100svh - 7rem));
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+  grid-template-columns: minmax(0, 7fr) minmax(20rem, 5fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 7rem);
+  border-bottom: 1px solid rgb(255 255 255 / 0.14);
+}
+.editorial-interior main .inner-hero-layout::after { display: none; }
+.editorial-interior main .inner-hero-copy { min-width: 0; }
+.editorial-interior main .inner-hero-copy h1 { margin-block: clamp(1.5rem, 4vw, 3.5rem) clamp(1.5rem, 3vw, 2.5rem); }
+.editorial-interior main .inner-hero-copy > :last-child { max-width: 42rem; }
+.editorial-interior main .process-hero .inner-hero-copy > p:last-child,
+.editorial-interior main .blog-hero .inner-hero-copy > p:last-child {
+  max-width: 42rem;
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.65rem);
+  line-height: 1.35;
+}
+.editorial-interior main .work-index-hero.inner-hero-layout { align-content: center; }
+.editorial-interior main .blog-hero.inner-hero-layout .blog-hero-copy { display: block; }
+.editorial-interior main .blog-hero.inner-hero-layout h1 { max-width: 14ch; }
+.editorial-interior .contact-page > header .inner-hero-signal { margin-top: clamp(2.5rem, 6vw, 5rem); }
+.editorial-interior .content-shell > .inner-hero-signal { min-height: 260px; margin-block: clamp(3rem, 7vw, 6rem) 0; }
+.editorial-interior .content-shell > .inner-hero-signal + article { margin-top: 0; }
+.editorial-interior .not-found { position: relative; padding-right: min(49%, 43rem); }
+.editorial-interior .not-found > .inner-hero-signal { position: absolute; top: clamp(4rem, 10vw, 8rem); right: 0; width: min(44%, 38rem); }
+
+@media (max-width: 56rem) {
+  .editorial-interior main .inner-hero-layout {
+    min-height: auto;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .editorial-interior main .inner-hero-layout .inner-hero-signal { min-height: 220px; }
+  .editorial-interior .not-found { padding-right: var(--container-pad, 1.25rem); }
+  .editorial-interior .not-found > .inner-hero-signal { position: relative; top: auto; right: auto; width: 100%; margin-top: 3rem; }
 }

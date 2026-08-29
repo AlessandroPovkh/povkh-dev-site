@@ -2,6 +2,7 @@
 import type { Locale } from "../lib/i18n";
 import type { CollectionEntry } from "astro:content";
 import LanguageSwitch from "./LanguageSwitch.astro";
+import BrandMark from "./BrandMark.astro";
 
 interface Props {
   locale: Locale;
@@ -17,8 +18,8 @@ const contactHref = site.nav.find(({ id }) => id === "contact")?.href ?? "/conta
 
 <header class="site-header" data-site-header>
   <div class="header-inner container">
-    <a class="wordmark" href={locale === "ru" ? "/ru/" : "/"} aria-label={isRu ? "Главная Povkh.Dev" : "Povkh.Dev home"}>
-      {isRu ? <>Povkh<span class="wordmark-dot">.</span>Dev</> : <>POVKH<span class="wordmark-dot">.</span>DEV</>}
+    <a class:list={["wordmark", isRu && "wordmark-ru"]} href={locale === "ru" ? "/ru/" : "/"} aria-label={isRu ? "Главная Povkh.Dev" : "Povkh.Dev home"}>
+      {isRu ? <><BrandMark size={40} /><span>Povkh.Dev</span></> : <>POVKH<span class="wordmark-dot">.</span>DEV</>}
     </a>
     <nav class="primary-nav" aria-label={isRu ? "Основная навигация" : "Primary navigation"}>
       <ul class="primary-links" data-testid="primary-links" data-primary-links>

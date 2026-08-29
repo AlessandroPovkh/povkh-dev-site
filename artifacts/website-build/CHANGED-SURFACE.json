@@ -1,0 +1,28 @@
+{
+  "packet": "P-029-aurora-silk",
+  "change": "Aurora Silk dynamic background for the complete Russian surface",
+  "localeScope": ["ru"],
+  "runtimeDependenciesAdded": [],
+  "productionFiles": [
+    "src/components/AmbientBackdrop.astro",
+    "src/layouts/BaseLayout.astro",
+    "src/styles/editorial-interior.css",
+    "src/pages/ru/index.astro"
+  ],
+  "testFiles": ["tests/e2e/aurora-backdrop.spec.ts"],
+  "protectedSurfacesUnchanged": [
+    "src/content/",
+    "public/assets/work/",
+    "package.json",
+    "lockfiles"
+  ],
+  "explicitlyUnchanged": [
+    "public copy",
+    "CTA labels",
+    "links",
+    "routes",
+    "cases",
+    "case assets",
+    "English pages"
+  ]
+}

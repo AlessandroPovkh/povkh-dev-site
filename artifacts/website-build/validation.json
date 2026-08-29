@@ -1,0 +1,21 @@
+{
+  "packet": "P-029-aurora-silk",
+  "status": "approved",
+  "humanReview": {
+    "result": "approved",
+    "date": "2026-08-29",
+    "humanCorrections": "none",
+    "learningDisposition": "none"
+  },
+  "acceptance": {
+    "oneSharedBackdropOnEveryRuRoute": "passed",
+    "noBackdropOnEnglishRoutes": "passed",
+    "plumGraphiteBelowActionPink": "passed_by_visual_review",
+    "twoSlowTransformOpacityLayers": "passed",
+    "staticReducedMotion": "passed",
+    "readableRepresentativeSurfaces": "passed_by_visual_review",
+    "noMobileOverflow": "passed",
+    "contentUnchanged": "passed"
+  },
+  "commitPushMergeDeploy": "not_performed"
+}

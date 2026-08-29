@@ -196,7 +196,9 @@ const copy = isRu ? {
   .choice-grid input:focus-visible + span { outline: 0.2rem solid var(--electric-cobalt); outline-offset: 0.2rem; }
   .field { display: grid; gap: var(--space-2); font-weight: 650; }
   .field small { color: var(--muted); font-weight: 400; }
-  input, textarea, select { width: 100%; min-height: 3.25rem; padding: 0.75rem; border: 1px solid var(--ink); border-radius: 0; color: var(--ink); background: rgb(255 255 255 / 0.35); }
+  input, textarea, select { width: 100%; min-height: 3.25rem; padding: 0.75rem; border: 1px solid rgb(255 255 255 / 0.28); border-radius: 0.5rem; color: #f4f1ef; background: #111114; }
+  input::placeholder, textarea::placeholder { color: #77737a; }
+  input:focus-visible, textarea:focus-visible, select:focus-visible { border-color: var(--povkh-pink); outline: 2px solid rgb(255 47 146 / 0.35); outline-offset: 2px; }
   textarea { resize: vertical; }
   .field-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
   .consent { display: grid; max-width: 46rem; grid-template-columns: 1.4rem 1fr; gap: var(--space-3); align-items: start; }

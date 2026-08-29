@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import InnerHeroSignal from "../../components/InnerHeroSignal.astro";
 import { getFaq, getSite, getTeam } from "../../lib/content";
 
 const locale = "ru" as const;
@@ -16,10 +17,13 @@ const faq = await getFaq(locale);
   description="Независимая студия Povkh.Dev из двух человек: ответственность остаётся рядом с работой."
 >
   <div class="studio-page">
-    <section class="studio-hero container" aria-labelledby="studio-title">
-      <p class="eyebrow">03 / Люди и ответственность</p>
-      <h1 id="studio-title">Студия</h1>
-      <p class="studio-lede">{team.intro}</p>
+    <section class="studio-hero inner-hero-layout container" aria-labelledby="studio-title">
+      <div class="inner-hero-copy">
+        <p class="eyebrow">03 / Люди и ответственность</p>
+        <h1 id="studio-title">Студия</h1>
+        <p class="studio-lede">{team.intro}</p>
+      </div>
+      <InnerHeroSignal variant="studio" />
     </section>
 
     <section class="studio-gate container" aria-labelledby="people-title">

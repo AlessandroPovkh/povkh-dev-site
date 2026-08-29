@@ -1,0 +1,18 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-029-aurora-silk",
+  "contract_sha256": "5ee0b5d057f256cec3158a7d88de2bf0b65ba39413a843843f2b550e4b4d075b",
+  "authority_sha256": {
+    ".studio/packets/P-029-aurora-silk/PACKET.md": "e323c4694dbae7a1835fc3ba7a94d571afee0a120f8818a2adf309d97d291a89",
+    ".studio/decisions.md": "343b618d2b8fc91a42c5dd17fd303bb652e518de00172ad95740c0236f408fb5",
+    ".studio/packets/P-029-aurora-silk/write-contract.json": "5ee0b5d057f256cec3158a7d88de2bf0b65ba39413a843843f2b550e4b4d075b"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "c28596add4549daddaf7ecf8b317693bc28947ca",
+  "branch": "feature/p-029-aurora-silk",
+  "worktree_path": "/Users/alessandropovkh/Desktop/harness studio/.worktrees/projects/povkh-dev/P-029-aurora-silk",
+  "harness_fingerprint": "574178faf4fd510a8e313850d297fc0f7162924542475609bfc6d5edba9daad5",
+  "stable_project_fingerprint": "31e72614e693017b016f3def53d1d0464f8951f453b8b31903e04e8b2d480933",
+  "prepared_at": "2026-08-28T21:09:10Z"
+}

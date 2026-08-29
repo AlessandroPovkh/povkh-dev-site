@@ -267,3 +267,38 @@ test("production authority gates reject current pending records and accept compl
   assert.equal(founderAuthorityApproved({ productionReady: true, items: [completeFounder, completeFounder] }), true);
   assert.equal(workRightsApproved({ rightsStatus: "approved" }), true);
 });
+
+test("Russian visual system uses the approved mark and dependency-free glyph field", async () => {
+  const [header, mark, glyph, homepage, interior, workIndex, projectBrief, complexCase, seoHead, favicon] = await Promise.all([
+    readFile(new URL("../../src/components/Header.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../src/components/BrandMark.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../src/components/home/GlyphField.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../src/pages/ru/index.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../src/styles/editorial-interior.css", import.meta.url), "utf8"),
+    readFile(new URL("../../src/pages/ru/work/index.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../src/components/contact/ProjectBrief.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../src/components/work/ComplexProductCase.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../src/components/SeoHead.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../public/favicon.svg", import.meta.url), "utf8"),
+  ]);
+  assert.match(header, /<BrandMark/);
+  assert.match(mark, /data-brand-mark/);
+  assert.equal((mark.match(/data-signal-stroke/g) ?? []).length, 3);
+  assert.match(glyph, /<canvas/);
+  assert.match(glyph, /tabindex="0"/);
+  assert.match(glyph, /pointerdown/);
+  assert.match(glyph, /keydown/);
+  assert.match(glyph, /prefers-reduced-motion/);
+  assert.match(glyph, /reducedMotion\.matches/);
+  assert.doesNotMatch(glyph, /FIELD DEPTH|\bLOCK\b|\bglow\b/iu);
+  assert.match(homepage, /<GlyphField/);
+  assert.match(homepage, /@media \(max-width: 640px\)[\s\S]*\[data-section\][^}]*content-visibility:\s*visible/);
+  assert.match(interior, /--povkh-pink:\s*#ff2f92/);
+  assert.match(interior, /\.editorial-interior \.preview-banner,\s*\.editorial-homepage \.preview-banner\s*\{[^}]*background:\s*#0d0d10/s);
+  assert.match(workIndex, /\.case-list-item\s+:global\(\.case-preview\)[^}]*background:[^}]*#0d0d10/s);
+  assert.match(projectBrief, /input, textarea, select[^}]*background:\s*#111114/s);
+  assert.match(complexCase, /\.related-case\s*\{[^}]*background:\s*#0d0d10/s);
+  assert.match(seoHead, /locale === "ru" \? "#08080a"/);
+  assert.match(favicon, /data-brand-mark/);
+  assert.match(favicon, /#ff2f92/);
+});

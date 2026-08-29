@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import InnerHeroSignal from "../../../components/InnerHeroSignal.astro";
 import CasePreview from "../../../components/CasePreview.astro";
 import { getLocalizedWork } from "../../../lib/content";
 import { getImage } from "astro:assets";
@@ -12,10 +13,13 @@ const giuliaPreview = await getImage({ src: giuliaHome, width: 1200, format: "we
 
 <BaseLayout locale={locale} currentPath="/ru/work/" title="Работы Povkh.Dev | Сложные продукты, брендинг и сайты" description="Кейсы Povkh.Dev: переработка промышленного каталога КЗМС, бренд и сайт ENDOkey, многоязычная система POVKH LAB.">
   <div class="work-index container">
-    <header class="work-index-hero">
-      <p class="eyebrow">Работы Povkh.Dev</p>
-      <h1>Работы со сложными продуктами</h1>
-      <p class="lede">Проекты, в которых потребовалось разобраться в предмете, покупателях и реальном пути к обращению.</p>
+    <header class="work-index-hero inner-hero-layout">
+      <div class="inner-hero-copy">
+        <p class="eyebrow">Работы Povkh.Dev</p>
+        <h1>Работы со сложными продуктами</h1>
+        <p class="lede">Проекты, в которых потребовалось разобраться в предмете, покупателях и реальном пути к обращению.</p>
+      </div>
+      <InnerHeroSignal variant="work" />
     </header>
 
     <section aria-labelledby="case-list-title">
@@ -69,14 +73,14 @@ const giuliaPreview = await getImage({ src: giuliaHome, width: 1200, format: "we
   .section-heading h2 { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 4rem); letter-spacing: -0.065em; line-height: 0.96; }
   .case-list { display: grid; gap: var(--space-8); }
   .case-list-item { min-width: 0; }
-  .case-list-item :global(.case-preview) { display: flex; min-height: 28rem; padding: var(--space-6); border: 1px solid var(--ink); flex-direction: column; justify-content: flex-end; background: var(--warm-coral); box-shadow: var(--shadow-offset); }
+  .case-list-item :global(.case-preview) { display: flex; min-height: 28rem; padding: var(--space-6); overflow: hidden; border: 1px solid var(--line); border-radius: 0.8rem; flex-direction: column; justify-content: flex-end; color: #f4f1ef; background: linear-gradient(118deg, rgb(255 47 146 / 0.12), transparent 42%), #0d0d10; box-shadow: none; }
   .case-list-item :global(.case-preview h2) { margin-block: var(--space-4); font-family: var(--font-display); font-size: clamp(2.4rem, 6vw, 6rem); letter-spacing: -0.07em; line-height: 0.9; }
   .case-list-item :global(.case-preview p:not(.metadata)) { max-width: 34rem; }
   .case-list-item :global(.case-preview .button) { align-self: flex-start; margin-top: var(--space-4); }
-  .giulia-index-card { display: grid; overflow: hidden; border: 1px solid var(--ink); grid-template-columns: minmax(20rem, 0.8fr) minmax(0, 1.2fr); background: #c7b4f2; box-shadow: var(--shadow-offset); }
-  .giulia-index-card :global(.case-preview) { min-height: 36rem; border: 0; background: #f1eee6; color: #171615; box-shadow: none; }
-  .giulia-index-card :global(.case-preview .metadata) { color: #a4373c; }
-  .giulia-index-card :global(.case-preview .button) { color: #f4f1ef; background: #171615; }
+  .giulia-index-card { display: grid; overflow: hidden; border: 1px solid var(--line); border-radius: 0.8rem; grid-template-columns: minmax(20rem, 0.8fr) minmax(0, 1.2fr); background: #0d0d10; box-shadow: none; }
+  .giulia-index-card :global(.case-preview) { min-height: 36rem; border: 0; border-radius: 0; color: #f4f1ef; background: #0d0d10; box-shadow: none; }
+  .giulia-index-card :global(.case-preview .metadata) { color: var(--povkh-pink); }
+  .giulia-index-card :global(.case-preview .button) { color: #160910; background: var(--povkh-pink); }
   .giulia-index-card > img { width: 100%; height: 100%; min-height: 36rem; object-fit: cover; object-position: top; }
   @media (max-width: 56rem) {
     .section-heading { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }

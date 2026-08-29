@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import InnerHeroSignal from "../../components/InnerHeroSignal.astro";
 import { getServices, getSite } from "../../lib/content";
 
 const locale = "ru" as const;
@@ -30,11 +31,14 @@ const exclusions = [
   description="Услуги по созданию брендов, сайтов и интеграций с понятными форматами начала, составом и границами."
 >
   <div class="info-page services-page">
-    <section class="info-hero container" aria-labelledby="services-title">
-      <p class="eyebrow">01 / Системы услуг</p>
-      <h1 id="services-title">Услуги</h1>
-      <p class="info-lede">{services.intro}</p>
-      <p class="info-note">Мы собираем работу вокруг определённого результата, сохраняя одну точку ответственности внутри Povkh.Dev.</p>
+    <section class="info-hero inner-hero-layout container" aria-labelledby="services-title">
+      <div class="inner-hero-copy">
+        <p class="eyebrow">01 / Системы услуг</p>
+        <h1 id="services-title">Услуги</h1>
+        <p class="info-lede">{services.intro}</p>
+        <p class="info-note">Мы собираем работу вокруг определённого результата, сохраняя одну точку ответственности внутри Povkh.Dev.</p>
+      </div>
+      <InnerHeroSignal variant="services" />
     </section>
 
     <section class="service-systems container" aria-labelledby="systems-title">

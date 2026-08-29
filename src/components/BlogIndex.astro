@@ -1,5 +1,6 @@
 ---
 import type { Locale } from "../lib/i18n";
+import InnerHeroSignal from "./InnerHeroSignal.astro";
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -52,10 +53,13 @@ const notes = isRu ? [
 ];
 ---
 
-<section class="blog-hero container" aria-labelledby="blog-title">
-  <p class="eyebrow">{isRu ? "Блог Povkh.Dev" : "Povkh.Dev blog"}</p>
-  <h1 id="blog-title">{isRu ? "Заметки о брендах, сайтах и связанных системах" : "Notes on brands, websites and connected systems"}</h1>
-  <p>{isRu ? "Коротко разбираем решения, из которых складывается цельный цифровой продукт." : "Short explanations of the decisions behind a coherent digital product."}</p>
+<section class:list={["blog-hero container", { "inner-hero-layout": isRu }]} aria-labelledby="blog-title">
+  <div class="blog-hero-copy inner-hero-copy">
+    <p class="eyebrow">{isRu ? "Блог Povkh.Dev" : "Povkh.Dev blog"}</p>
+    <h1 id="blog-title">{isRu ? "Заметки о брендах, сайтах и связанных системах" : "Notes on brands, websites and connected systems"}</h1>
+    <p>{isRu ? "Коротко разбираем решения, из которых складывается цельный цифровой продукт." : "Short explanations of the decisions behind a coherent digital product."}</p>
+  </div>
+  {isRu && <InnerHeroSignal variant="blog" />}
 </section>
 
 <section class="blog-notes container" aria-label={isRu ? "Заметки" : "Notes"}>
@@ -80,6 +84,7 @@ const notes = isRu ? [
 
 <style>
   .blog-hero { display: grid; min-height: 35rem; padding-block: var(--space-8); border-bottom: 1px solid var(--ink); grid-template-columns: 3fr 9fr; gap: var(--space-5); align-content: end; }
+  .blog-hero-copy { display: contents; }
   .blog-hero h1 { max-width: 15ch; margin: 0; font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 6.3rem); letter-spacing: -0.065em; line-height: 0.98; }
   .blog-hero > p:last-child { max-width: 38rem; margin: var(--space-5) 0 0; grid-column: 2; font-size: 1.2rem; }
   .blog-notes { padding-block: var(--space-8); }

@@ -29,3 +29,4 @@
 | P-024 | English and Italian synchronization | proposed | explicit approval of P-023 Russian surface | EN and IT surfaces synchronized without dropping locale routes |
 | P-025 | Multilingual SEO verification | proposed | P-024 synchronized routes; owner readiness must be resolved before execution | route, metadata, internal-link and applicable structured-data evidence |
 | P-026 | Final multilingual QA and preview | proposed | P-024 and P-025 complete | final responsive, visual, functional and local-preview evidence for RU, EN and IT |
+| P-029 | Aurora Silk RU backdrop | done | User approved the review result on 2026-08-29 without corrections | One shared, restrained dynamic plum/rose/violet background across all existing RU routes, with locale, motion, accessibility and regression evidence |

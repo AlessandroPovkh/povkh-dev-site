@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SeoHead from "../components/SeoHead.astro";
 import ConsentControls from "../components/ConsentControls.astro";
+import AmbientBackdrop from "../components/AmbientBackdrop.astro";
 import { getSite } from "../lib/content";
 import type { Locale } from "../lib/i18n";
 import "../styles/tokens.css";
@@ -51,6 +52,7 @@ const resolvedBodyClass = bodyClass ?? (isRu && shell === "default" ? "editorial
     </script>
   </head>
   <body class={resolvedBodyClass}>
+    {isRu && <AmbientBackdrop />}
     <a class="skip-link" href="#main-content">{isRu ? "Перейти к содержанию" : "Skip to content"}</a>
     {__POVKH_SITE_MODE__ !== "production" && <div class="preview-banner" role="status">{site.previewNotice}</div>}
     {shell === "default" && <Header {locale} {currentPath} {site} {hasAlternate} />}

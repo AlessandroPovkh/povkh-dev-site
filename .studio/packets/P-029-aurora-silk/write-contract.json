@@ -1,0 +1,74 @@
+{
+  "contract_version": 1,
+  "project_id": "povkh-dev",
+  "packet_id": "P-029-aurora-silk",
+  "mode": "project-write",
+  "packet_sha256": "e323c4694dbae7a1835fc3ba7a94d571afee0a120f8818a2adf309d97d291a89",
+  "authorization": {
+    "status": "approved",
+    "id": "D-029",
+    "ref": ".studio/decisions.md",
+    "approved_by": "user",
+    "approved_at": "2026-08-28T21:08:39Z",
+    "expires_at": "2026-09-02T21:08:39Z",
+    "payload_sha256": "c64964761b470ffb2a79c43132c5487b8a51a3ba8c519a2d017851cc170abb7d"
+  },
+  "base_ref": "refs/heads/main",
+  "base_commit": "c28596add4549daddaf7ecf8b317693bc28947ca",
+  "branch": "feature/p-029-aurora-silk",
+  "harness_revision": "bdab16e1e5eecb42465187d356b6421106ac504f",
+  "harness_baseline_sha256": "574178faf4fd510a8e313850d297fc0f7162924542475609bfc6d5edba9daad5",
+  "stable_project_baseline_sha256": "31e72614e693017b016f3def53d1d0464f8951f453b8b31903e04e8b2d480933",
+  "decisions_baseline_sha256": "791cca36b402cf6f0219be4365118d7d3bd5426bb11798ebe3940fc1642ff851",
+  "included_roots": [
+    ".studio/decisions.md",
+    ".studio/hooks.md",
+    ".studio/packets/P-029-aurora-silk",
+    ".studio/route-map.md",
+    ".studio/scope-contract.json",
+    "PROJECT.md",
+    "artifacts/website-build",
+    "docs/superpowers/plans/2026-08-28-povkh-dev-russian-redesign.md",
+    "docs/superpowers/specs/2026-08-28-povkh-aurora-silk-background-design.md",
+    "public/favicon.svg",
+    "src/components",
+    "src/layouts",
+    "src/lib",
+    "src/pages",
+    "src/scripts",
+    "src/styles",
+    "tests"
+  ],
+  "excluded_roots": [],
+  "external_actions": [],
+  "required_checks": [
+    {
+      "id": "content-contract",
+      "runner": "node",
+      "args": [
+        "--test",
+        "tests/content/content-contract.test.mjs"
+      ],
+      "timeout_seconds": 120
+    },
+    {
+      "id": "astro-check",
+      "runner": "node",
+      "args": [
+        "node_modules/@astrojs/check/dist/cli/index.js"
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "id": "site-build",
+      "runner": "node",
+      "args": [
+        "node_modules/astro/astro.js",
+        "build"
+      ],
+      "timeout_seconds": 300
+    }
+  ],
+  "expected_result": "A reviewable shared Aurora Silk backdrop gives every RU route a calm plum, rose and violet dynamic atmosphere with static reduced-motion fallback while preserving content, cases, routes and non-RU surfaces.",
+  "rollback_limit": "leave-managed-worktree-no-automatic-cleanup"
+}

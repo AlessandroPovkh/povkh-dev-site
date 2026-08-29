@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import InnerHeroSignal from "../../components/InnerHeroSignal.astro";
 import { getProcess, getSite } from "../../lib/content";
 
 const locale = "ru" as const;
@@ -15,10 +16,13 @@ const process = await getProcess(locale);
   description="Пять этапов работы Povkh.Dev с понятным результатом для клиента на каждом."
 >
   <div class="process-page">
-    <section class="process-hero container" aria-labelledby="process-title">
-      <p class="eyebrow">02 / Система работы</p>
-      <h1 id="process-title">Процесс</h1>
-      <p>{process.intro}</p>
+    <section class="process-hero inner-hero-layout container" aria-labelledby="process-title">
+      <div class="inner-hero-copy">
+        <p class="eyebrow">02 / Система работы</p>
+        <h1 id="process-title">Процесс</h1>
+        <p>{process.intro}</p>
+      </div>
+      <InnerHeroSignal variant="process" />
     </section>
 
     <section class="process-stages container" aria-labelledby="stages-title">

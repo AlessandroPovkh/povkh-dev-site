@@ -1,0 +1,11 @@
+{
+  "packet": "P-029-aurora-silk",
+  "screenshots": [
+    { "file": "screenshots/home-desktop.png", "route": "/ru/", "viewport": "desktop", "sha256": "98a18447d43f8960dffb82112b9ff2b8827c9727ba3df22c881a4ae508ac6300" },
+    { "file": "screenshots/services-desktop.png", "route": "/ru/services/", "viewport": "desktop", "sha256": "b93856f31bcb60fdaae1b255a595d2058ea23d665b8e25a689ddf08d676131b5" },
+    { "file": "screenshots/services-mobile.png", "route": "/ru/services/", "viewport": "390px", "sha256": "fced357169d1bd0b616e63c38afabe9a902dfaa452c5e85db932b364430ff80b" },
+    { "file": "screenshots/work-desktop.png", "route": "/ru/work/", "viewport": "desktop", "sha256": "b4f4eade90a5ce611103584beba3880c8a5b828f9d5be8093576366a4b4a08ca" },
+    { "file": "screenshots/contact-desktop.png", "route": "/ru/contact/", "viewport": "desktop", "sha256": "611adb20f186895779ea2146a5f4d890f153d4601256ec645ebe016514f732aa" },
+    { "file": "screenshots/privacy-desktop.png", "route": "/ru/privacy/", "viewport": "desktop", "sha256": "7715ce6117317cfa27dbc10247b3f8767a0186617c0da23e4c5a96bd2acdfae2" }
+  ]
+}
